@@ -34,7 +34,6 @@ Erp.FromFieldView = Ember.TextField.extend({
 Ember.Handlebars.helper('form-field', Erp.FromFieldView);
 
 Erp.ImageUploadView = Ember.TextField.extend({
-<<<<<<< HEAD
     
     attributeBindings: ['type', 'value', 'size', 'pattern', 'name', 'min', 'max',
                       'accept', 'autocomplete', 'autosave', 'formaction',
@@ -83,12 +82,3 @@ Erp.ImagePreviewView = Ember.View.extend({
 })
 
 Ember.Handlebars.helper('img-preview', Erp.ImagePreviewView);
-=======
-
-    change: function (event) {
-        console.log(this.get('element').files);
-    }
-});
-
-Ember.Handlebars.helper('img-upload', Erp.ImageUploadView);
->>>>>>> b312ca7489257d4bb866a3e1574e6a1e4ff0767f
