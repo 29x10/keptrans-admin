@@ -89,7 +89,11 @@
             <div class="sub header">添加产品</div>
         </div>
     </h2>
+<<<<<<< HEAD
     <div {{bind-attr class="formError:warning isLoading:loading :ui :form :segment"}}>
+=======
+    <div {{bind-attr class="formError:warning :ui :form :segment"}}>
+>>>>>>> b312ca7489257d4bb866a3e1574e6a1e4ff0767f
         {{#if formError}}
             <div class="ui warning message">
                 <div class="ui header">出错啦</div>
@@ -176,11 +180,16 @@
             {{action 'addProduct'}}>
             <i class="icon location"></i>添加
         </div>
+<<<<<<< HEAD
     {{img-upload type="file" multiple="true" id="upload" class="hidden" files=files}}
+=======
+    {{img-upload type="file" multiple="true" id="upload" class="hidden"}}
+>>>>>>> b312ca7489257d4bb866a3e1574e6a1e4ff0767f
         <div class="ui green button" {{action 'uploadImage'}}>
             <i class="icon photo"></i>上传
         </div>
     <div class="ui list">
+<<<<<<< HEAD
     {{#each file in files}}
         <div class="item">
         {{img-preview file=file}}
@@ -192,6 +201,35 @@
             </div>
         </div>
     {{/each}}
+=======
+        <div class="item">
+            <img class="ui image small" src="http://s1.dwstatic.com/group1/M00/2A/67/148ee8b96fa6fbb1b0e9a7de8dd05ae6.jpg">
+            <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
+            <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
+            <div class="content">
+                <div class="header">123.jpg</div>
+                <div class="description">封面</div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="ui image small" src="http://s1.dwstatic.com/group1/M00/2A/67/148ee8b96fa6fbb1b0e9a7de8dd05ae6.jpg">
+            <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
+            <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
+            <div class="content">
+                <div class="header">123.jpg</div>
+                <div class="description">封面</div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="ui image small" src="http://s1.dwstatic.com/group1/M00/2A/67/148ee8b96fa6fbb1b0e9a7de8dd05ae6.jpg">
+            <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
+            <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
+            <div class="content">
+                <div class="header">123.jpg</div>
+                <div class="description">封面</div>
+            </div>
+        </div>
+>>>>>>> b312ca7489257d4bb866a3e1574e6a1e4ff0767f
     </div>
     </div>
 
