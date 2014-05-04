@@ -182,8 +182,12 @@
         </div>
     <div class="ui list">
     {{#each file in files}}
-        <div class="item">
+        <div class="ui top attached successful progress">
+            <div class="bar" style="width: 0"></div>
+        </div>
+        <div class="item ui attached">
         {{img-preview file=file}}
+            <div class="ui tiny button red floated right" {{action 'upload' file}}><i class="icon heart"></i>上传</div>
             <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
             <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
             <div class="content">

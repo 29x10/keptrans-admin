@@ -40,6 +40,23 @@ Erp.ProductsNewController = Ember.ObjectController.extend({
 
         uploadImage: function () {
             $('#upload').trigger("click");
+        },
+        
+        upload: function (file) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://keptrans-api-106855.apne1.nitrousbox.com/image', true);
+            var formData = new FormData();
+            formData.append('file', file);
+            xhr.onload = function (event) {
+                $(".ui.progress .bar").css({width: '100%'});
+            };
+            xhr.upload.onprogress = function (event) {
+                if (event.lengthComputable) {
+                    var complete = '' + (event.loaded / event.total * 100 | 0) + '%';
+                    $(".ui.progress .bar").css({width: complete});
+                }
+            };
+            xhr.send(formData);
         }
     }
 });
