@@ -9,6 +9,6 @@ Erp.Router.map(function () {
 
 Erp.ProductsNewRoute = Ember.Route.extend({
     model: function () {
-        return {};
+        return [];
     }
 });

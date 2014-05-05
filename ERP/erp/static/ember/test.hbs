@@ -77,7 +77,7 @@
             <div class="sub header">添加产品</div>
         </div>
     </h2>
-    <div {{bind-attr class="formError:warning :ui :form :segment"}}>
+    <div {{bind-attr class="formError:warning isLoading:loading :ui :form :segment"}}>
         {{#if formError}}
             <div class="ui warning message">
                 <div class="ui header">出错啦</div>
@@ -164,8 +164,26 @@
             {{action 'addProduct'}}>
             <i class="icon location"></i>添加
         </div>
-        <div class="ui green button">
+        {{img-upload type="file" multiple="true" id="upload" class="hidden" files=files}}
+        <div class="ui green button" {{action 'uploadImage'}}>
             <i class="icon photo"></i>上传
+        </div>
+        <div class="ui list">
+            {{#each files itemController="productImageUpload"}}
+                <div class="ui top attached successful progress">
+                    <div class="bar" {{bind-attr style="barWidth"}}></div>
+                </div>
+                <div class="item ui attached">
+                    {{img-preview file=model}}
+                    <div class="ui tiny button red floated right" {{action 'upload'}}><i class="icon heart"></i>上传</div>
+                    <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
+                    <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
+                    <div class="content">
+                        <div class="header">{{name}}</div>
+                        <div class="description">封面</div>
+                    </div>
+                </div>
+            {{/each}}
         </div>
     </div>
 

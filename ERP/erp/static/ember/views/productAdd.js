@@ -44,17 +44,14 @@ Erp.ImageUploadView = Ember.TextField.extend({
     change: function (event) {
         
         var files = this.get('files');
-   
-        if (files == undefined) {
-            files = Ember.A();
-        }
+
         for (var i=0; i<this.get('element').files.length; i++) {
             files.pushObject(this.get('element').files[i]);
         }
         this.set('files', files);
     },
     
-    files: []
+    files: Ember.A()
     
     
 });
@@ -78,7 +75,7 @@ Erp.ImagePreviewView = Ember.View.extend({
             
         }.bind(this);
         reader.readAsDataURL(this.get('file'));
-    },
-})
+    }
+});
 
 Ember.Handlebars.helper('img-preview', Erp.ImagePreviewView);

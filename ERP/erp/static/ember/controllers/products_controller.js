@@ -1,4 +1,36 @@
-Erp.ProductsNewController = Ember.ObjectController.extend({
+Erp.ProductsNewController = Ember.ArrayController.extend({
+
+    formError: false,
+
+    isLoading: false,
+
+    brandNone: false,
+
+    categoryNone: false,
+
+    specNone: false,
+
+    priceNone: false,
+
+    brandError: false,
+
+    categoryError: false,
+
+    specError: false,
+
+    priceError: false,
+
+    files: Ember.A(),
+
+    brand: "",
+
+    category: "",
+
+    spec: "",
+
+    price: "",
+
+
     actions: {
         addProduct: function () {
 
@@ -40,23 +72,6 @@ Erp.ProductsNewController = Ember.ObjectController.extend({
 
         uploadImage: function () {
             $('#upload').trigger("click");
-        },
-        
-        upload: function (file) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://keptrans-api-106855.apne1.nitrousbox.com/image', true);
-            var formData = new FormData();
-            formData.append('file', file);
-            xhr.onload = function (event) {
-                $(".ui.progress .bar").css({width: '100%'});
-            };
-            xhr.upload.onprogress = function (event) {
-                if (event.lengthComputable) {
-                    var complete = '' + (event.loaded / event.total * 100 | 0) + '%';
-                    $(".ui.progress .bar").css({width: complete});
-                }
-            };
-            xhr.send(formData);
         }
     }
 });

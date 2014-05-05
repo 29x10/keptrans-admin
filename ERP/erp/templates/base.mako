@@ -176,27 +176,27 @@
             {{action 'addProduct'}}>
             <i class="icon location"></i>添加
         </div>
-    {{img-upload type="file" multiple="true" id="upload" class="hidden" files=files}}
+        {{img-upload type="file" multiple="true" id="upload" class="hidden" files=files}}
         <div class="ui green button" {{action 'uploadImage'}}>
             <i class="icon photo"></i>上传
         </div>
-    <div class="ui list">
-    {{#each file in files}}
-        <div class="ui top attached successful progress">
-            <div class="bar" style="width: 0"></div>
+        <div class="ui list">
+            {{#each files itemController="productImageUpload"}}
+                <div class="ui top attached successful progress">
+                    <div class="bar" {{bind-attr style="barWidth"}}></div>
+                </div>
+                <div class="item ui attached">
+                    {{img-preview file=model}}
+                    <div class="ui tiny button red floated right" {{action 'upload'}}><i class="icon heart"></i>上传</div>
+                    <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
+                    <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
+                    <div class="content">
+                        <div class="header">{{name}}</div>
+                        <div class="description">封面</div>
+                    </div>
+                </div>
+            {{/each}}
         </div>
-        <div class="item ui attached">
-        {{img-preview file=file}}
-            <div class="ui tiny button red floated right" {{action 'upload' file}}><i class="icon heart"></i>上传</div>
-            <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
-            <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
-            <div class="content">
-                <div class="header">{{file.name}}</div>
-                <div class="description">封面</div>
-            </div>
-        </div>
-    {{/each}}
-    </div>
     </div>
 
 
@@ -206,13 +206,15 @@
 <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.0/jquery.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.13.0/javascript/semantic.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/handlebars.js/1.3.0/handlebars.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.0/ember.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/app.js')}" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/models/product.js')}" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/views/productAdd.js')}" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/router.js')}" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/controllers/products_controller.js')}"
+        type="text/javascript"></script>
+<script src="${request.static_url('erp:static/ember/controllers/product_image_upload_controller.js')}"
         type="text/javascript"></script>
 </body>
 </html>
