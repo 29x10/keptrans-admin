@@ -46,6 +46,7 @@ Erp.ImageUploadView = Ember.TextField.extend({
         var files = this.get('files');
 
         for (var i=0; i<this.get('element').files.length; i++) {
+            this.get('element').files[i].file_name = this.get('element').files[i].name;
             files.pushObject(this.get('element').files[i]);
         }
         this.set('files', files);

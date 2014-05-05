@@ -5,7 +5,7 @@ body {
 }
 
 
-@media only screen and (min-width: 767px) {
+@media (min-width: 767px) {
 
     .blank-sidebar {
         margin-left: 275px;
@@ -46,7 +46,7 @@ body {
     /*pointer-events: none;*/
 }
 
-@media only screen and (max-width: 767px) {
+@media (max-width: 767px) {
 
     .blank-sidebar {
         padding-left: 1.5rem;
