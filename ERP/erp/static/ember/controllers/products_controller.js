@@ -2,6 +2,8 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
     formError: false,
 
+    productError: Ember.A(),
+
     isLoading: false,
 
     brandNone: false,
@@ -11,14 +13,6 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
     specNone: false,
 
     priceNone: false,
-
-    brandError: false,
-
-    categoryError: false,
-
-    specError: false,
-
-    priceError: false,
 
     files: Ember.A(),
 
@@ -30,44 +24,60 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
     price: "",
 
+    desc: "",
+
+    cover: "",
+
+    coverIsSet: false,
+
+    coverIndex: -1,
 
     actions: {
         addProduct: function () {
+            var context = this;
 
-            this.set('formError', false);
+            context.set('formError', false);
+            context.set('productError', Ember.A());
+
 
             ['brandNone', 'categoryNone', 'specNone', 'priceNone'].forEach(function (field) {
-                this.set(field, false);
-            }.bind(this));
+                context.set(field, false);
+            });
 
             var newProduct = this.store.createRecord('product', {
-                brand: this.get('brand'),
-                category: this.get('category'),
-                spec: this.get('spec'),
-                price: this.get('price')
+                brand: context.get('brand'),
+                category: context.get('category'),
+                spec: context.get('spec'),
+                price: context.get('price'),
+                desc: context.get('desc'),
+                cover: context.get('cover')
             });
             
-            this.set('isLoading', true);
+            context.set('isLoading', true);
 
             newProduct.save().then(
                 function (respond) {
-                    this.set('isLoading', false);
+                    context.set('isLoading', false);
                     var success = $('.ui.dimmer.page');
                     success.dimmer('show');
                     window.setTimeout(function () {
                         success.dimmer('hide');
                     }, 2000);
-                    this.set('brand', '');
-                    this.set('category', '');
-                    this.set('spec', '');
-                    this.set('price', '');
-                }.bind(this), function (response) {
-                    this.set('isLoading', false);
-                    this.set('formError', true);
+                    context.set('brand', '');
+                    context.set('category', '');
+                    context.set('spec', '');
+                    context.set('price', '');
+                    context.set('desc', '');
+                    context.set('cover', '');
+                }, function (response) {
+                    newProduct.deleteRecord();
+                    context.set('isLoading', false);
+                    context.set('formError', true);
                    response.responseJSON.errors.forEach(function (error) {
-                       this.set(error.name + 'None', true);
-                   }.bind(this));
-                }.bind(this));
+                       var productError = context.get('productError');
+                       productError.pushObject(error.description);
+                   });
+                });
         },
 
         uploadImage: function () {

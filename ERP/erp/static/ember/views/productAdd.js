@@ -11,18 +11,17 @@ Erp.FromFieldView = Ember.TextField.extend({
 
     regex: '^.+$',
 
+    hasError: false,
+
     valueChanged: function () {
         re = new RegExp(this.get('regex'), 'g');
-        this.set('error', !re.test(this.get('value')));
+        this.set('hasError', !re.test(this.get('value')));
     }.observes('value'),
 
     focusIn: function (event) {
         this._super(event);
-        if (this.get('value') == undefined) {
-            this.set('error', true);
-        } else {
-            this.valueChanged();
-        }
+        this.valueChanged();
+        this.set('error', this.get('hasError'));
     },
 
     focusOut: function (event) {
@@ -44,9 +43,11 @@ Erp.ImageUploadView = Ember.TextField.extend({
     change: function (event) {
         
         var files = this.get('files');
+        var targetFiles = this.get('element').files;
 
-        for (var i=0; i<this.get('element').files.length; i++) {
-            this.get('element').files[i].file_name = this.get('element').files[i].name;
+        for (var i=0; i<targetFiles.length; i++) {
+            targetFiles[i].file_name = targetFiles[i].name;
+            targetFiles[i].isCover = "";
             files.pushObject(this.get('element').files[i]);
         }
         this.set('files', files);
@@ -80,3 +81,10 @@ Erp.ImagePreviewView = Ember.View.extend({
 });
 
 Ember.Handlebars.helper('img-preview', Erp.ImagePreviewView);
+
+
+Erp.ItemView = Ember.View.extend({
+    didInsertElement: function() {
+        this.get('controller').set('index',this.get('contentIndex'));
+    }
+});

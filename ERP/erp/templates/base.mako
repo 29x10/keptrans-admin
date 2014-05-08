@@ -2,7 +2,7 @@
 <html lang="${request.locale_name}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="凯思电气">
     <meta name="author" content="BINLEI XUE">
     <link rel="shortcut icon" type="image/x-icon" href="${request.static_url('erp:static/keptrans.ico')}">
@@ -18,7 +18,7 @@
 
 <script type="text/x-handlebars" data-template-name="erp">
     <div class="ui vertical sidebar menu show-sidebar">
-        <a class="item close">
+        <a class="item close mobile-only" {{action 'hideSideBar'}}>
             <i class="close icon"></i>关闭
         </a>
         <a class="item" href="#/">
@@ -34,7 +34,9 @@
                 {{#link-to 'products.new' class="item"}}
                     添加产品
                 {{/link-to}}
-                <a class="item">查看产品</a>
+                {{#link-to 'products.view' class="item"}}
+                    查看产品
+                {{/link-to}}
             </div>
         </div>
         <div class="item">
@@ -54,7 +56,7 @@
     </div>
 
     <div class="ui menu mobile-nav">
-        <a class="item sidebar-toggle">
+        <a class="item" {{action 'showSideBar'}}>
             <i class="icon list"></i>
         </a>
     </div>
@@ -93,18 +95,9 @@
             <div class="ui warning message">
                 <div class="ui header">出错啦</div>
                 <ul class="list">
-                    {{#if brandNone}}
-                        <li>你忘了填写<b>品牌</b>名称</li>
-                    {{/if}}
-                    {{#if categoryNone}}
-                        <li><b>类别</b>很重要，补上吧</li>
-                    {{/if}}
-                    {{#if specNone}}
-                        <li>每个产品的<b>型号</b>都不一样，不能落下</li>
-                    {{/if}}
-                    {{#if priceNone}}
-                        <li>最最最重要<b>价格</b>不能忘了，而且必须是数字哦</li>
-                    {{/if}}
+                    {{#each error in productError}}
+                    <li>{{error}}</li>
+                    {{/each}}
                 </ul>
             </div>
         {{/if}}
@@ -169,7 +162,7 @@
 
         <div class="field">
             <label>产品手册</label>
-            <textarea></textarea>
+            {{textarea value=desc}}
         </div>
         <div class="ui blue button"
             {{action 'addProduct'}}>
@@ -180,18 +173,20 @@
             <i class="icon photo"></i>上传
         </div>
         <div class="ui list">
-            {{#each files itemController="productImageUpload"}}
+            {{#each files itemController="productImageUpload" itemViewClass="Erp.ItemView"}}
                 <div class="ui top attached successful progress">
                     <div class="bar" {{bind-attr style="barWidth"}}></div>
                 </div>
                 <div class="item ui attached">
                     {{img-preview file=model}}
-                    <div class="ui tiny button red floated right" {{action 'upload'}}><i class="icon heart"></i>上传</div>
-                    <div class="ui tiny button red floated right"><i class="icon checkmark"></i>设为封面</div>
+                    <div {{bind-attr class=":ui :tiny :button :red :floated :right isUploading:disabled"}}
+                    {{action 'upload'}}><i class="icon heart"></i>{{uploadStatus}}</div>
+                    <div {{bind-attr class=":ui :tiny :button :red :floated :right uploadFinished::disabled"}}
+    {{action 'setCover'}}><i class="icon checkmark"></i>设为封面</div>
                     <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
                     <div class="content">
-                        <div class="header">{{name}}</div>
-                        <div class="description">封面</div>
+                        <div class="header">{{file_name}}</div>
+                        <div class="description">{{isCover}}</div>
                     </div>
                 </div>
             {{/each}}
@@ -201,11 +196,37 @@
 
 </script>
 
+<script type="text/x-handlebars" data-template-name="products/view">
+    <div class="ui three items stackable">
+        {{#each product in model}}
+        <div class="item">
+            <div class="image">
+                <img {{bind-attr src=product.cover}}>
+                <a class="star ui corner label">
+                    <i class="star icon"></i>
+                </a>
+            </div>
+            <div class="content">
+                {{#link-to 'product' product class="ui button small green floated right"}}
+                点击查看
+                {{/link-to}}
+                <div class="name">{{product.brand}}</div>
+                <p class="description">{{product.spec}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="product">
+    {{spec}}
+</script>
+
 
 <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/javascript/semantic.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/handlebars.js/1.3.0/handlebars.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.prod.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/app.js')}" type="text/javascript"></script>
 <script src="${request.static_url('erp:static/ember/formDataPromise.js')}" type="text/javascript"></script>
