@@ -21,9 +21,9 @@
         <a class="item close mobile-only" {{action 'hideSideBar'}}>
             <i class="close icon"></i>关闭
         </a>
-        <a class="item" href="#/">
+        {{#link-to 'erp' class="item" activeClass="keptrans" closeSideBar="true"}}
             <i class="home icon"></i> 凯思ERP
-        </a>
+        {{/link-to}}
 
         <div class="item">
             <div class="ui input"><input placeholder="Search..." type="text"></div>
@@ -31,10 +31,10 @@
         <div class="item">
             <i class="list icon"></i> 产品管理
             <div class="menu">
-                {{#link-to 'products.new' class="item"}}
+                {{#link-to 'products.new' class="item" closeSideBar="true"}}
                     添加产品
                 {{/link-to}}
-                {{#link-to 'products.view' class="item"}}
+                {{#link-to 'products.view' class="item" closeSideBar="true"}}
                     查看产品
                 {{/link-to}}
             </div>
@@ -96,7 +96,7 @@
                 <div class="ui header">出错啦</div>
                 <ul class="list">
                     {{#each error in productError}}
-                    <li>{{error}}</li>
+                        <li>{{error}}</li>
                     {{/each}}
                 </ul>
             </div>
@@ -180,10 +180,10 @@
                 <div class="item ui attached">
                     {{img-preview file=model}}
                     <div {{bind-attr class=":ui :tiny :button :red :floated :right isUploading:disabled"}}
-                    {{action 'upload'}}><i class="icon heart"></i>{{uploadStatus}}</div>
-                    <div {{bind-attr class=":ui :tiny :button :red :floated :right uploadFinished::disabled"}}
-    {{action 'setCover'}}><i class="icon checkmark"></i>设为封面</div>
-                    <div class="ui tiny button teal floated right"><i class="icon url"></i>复制图片地址</div>
+                        {{action 'upload'}}><i class="icon heart"></i>{{uploadStatus}}</div>
+                    <div {{bind-attr class=":ui :tiny :button :green :floated :right uploadFinished::disabled"}}
+                        {{action 'setCover'}}><i class="icon checkmark"></i>设为封面
+                    </div>
                     <div class="content">
                         <div class="header">{{file_name}}</div>
                         <div class="description">{{isCover}}</div>
@@ -199,27 +199,54 @@
 <script type="text/x-handlebars" data-template-name="products/view">
     <div class="ui three items stackable">
         {{#each product in model}}
-        <div class="item">
-            <div class="image">
-                <img {{bind-attr src=product.cover}}>
-                <a class="star ui corner label">
-                    <i class="star icon"></i>
-                </a>
+            <div class="item">
+                <div class="image">
+                    <img {{bind-attr src=product.cover}}>
+                    <a class="star ui corner label">
+                        <i class="star icon"></i>
+                    </a>
+                </div>
+                <div class="content">
+                    {{#link-to 'product' product class="ui button small green floated right"}}
+                        点击查看
+                    {{/link-to}}
+                    <div class="name">{{product.brand}}</div>
+                    <p class="description">{{product.spec}}</p>
+                </div>
             </div>
-            <div class="content">
-                {{#link-to 'product' product class="ui button small green floated right"}}
-                点击查看
-                {{/link-to}}
-                <div class="name">{{product.brand}}</div>
-                <p class="description">{{product.spec}}</p>
-            </div>
-        </div>
         {{/each}}
     </div>
 </script>
 
 <script type="text/x-handlebars" data-template-name="product">
-    {{spec}}
+    <div class="ui segment">
+        <div class="ui grid stackable">
+            <div class="five column wide">
+                <div class="ui segment raised">
+                    <img class="ui medium image attached" {{bind-attr src=cover}}>
+                </div>
+            </div>
+            <div class="eleven column wide">
+                <div class="ui header huge blue">
+                    {{brand}}
+                    <div class="ui label black">{{category}}</div>
+                    <div class="sub header">价格: &yen {{price}}</div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui small images">
+                    <img class="ui image" {{bind-attr src=cover}}>
+                    <img class="ui image" {{bind-attr src=cover}}>
+                    <img class="ui image" {{bind-attr src=cover}}>
+                    <img class="ui image" {{bind-attr src=cover}}>
+                </div>
+                <div class="ui button basic red">DHC1J-A1PR</div>
+                <div class="ui button basic red">DHC1J-A1R</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+        asdfasdfasdf
+    </div>
 </script>
 
 

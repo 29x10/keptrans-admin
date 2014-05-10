@@ -69,6 +69,7 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
                     context.set('price', '');
                     context.set('desc', '');
                     context.set('cover', '');
+                    context.set('files', Ember.A());
                 }, function (response) {
                     newProduct.deleteRecord();
                     context.set('isLoading', false);
