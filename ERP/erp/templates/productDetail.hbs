@@ -1,0 +1,32 @@
+<script type="text/x-handlebars" data-template-name="product">
+    <div class="ui segment">
+        <div class="ui grid stackable">
+            <div class="five column wide">
+                <div class="ui segment raised">
+                    <img class="ui medium image attached" {{bind-attr src=cover}}>
+                </div>
+            </div>
+            <div class="eleven column wide">
+                <div class="ui header huge blue">
+                    {{brand}}
+                    <div class="ui label black">{{category}}</div>
+                    <div class="sub header">价格: &yen {{price rows.firstObject.price}}
+                        - {{price rows.lastObject.price}}</div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui small images">
+                    <img class="ui image" {{bind-attr src=cover}}>
+                    <img class="ui image" {{bind-attr src=cover}}>
+                    <img class="ui image" {{bind-attr src=cover}}>
+                    <img class="ui image" {{bind-attr src=cover}}>
+                </div>
+                {{#each rows}}
+                    <div class="ui button basic">{{model}}</div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+        asdfasdfasdf
+    </div>
+</script>

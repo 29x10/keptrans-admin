@@ -1,0 +1,21 @@
+<script type="text/x-handlebars" data-template-name="products/view">
+    <div class="ui three items stackable">
+        {{#each product in model}}
+            <div class="item">
+                <div class="image">
+                    <img {{bind-attr src=product.cover}}>
+                    <a class="star ui corner label">
+                        <i class="star icon"></i>
+                    </a>
+                </div>
+                <div class="content">
+                    {{#link-to 'product' product class="ui button small green floated right"}}
+                        点击查看
+                    {{/link-to}}
+                    <div class="name">{{product.brand}}</div>
+                    <p class="description">{{product.spec}}</p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</script>

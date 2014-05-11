@@ -1,0 +1,147 @@
+<script type="text/x-handlebars" data-template-name="products/new">
+    <div class="ui dimmer page">
+        <div class="content">
+            <div class="center">
+                <h2 class="ui inverted icon header">
+                    <i class="icon circular inverted emphasized teal checkmark"></i>
+                    添加产品成功
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="ui header">
+        <i class="settings icon"></i>
+
+        <div class="content">
+            产品管理
+            <div class="sub header">添加产品</div>
+        </div>
+    </h2>
+    <div {{bind-attr class="formError:warning isLoading:loading :ui :form :segment"}}>
+        {{#if formError}}
+            <div class="ui warning message">
+                <div class="ui header">出错啦</div>
+                <ul class="list">
+                    {{#each error in productError}}
+                        <li>{{error}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/if}}
+        <div class="three fields">
+            <div
+                {{bind-attr class="brandError:error :field"}}>
+                <label>品牌</label>
+
+                <div class="ui left labeled icon input">
+                    {{form-field type="text" placeholder="品牌名称" value=brand error=brandError}}
+                    <i class="bookmark icon"></i>
+
+                </div>
+                {{#if brandError}}
+                    <div class="ui red pointing above label">产品牌子不能为空</div>
+                {{/if}}
+
+            </div>
+            <div
+                {{bind-attr class="categoryError:error :field"}}>
+                <label>类别</label>
+
+                <div class="ui left labeled icon input">
+                    {{form-field type="text" placeholder="所属类别" value=category error=categoryError}}
+                    <i class="reorder icon"></i>
+                </div>
+                {{#if categoryError}}
+                    <div class="ui red pointing above label">产品所属分类不能为空</div>
+                {{/if}}
+            </div>
+            <div
+                {{bind-attr class="specError:error :field"}}>
+                <label>基本型号</label>
+
+                <div class="ui left labeled icon input">
+                    {{form-field type="text" placeholder="基本型号" value=spec error=specError}}
+                    <i class="tag icon"></i>
+
+                </div>
+                {{#if specError}}
+                    <div class="ui red pointing above label">产品的基本型号不能为空</div>
+                {{/if}}
+            </div>
+        </div>
+
+
+
+        <div class="field">
+            {{image-upload imageUrl=cover}}
+        </div>
+        {{#each rows}}
+            <div class="ui divider horizontal">产品#{{_view.contentIndex}}</div>
+            <div class="two fields">
+                <div {{bind-attr class="specError:error :field"}}>
+                    <label>型号</label>
+                    <div class="ui left labeled icon input">
+                        {{form-field type="text" placeholder="基本型号" value=spec error=specError}}
+                        <i class="tag icon"></i>
+                    </div>
+                    {{#if specError}}
+                        <div class="ui red pointing above label">产品的基本型号不能为空</div>
+                    {{/if}}
+                </div>
+                <div {{bind-attr class="priceError:error :field"}}>
+                    <label>价格</label>
+                    <div class="ui left labeled icon input">
+                        {{form-field type="text" placeholder="价格" value=price error=priceError regex="^\d+$"}}
+                        <i class="yen icon"></i>
+                    </div>
+                    {{#if priceError}}
+                        <div class="ui red pointing above label">价格不能为空，必须是数字，单位是分</div>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="field">
+                {{image-upload imageUrl=image}}
+            </div>
+        {{/each}}
+
+
+
+
+        <div class="field">
+            <label>产品手册</label>
+            {{textarea value=desc}}
+        </div>
+        <div class="ui teal button"
+            {{action 'addProduct'}}>
+            <i class="icon add"></i>添加产品
+        </div>
+        <div class="ui blue button"
+            {{action 'publishProduct'}}>
+            <i class="icon location"></i>发布产品
+        </div>
+        {{img-upload type="file" multiple="true" id="upload" class="hidden" files=files}}
+        <div class="ui green button" {{action 'uploadImage'}}>
+            <i class="icon photo"></i>上传图片
+        </div>
+        <div class="ui list">
+            {{#each files itemController="productImageUpload" itemViewClass="Erp.ItemView"}}
+                <div class="ui top attached successful progress">
+                    <div class="bar" {{bind-attr style="barWidth"}}></div>
+                </div>
+                <div class="item ui attached">
+                    {{img-preview file=model}}
+                    <div {{bind-attr class=":ui :tiny :button :red :floated :right isUploading:disabled"}}
+                        {{action 'upload'}}><i class="icon heart"></i>{{uploadStatus}}</div>
+                    <div {{bind-attr class=":ui :tiny :button :green :floated :right uploadFinished::disabled"}}
+                        {{action 'setCover'}}><i class="icon checkmark"></i>设为封面
+                    </div>
+                    <div class="content">
+                        <div class="header">{{file_name}}</div>
+                        <div class="description">{{isCover}}</div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</script>

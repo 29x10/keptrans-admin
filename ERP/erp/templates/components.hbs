@@ -1,0 +1,26 @@
+<script type="text/x-handlebars" data-template-name="components/image-upload">
+    {{img-upload type="file" id=imageId class="hidden" file=imageObject action="triggerUpload"}}
+    <div class="ui top attached successful progress">
+        <div class="bar" {{bind-attr style=barWidth}}></div>
+    </div>
+    <div class="ui list large">
+        <div class="item">
+            <div class="right floated tiny teal ui button" {{action 'chooseImage'}}><i class="file icon"></i>选择</div>
+            {{#if imageObject}}
+                <div class="right floated tiny red ui button" {{action 'uploadImage' imageObject}}><i class="cloud upload icon"></i>{{uploadStatus}}</div>
+            {{/if}}
+            {{#if imageObject}}
+                {{img-preview file=imageObject}}
+            {{else}}
+                <i class="icon photo"></i>
+            {{/if}}
+            <div class="content">
+                {{#if imageObject}}
+                    <div class="header">{{imageObject.name}}</div>
+                {{else}}
+                    <div class="header">您还未选择任何照片</div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</script>

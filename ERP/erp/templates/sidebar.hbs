@@ -1,0 +1,49 @@
+<script type="text/x-handlebars" data-template-name="erp">
+    <div class="ui vertical sidebar menu show-sidebar">
+        <a class="item close mobile-only" {{action 'hideSideBar'}}>
+            <i class="close icon"></i>关闭
+        </a>
+        {{#link-to 'erp' class="item" activeClass="keptrans" closeSideBar="true"}}
+            <i class="home icon"></i> 凯思ERP
+        {{/link-to}}
+
+        <div class="item">
+            <div class="ui input"><input placeholder="Search..." type="text"></div>
+        </div>
+        <div class="item">
+            <i class="list icon"></i> 产品管理
+            <div class="menu">
+                {{#link-to 'products.new' class="item" closeSideBar="true"}}
+                    添加产品
+                {{/link-to}}
+                {{#link-to 'products.view' class="item" closeSideBar="true"}}
+                    查看产品
+                {{/link-to}}
+            </div>
+        </div>
+        <div class="item">
+            <i class="list icon"></i> 订单管理
+            <div class="menu">
+                <a class="item">开单</a>
+                <a class="item">查看订单</a>
+            </div>
+        </div>
+        <div class="item">
+            <i class="list icon"></i> 库存管理
+            <div class="menu">
+                <a class="item">产品入库</a>
+                <a class="item">查看库存</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui menu mobile-nav">
+        <a class="item" {{action 'showSideBar'}}>
+            <i class="icon list"></i>
+        </a>
+    </div>
+
+    <div class="blank-sidebar">
+        {{outlet}}
+    </div>
+</script>

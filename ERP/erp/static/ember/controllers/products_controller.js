@@ -1,18 +1,18 @@
 Erp.ProductsNewController = Ember.ArrayController.extend({
 
     formError: false,
-
+    // server respond
     productError: Ember.A(),
 
     isLoading: false,
 
-    brandNone: false,
+    // attr
+    brandError: false,
+    categoryError: false,
+    specError: false,
 
-    categoryNone: false,
+    coverObject: false,
 
-    specNone: false,
-
-    priceNone: false,
 
     files: Ember.A(),
 
@@ -22,35 +22,35 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
     spec: "",
 
-    price: "",
-
     desc: "",
 
     cover: "",
 
-    coverIsSet: false,
-
-    coverIndex: -1,
+    rows: function () {
+        var rows = Ember.A();
+        rows.pushObject({price: "", spec: "", image: ""});
+        return rows
+    }(),
 
     actions: {
-        addProduct: function () {
+        publishProduct: function () {
             var context = this;
 
             context.set('formError', false);
             context.set('productError', Ember.A());
 
 
-            ['brandNone', 'categoryNone', 'specNone', 'priceNone'].forEach(function (field) {
-                context.set(field, false);
-            });
+//            var rows = context.get('rows').map(function (row) {
+//                return {price: row.price, model: row.spec, image: row.image}
+//            });
 
             var newProduct = this.store.createRecord('product', {
                 brand: context.get('brand'),
                 category: context.get('category'),
-                spec: context.get('spec'),
-                price: context.get('price'),
+                model: context.get('spec'),
+                cover: context.get('cover'),
                 desc: context.get('desc'),
-                cover: context.get('cover')
+                rows: context.get('rows')
             });
             
             context.set('isLoading', true);
@@ -66,10 +66,8 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
                     context.set('brand', '');
                     context.set('category', '');
                     context.set('spec', '');
-                    context.set('price', '');
                     context.set('desc', '');
                     context.set('cover', '');
-                    context.set('files', Ember.A());
                 }, function (response) {
                     newProduct.deleteRecord();
                     context.set('isLoading', false);
@@ -83,6 +81,12 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
         uploadImage: function () {
             $('#upload').trigger("click");
+        },
+
+        addProduct: function () {
+            var rows = this.get('rows');
+            rows.pushObject({price: "", spec: "", image: ""});
         }
+
     }
 });
