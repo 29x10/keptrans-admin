@@ -71,44 +71,41 @@ body {
     display: none;
 }
 
+.ui.basic.button {
+    margin: 10px 10px 0 0;
+}
+
 .ui.basic.button.black {
     box-shadow: 0 0 0 1px #5C6166 inset;
     color: #5C6166!important;
-    margin: 10px 10px 0 0;
 }
 
 .ui.basic.button.green {
     box-shadow: 0 0 0 1px #5BBD72 inset;
     color: #5BBD72!important;
-    margin: 10px 10px 0 0;
 }
 
 .ui.basic.button.red {
     box-shadow: 0 0 0 1px #D95C5C inset;
     color: #D95C5C!important;
-    margin: 10px 10px 0 0;
 }
 
 .ui.basic.button.orange {
     box-shadow: 0 0 0 1px #E96633 inset;
     color: #E96633!important;
-    margin: 10px 10px 0 0;
 }
 
 .ui.basic.button.blue {
     box-shadow: 0 0 0 1px #6ECFF5 inset;
     color: #6ECFF5!important;
-    margin: 10px 10px 0 0;
 }
 
 .ui.basic.button.purple {
     box-shadow: 0 0 0 1px #564F8A inset;
     color: #564F8A!important;
-    margin: 10px 10px 0 0;
 }
 
 .ui.basic.button.teal {
     box-shadow: 0 0 0 1px #00B5AD inset;
     color: #00B5AD!important;
-    margin: 10px 10px 0 0;
 }

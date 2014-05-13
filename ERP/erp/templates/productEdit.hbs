@@ -1,0 +1,74 @@
+<script type="text/x-handlebars" data-template-name="product/edit">
+    <h2 class="ui header">
+        <i class="edit icon"></i>
+
+        <div class="content">
+            产品管理
+            <div class="sub header">编辑产品</div>
+        </div>
+    </h2>
+    <div class="ui segment form">
+        <div class="three fields">
+            <div class="field">
+                <label>品牌</label>
+                <div class="ui left labeled icon input">
+                    {{form-field type="text" placeholder="品牌名称" value=brand error=brandError}}
+                    <i class="bookmark icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label>类目</label>
+                <div class="ui left labeled icon input">
+                    {{form-field type="text" placeholder="所属类目" value=category error=categoryError}}
+                    <i class="reorder icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label>基本型号</label>
+                <div class="ui left labeled icon input">
+                    {{form-field type="text" placeholder="基本型号" value=spec error=specError}}
+                    <i class="tag icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            {{image-upload imageUrl=cover}}
+        </div>
+        {{#each rows}}
+            <div class="ui divider horizontal">产品#{{_view.contentIndex}}</div>
+            <div class="two fields">
+                <div class="field">
+                    <label>型号</label>
+                    <div class="ui left labeled icon input">
+                        {{form-field type="text" placeholder="基本型号" value=spec error=specError}}
+                        <i class="tag icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>价格</label>
+                    <div class="ui left labeled icon input">
+                        {{form-field type="text" placeholder="价格" value=price error=priceError regex="^\d+$"}}
+                        <i class="yen icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                {{image-upload imageUrl=image}}
+            </div>
+        {{/each}}
+        <div class="field">
+            <label>产品手册</label>
+            {{textarea value=desc}}
+        </div>
+
+        <div class="ui teal button"
+            {{action 'addProduct'}}>
+            <i class="icon add"></i>添加产品
+        </div>
+        <div class="ui blue button">
+            <i class="icon location"></i>发布产品
+        </div>
+
+
+    </div>
+</script>

@@ -4,6 +4,10 @@ Erp.ApplicationAdapter = DS.RESTAdapter.extend({
     host: 'http://192.168.1.102:5002'
 });
 
+Erp.Router.reopen({
+    location: 'history'
+});
+
 
 Ember.LinkView.reopen({
     closeSideBar: false,
@@ -13,10 +17,7 @@ Ember.LinkView.reopen({
         if(action) {
             Ember.$('.ui.sidebar').sidebar({overlay: true}).sidebar('hide');
         }
-
         // no action to take, handle the link-to normally
         return result;
     }
 });
-
-

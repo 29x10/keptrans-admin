@@ -46,14 +46,14 @@
             </div>
             <div
                 {{bind-attr class="categoryError:error :field"}}>
-                <label>类别</label>
+                <label>类目</label>
 
                 <div class="ui left labeled icon input">
-                    {{form-field type="text" placeholder="所属类别" value=category error=categoryError}}
+                    {{form-field type="text" placeholder="所属类目" value=category error=categoryError}}
                     <i class="reorder icon"></i>
                 </div>
                 {{#if categoryError}}
-                    <div class="ui red pointing above label">产品所属分类不能为空</div>
+                    <div class="ui red pointing above label">产品所属类目不能为空</div>
                 {{/if}}
             </div>
             <div

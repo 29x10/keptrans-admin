@@ -185,3 +185,9 @@ Erp.ImageUploadComponent = Ember.Component.extend({
 
 
 });
+
+
+//Ember.Handlebars.helper('format-markdown', function(input) {
+//    console.log()
+//    return Ember.Handlebars.compile(input)
+//});

@@ -67,3 +67,27 @@ Erp.ProductImageUploadController = Ember.ObjectController.extend({
         }
     }
 });
+
+
+Erp.ProductIndexController = Ember.ObjectController.extend({
+
+    selected: false,
+
+    actions: {
+        select: function (target) {
+            var context = this;
+            var selected = context.get('selected');
+
+            if (!selected) {
+                selected = {};
+            }
+            Ember.set(selected, 'selected', false);
+            this.get('rows').forEach(function (row) {
+                if (row === target) {
+                    Ember.set(row, 'selected', true);
+                    context.set('selected', row);
+                }
+            });
+        }
+    }
+});

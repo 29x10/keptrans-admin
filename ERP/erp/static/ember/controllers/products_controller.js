@@ -39,15 +39,10 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
             context.set('formError', false);
             context.set('productError', Ember.A());
 
-
-//            var rows = context.get('rows').map(function (row) {
-//                return {price: row.price, model: row.spec, image: row.image}
-//            });
-
             var newProduct = this.store.createRecord('product', {
                 brand: context.get('brand'),
                 category: context.get('category'),
-                model: context.get('spec'),
+                spec: context.get('spec'),
                 cover: context.get('cover'),
                 desc: context.get('desc'),
                 rows: context.get('rows')

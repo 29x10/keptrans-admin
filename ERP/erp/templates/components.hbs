@@ -12,13 +12,21 @@
             {{#if imageObject}}
                 {{img-preview file=imageObject}}
             {{else}}
-                <i class="icon photo"></i>
+                {{#if imageUrl}}
+                    <img class="ui image avatar" {{bind-attr src=imageUrl}}>
+                {{else}}
+                    <i class="icon photo"></i>
+                {{/if}}
             {{/if}}
             <div class="content">
                 {{#if imageObject}}
                     <div class="header">{{imageObject.name}}</div>
                 {{else}}
-                    <div class="header">您还未选择任何照片</div>
+                    {{#if imageUrl}}
+                        <div class="header">来自数据库</div>
+                    {{else}}
+                        <div class="header">您还未选择任何照片</div>
+                    {{/if}}
                 {{/if}}
             </div>
         </div>
