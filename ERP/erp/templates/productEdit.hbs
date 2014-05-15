@@ -1,35 +1,37 @@
 <script type="text/x-handlebars" data-template-name="product/edit">
+    <div class="ui dimmer page">
+        <div class="content">
+            <div class="center">
+                <h2 class="ui inverted icon header">
+                    <i class="icon circular inverted emphasized blue checkmark"></i>
+                    更新成功
+                </h2>
+            </div>
+        </div>
+    </div>
     <h2 class="ui header">
         <i class="edit icon"></i>
-
         <div class="content">
             产品管理
             <div class="sub header">编辑产品</div>
         </div>
     </h2>
+    <div class="ui steps nav small">
+        {{#link-to 'products.view' class="ui step" tagName="div" activeClass="noActive"}}
+            产品详情
+        {{/link-to}}
+        {{#link-to 'product' model class="ui step" tagName="div" activeClass="noActive"}}
+            产品详情
+        {{/link-to}}
+        <div class="ui active step">
+            编辑产品
+        </div>
+    </div>
     <div class="ui segment form">
         <div class="three fields">
-            <div class="field">
-                <label>品牌</label>
-                <div class="ui left labeled icon input">
-                    {{form-field type="text" placeholder="品牌名称" value=brand error=brandError}}
-                    <i class="bookmark icon"></i>
-                </div>
-            </div>
-            <div class="field">
-                <label>类目</label>
-                <div class="ui left labeled icon input">
-                    {{form-field type="text" placeholder="所属类目" value=category error=categoryError}}
-                    <i class="reorder icon"></i>
-                </div>
-            </div>
-            <div class="field">
-                <label>基本型号</label>
-                <div class="ui left labeled icon input">
-                    {{form-field type="text" placeholder="基本型号" value=spec error=specError}}
-                    <i class="tag icon"></i>
-                </div>
-            </div>
+            {{form-field label="品牌" placeholder="品牌名称" value=brand regex="^.+$" errorMessage="品牌不能为空" icon="bookmark"}}
+            {{form-field label="类目" placeholder="所属类目" value=category regex="^.+$" errorMessage="所属类目不能为空" icon="reorder"}}
+            {{form-field label="基本型号" placeholder="基本型号" value=spec regex="^.+$" errorMessage="基本型号不能为空" icon="tag"}}
         </div>
         <div class="field">
             {{image-upload imageUrl=cover}}
@@ -37,23 +39,14 @@
         {{#each rows}}
             <div class="ui divider horizontal">产品#{{_view.contentIndex}}</div>
             <div class="two fields">
-                <div class="field">
-                    <label>型号</label>
-                    <div class="ui left labeled icon input">
-                        {{form-field type="text" placeholder="基本型号" value=spec error=specError}}
-                        <i class="tag icon"></i>
-                    </div>
-                </div>
-                <div class="field">
-                    <label>价格</label>
-                    <div class="ui left labeled icon input">
-                        {{form-field type="text" placeholder="价格" value=price error=priceError regex="^\d+$"}}
-                        <i class="yen icon"></i>
-                    </div>
-                </div>
+                {{form-field label="型号" placeholder="型号" value=spec regex="^.+$" errorMessage="型号不能为空" icon="reorder"}}
+                {{form-field label="价格" placeholder="价格" value=price regex="^\d+$" errorMessage="价格不能为空且必须是数字，单位是分" icon="yen"}}
             </div>
             <div class="field">
                 {{image-upload imageUrl=image}}
+            </div>
+            <div class="ui button red small floated right" {{action 'removeProduct' this}}>
+                删除
             </div>
         {{/each}}
         <div class="field">
@@ -65,8 +58,21 @@
             {{action 'addProduct'}}>
             <i class="icon add"></i>添加产品
         </div>
-        <div class="ui blue button">
+        <div class="ui blue button"
+            {{action 'updateProduct'}}>
             <i class="icon location"></i>发布产品
+        </div>
+        {{multi-img-upload id="upload" files=files}}
+        <div class="ui green button" {{action 'uploadImage'}}>
+            <i class="icon photo"></i>上传图片
+        </div>
+        <div class="ui purple button" {{action 'rollback'}}>
+            <i class="undo icon"></i>撤销
+        </div>
+        <div class="ui list large">
+            {{#each image in files}}
+                {{images-list image=image}}
+            {{/each}}
         </div>
 
 

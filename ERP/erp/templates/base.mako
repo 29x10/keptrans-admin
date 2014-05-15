@@ -32,10 +32,19 @@
 <script src="//cdnjscn.b0.upaiyun.com/libs/handlebars.js/1.3.0/handlebars.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.prod.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/zeroclipboard/2.0.0-beta.5/ZeroClipboard.min.js" type="text/javascript"></script>
 
-    % for url in webassets(request, 'ember/app.js', 'ember/formDataPromise.js',\
-                                  'ember/models/product.js', 'ember/views/productAdd.js', 'ember/router.js',\
-                                  'ember/controllers/products_controller.js', 'ember/controllers/product_controller.js',\
+    % for url in webassets(request, 'ember/app.js',\
+                                  'ember/form-data-promise.js',\
+                                  'ember/models/product.js',\
+                                  'ember/views/product.js',\
+                                  'ember/components/clipboard.js',\
+                                  'ember/components/form-field.js',\
+                                  'ember/components/image-upload.js',\
+                                  'ember/components/images-list.js',\
+                                  'ember/router.js',\
+                                  'ember/controllers/products_controller.js',\
+                                  'ember/controllers/product_controller.js',\
                                   output='out.js', filters='yui_js'):
         <script src="${url}" type="text/javascript"></script>
     % endfor

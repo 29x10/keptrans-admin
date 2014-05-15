@@ -3,7 +3,7 @@ Erp.ListTransform = DS.Transform.extend({
         return serialized;
     },
     serialize: function(deserialized) {
-        return deserialized;
+        return Ember.A(deserialized);
     }
 });
 

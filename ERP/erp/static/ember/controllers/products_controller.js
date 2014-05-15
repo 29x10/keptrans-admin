@@ -6,14 +6,6 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
     isLoading: false,
 
-    // attr
-    brandError: false,
-    categoryError: false,
-    specError: false,
-
-    coverObject: false,
-
-
     files: Ember.A(),
 
     brand: "",
@@ -26,11 +18,9 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
     cover: "",
 
-    rows: function () {
-        var rows = Ember.A();
-        rows.pushObject({price: "", spec: "", image: ""});
-        return rows
-    }(),
+    rows: Ember.A([{price: "", spec: "", image: ""}]),
+
+    reset: false,
 
     actions: {
         publishProduct: function () {
@@ -53,7 +43,7 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
             newProduct.save().then(
                 function (respond) {
                     context.set('isLoading', false);
-                    var success = $('.ui.dimmer.page');
+                    var success = Ember.$('.ui.dimmer.page');
                     success.dimmer('show');
                     window.setTimeout(function () {
                         success.dimmer('hide');
@@ -63,6 +53,10 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
                     context.set('spec', '');
                     context.set('desc', '');
                     context.set('cover', '');
+                    var rows = Ember.A();
+                    rows.pushObject({price: "", spec: "", image: ""});
+                    context.set('rows', rows);
+                    context.set('reset', true);
                 }, function (response) {
                     newProduct.deleteRecord();
                     context.set('isLoading', false);
@@ -81,6 +75,13 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
         addProduct: function () {
             var rows = this.get('rows');
             rows.pushObject({price: "", spec: "", image: ""});
+        },
+
+        removeProduct: function (row) {
+            var rows = this.get('rows');
+            if (rows.length > 1) {
+                rows.removeObject(row);
+            }
         }
 
     }

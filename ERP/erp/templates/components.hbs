@@ -1,16 +1,16 @@
 <script type="text/x-handlebars" data-template-name="components/image-upload">
-    {{img-upload type="file" id=imageId class="hidden" file=imageObject action="triggerUpload"}}
+    {{img-upload file=imageObject action="triggerUpload"}}
     <div class="ui top attached successful progress">
         <div class="bar" {{bind-attr style=barWidth}}></div>
     </div>
-    <div class="ui list large">
+    <div class="ui list large attached">
         <div class="item">
             <div class="right floated tiny teal ui button" {{action 'chooseImage'}}><i class="file icon"></i>选择</div>
             {{#if imageObject}}
                 <div class="right floated tiny red ui button" {{action 'uploadImage' imageObject}}><i class="cloud upload icon"></i>{{uploadStatus}}</div>
             {{/if}}
             {{#if imageObject}}
-                {{img-preview file=imageObject}}
+                {{img-preview file=imageObject class="avatar"}}
             {{else}}
                 {{#if imageUrl}}
                     <img class="ui image avatar" {{bind-attr src=imageUrl}}>
@@ -32,3 +32,45 @@
         </div>
     </div>
 </script>
+
+<script type="text/x-handlebars" data-template-name="components/zero-clipboard">
+    <div {{bind-attr data-clipboard-text=text class=":ui :button btn-class"}}><i class="copy icon"></i>复制</div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="components/images-list">
+    <div class="ui top attached successful progress">
+        <div class="bar" {{bind-attr style=barWidth}}></div>
+    </div>
+    <div class="item ui attached">
+        {{img-preview file=image class="medium"}}
+        <div {{bind-attr class=":ui :tiny :button :red :floated :right isUploading:disabled"}}
+            {{action 'upload' image}}><i class="icon cloud upload"></i>{{uploadStatus}}</div>
+        {{#if imageUrl}}
+            {{zero-clipboard text=imageUrl btn-class="tiny green floated right"}}
+        {{/if}}
+        </div>
+        <div class="content">
+            <div class="header">{{name}}</div>
+            <div class="description"></div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="components/form-field">
+    <div {{bind-attr class="error:error :field"}}>
+        <label>{{label}}</label>
+
+        <div class="ui left labeled icon input">
+            {{form-input type="text" placeholder=placeholder value=value error=error regex=regex}}
+            <i {{bind-attr class="icon :icon"}}></i>
+
+        </div>
+        {{#if error}}
+            <div class="ui red pointing above label">{{errorMessage}}</div>
+        {{/if}}
+    </div>
+</script>
+
+

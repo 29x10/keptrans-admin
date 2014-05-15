@@ -1,4 +1,4 @@
-Erp.FromFieldView = Ember.TextField.extend({
+Erp.FormInputView = Ember.TextField.extend({
 
     attributeBindings: ['type', 'value', 'size', 'pattern', 'name', 'min', 'max',
                       'accept', 'autocomplete', 'autosave', 'formaction',
@@ -13,26 +13,31 @@ Erp.FromFieldView = Ember.TextField.extend({
 
     hasError: false,
 
+    getFocus: false,
+
     valueChanged: function () {
         re = new RegExp(this.get('regex'), 'g');
-        this.set('hasError', !re.test(this.get('value')));
-    }.observes('value'),
+        this.set('error', !re.test(this.get('value')) && this.get('getFocus'));
+    }.observes('value', 'getFocus'),
 
     focusIn: function (event) {
         this._super(event);
-        this.valueChanged();
-        this.set('error', this.get('hasError'));
+        this.set('getFocus', true);
     },
 
     focusOut: function (event) {
         this._super(event);
-        this.set('error', false);
+        this.set('getFocus', false);
     }
 });
 
-Ember.Handlebars.helper('form-field', Erp.FromFieldView);
+Ember.Handlebars.helper('form-input', Erp.FormInputView);
 
 Erp.ImageUploadView = Ember.TextField.extend({
+
+    type: "file",
+
+    classNames: ['hidden'],
     
     attributeBindings: ['type', 'value', 'size', 'pattern', 'name', 'min', 'max',
                       'accept', 'autocomplete', 'autosave', 'formaction',
@@ -54,6 +59,12 @@ Ember.Handlebars.helper('img-upload', Erp.ImageUploadView);
 
 Erp.MultiImageUploadView = Ember.TextField.extend({
 
+    type: "file",
+
+    classNames: ['hidden'],
+
+    multiple: "multiple",
+
     attributeBindings: ['type', 'value', 'size', 'pattern', 'name', 'min', 'max',
                       'accept', 'autocomplete', 'autosave', 'formaction',
                       'formenctype', 'formmethod', 'formnovalidate', 'formtarget',
@@ -66,11 +77,8 @@ Erp.MultiImageUploadView = Ember.TextField.extend({
         var targetFiles = this.get('element').files;
 
         for (var i=0; i<targetFiles.length; i++) {
-            targetFiles[i].file_name = targetFiles[i].name;
-            targetFiles[i].isCover = "";
             files.pushObject(this.get('element').files[i]);
         }
-        this.set('files', files);
     },
 
     files: Ember.A()
@@ -82,7 +90,7 @@ Erp.ImagePreviewView = Ember.View.extend({
     tagName: 'img',
     attributeBindings: ['src', 'file'],
     
-    classNames: ['ui', 'image', 'avatar'],
+    classNames: ['ui', 'image'],
     
     src: '',
     
@@ -119,75 +127,7 @@ Erp.ItemView = Ember.View.extend({
     }
 });
 
-
 Ember.Handlebars.helper('price', function(value, options) {
     value = "" + value;
     return value.slice(0, -2) + '.' + value.slice(-2);
 });
-
-
-Erp.ImageUploadComponent = Ember.Component.extend({
-
-    barWidth: "width: 0",
-
-    startUpload: false,
-
-    uploadStatus: "上传",
-
-    imageUrl: "",
-
-    imageObject: false,
-
-    actions: {
-        uploadImage: function (file) {
-            var formData = new FormData();
-            var context = this;
-            if (context.get('startUpload')) {
-                return;
-            }
-            formData.append('file', file);
-            var hash = {
-                xhr: function () {
-                    var xhr = Ember.$.ajaxSettings.xhr();
-
-                    xhr.upload.onprogress = function (event) {
-                        var width = 'width: ' + event.loaded / event.total * 100 + '%';
-                        context.set('barWidth', width);
-                    };
-
-                    xhr.onload = function (event) {
-                        context.set('barWidth', 'width: 100%');
-                    };
-                    return xhr;
-                },
-                contentType: false,
-                processData: false
-            };
-
-            context.set('startUpload', true);
-            context.set('uploadStatus', '上传中');
-            Erp.FormDataPromise.ajax("http://192.168.1.102:5002/image", "POST", formData, true, hash).then(function (response) {
-                context.set('uploadStatus', '上传完成');
-                context.set('imageUrl', 'http://keptrans.b0.upaiyun.com' + response.image);
-                console.log(response);
-            }, function (response) {
-                context.set('startUpload', false);
-                context.set('uploadStatus', '上传');
-                context.set('barWidth', 'width: 0');
-                console.log(response);
-            });
-        },
-
-        chooseImage: function () {
-            this.$('input').trigger("click");
-        }
-    }
-
-
-});
-
-
-//Ember.Handlebars.helper('format-markdown', function(input) {
-//    console.log()
-//    return Ember.Handlebars.compile(input)
-//});

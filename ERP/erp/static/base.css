@@ -5,7 +5,7 @@ body {
 }
 
 
-@media (min-width: 767px) {
+@media only screen and (min-width: 767px) {
 
     .blank-sidebar {
         margin-left: 275px;
@@ -17,7 +17,15 @@ body {
         margin-left: 0 !important;
     }
 
+    .ui.steps.nav {
+        margin-top: 20px;
+    }
 
+
+}
+
+.text-center {
+    text-align: center;
 }
 
 .ui.menu.mobile-nav {
@@ -50,7 +58,7 @@ body {
     /*pointer-events: none;*/
 }
 
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
 
     .blank-sidebar {
         padding-left: 1.5rem;
@@ -109,3 +117,61 @@ body {
     box-shadow: 0 0 0 1px #00B5AD inset;
     color: #00B5AD!important;
 }
+
+
+
+.ui.form .fields .field {
+    clear: none;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ui.form .fields .field:first-child {
+  border-left: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ui.form .two.fields .fields,
+.ui.form .two.fields .field {
+    width: 50%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.ui.form .three.fields .fields,
+.ui.form .three.fields .field {
+    width: 33.333%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.ui.form .four.fields .fields,
+.ui.form .four.fields .field {
+    width: 25%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.ui.form .five.fields .fields,
+.ui.form .five.fields .field {
+    width: 20%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .ui.form .two.fields .fields,
+    .ui.form .two.fields .field,
+    .ui.form .three.fields .fields,
+    .ui.form .three.fields .field,
+    .ui.form .four.fields .fields,
+    .ui.form .four.fields .field,
+    .ui.form .five.fields .fields,
+    .ui.form .five.fields .field {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
