@@ -18,7 +18,7 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
     cover: "",
 
-    rows: Ember.A([{price: "", spec: "", image: ""}]),
+    rows: Ember.A([{price: "", spec: "", image: "", amount: "", dtime: ""}]),
 
     reset: false,
 
@@ -53,8 +53,7 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
                     context.set('spec', '');
                     context.set('desc', '');
                     context.set('cover', '');
-                    var rows = Ember.A();
-                    rows.pushObject({price: "", spec: "", image: ""});
+                    var rows = Ember.A([{price: "", spec: "", image: "", amount: "", dtime: ""}]);
                     context.set('rows', rows);
                     context.set('reset', true);
                 }, function (response) {
@@ -74,7 +73,7 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 
         addProduct: function () {
             var rows = this.get('rows');
-            rows.pushObject({price: "", spec: "", image: ""});
+            rows.pushObject({price: "", spec: "", image: "", amount: "", dtime: ""});
         },
 
         removeProduct: function (row) {

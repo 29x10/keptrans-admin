@@ -54,7 +54,10 @@
                     {{brand}}
                     <div class="ui label black">{{category}}</div>
                     {{#if selected}}
-                        <div class="sub header">价格: &yen {{price selected.price}}</div>
+                        <div class="sub header">
+                            价格: &yen {{price selected.price}}
+                            库存: {{selected.amount}}只 货期: {{selected.dtime}}天
+                        </div>
                     {{else}}
                         <div class="sub header">价格: &yen {{price rows.firstObject.price}} 起</div>
                     {{/if}}

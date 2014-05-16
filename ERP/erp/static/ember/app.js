@@ -1,7 +1,7 @@
 Erp = Ember.Application.create();
 
 Erp.ApplicationAdapter = DS.RESTAdapter.extend({
-    host: 'http://192.168.1.102:5002'
+    host: 'http://api.keptrans.com'
 });
 
 Erp.Router.reopen({

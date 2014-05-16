@@ -18,7 +18,7 @@
     </h2>
     <div class="ui steps nav small">
         {{#link-to 'products.view' class="ui step" tagName="div" activeClass="noActive"}}
-            产品详情
+            产品列表
         {{/link-to}}
         {{#link-to 'product' model class="ui step" tagName="div" activeClass="noActive"}}
             产品详情
@@ -40,7 +40,11 @@
             <div class="ui divider horizontal">产品#{{_view.contentIndex}}</div>
             <div class="two fields">
                 {{form-field label="型号" placeholder="型号" value=spec regex="^.+$" errorMessage="型号不能为空" icon="reorder"}}
-                {{form-field label="价格" placeholder="价格" value=price regex="^\d+$" errorMessage="价格不能为空且必须是数字，单位是分" icon="yen"}}
+                {{form-field label="价格" placeholder="价格" value=price regex="^[1-9]\d*$" errorMessage="价格不能为空且必须是数字，单位是分" icon="yen"}}
+            </div>
+            <div class="two fields">
+                {{form-field label="库存数量" placeholder="数量" value=amount regex="^[1-9]\d*$" errorMessage="库存数量不能为空" icon="archive"}}
+                {{form-field label="货期" placeholder="天数" value=dtime regex="^[1-9]\d*$" errorMessage="货期不能为空且必须为数字，单位是天" icon="calendar"}}
             </div>
             <div class="field">
                 {{image-upload imageUrl=image}}
@@ -60,7 +64,7 @@
         </div>
         <div class="ui blue button"
             {{action 'updateProduct'}}>
-            <i class="icon location"></i>发布产品
+            <i class="icon save"></i>保存
         </div>
         {{multi-img-upload id="upload" files=files}}
         <div class="ui green button" {{action 'uploadImage'}}>
@@ -74,7 +78,5 @@
                 {{images-list image=image}}
             {{/each}}
         </div>
-
-
     </div>
 </script>
