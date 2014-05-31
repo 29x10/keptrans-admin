@@ -53,11 +53,6 @@ body {
 }
 
 
-
-.dropArea * {
-    /*pointer-events: none;*/
-}
-
 @media only screen and (max-width: 767px) {
 
     .blank-sidebar {
@@ -118,60 +113,28 @@ body {
     color: #00B5AD!important;
 }
 
-
-
-.ui.form .fields .field {
-    clear: none;
-    float: left;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.ui.form .fields .field:first-child {
-  border-left: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+.ui.segment.tag-input {
+    padding: 5px;
 }
 
-.ui.form .two.fields .fields,
-.ui.form .two.fields .field {
-    width: 50%;
-    padding-left: 1%;
-    padding-right: 1%;
+.ui.form .tag-input input {
+    width: auto;
+    border: none;
 }
-.ui.form .three.fields .fields,
-.ui.form .three.fields .field {
-    width: 33.333%;
-    padding-left: 1%;
-    padding-right: 1%;
+
+.mouse {
+    cursor: pointer;
 }
-.ui.form .four.fields .fields,
-.ui.form .four.fields .field {
-    width: 25%;
-    padding-left: 1%;
-    padding-right: 1%;
-}
-.ui.form .five.fields .fields,
-.ui.form .five.fields .field {
-    width: 20%;
-    padding-left: 1%;
-    padding-right: 1%;
+
+.ui.product.input input {
+    padding: 0;
+    height: 100%;
 }
 
 
-@media only screen and (max-width: 767px) {
-    .ui.form .two.fields .fields,
-    .ui.form .two.fields .field,
-    .ui.form .three.fields .fields,
-    .ui.form .three.fields .field,
-    .ui.form .four.fields .fields,
-    .ui.form .four.fields .field,
-    .ui.form .five.fields .fields,
-    .ui.form .five.fields .field {
-        width: 100%;
-        padding-left: 0;
-        padding-right: 0;
-    }
+.ui.disabled.button,
+.ui.disabled.button:hover,
+.ui.disabled.button.active {
+    pointer-events: none;
 }
 

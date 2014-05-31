@@ -7,7 +7,7 @@
         <div class="item">
             <div class="right floated tiny teal ui button" {{action 'chooseImage'}}><i class="file icon"></i>选择</div>
             {{#if imageObject}}
-                <div class="right floated tiny red ui button" {{action 'uploadImage' imageObject}}><i class="cloud upload icon"></i>{{uploadStatus}}</div>
+                <div class="right floated tiny red ui button" {{action 'upload' imageObject}}><i class="cloud upload icon"></i>{{uploadStatus}}</div>
             {{/if}}
             {{#if imageObject}}
                 {{img-preview file=imageObject class="avatar"}}
@@ -49,6 +49,14 @@
         {{#if imageUrl}}
             {{zero-clipboard text=imageUrl btn-class="tiny green floated right"}}
         {{/if}}
+
+        {{#if imageUrl}}
+            {{#if isSet}}
+                <div {{bind-attr class=":ui :button :tiny :blue :floated: right"}} {{action 'removeFromProduct'}}><i class="copy icon"></i>删除</div>
+            {{else}}
+                <div {{bind-attr class=":ui :button :tiny :blue :floated: right"}} {{action 'addToProduct'}}><i class="copy icon"></i>添加</div>
+            {{/if}}
+        {{/if}}
         </div>
         <div class="content">
             <div class="header">{{name}}</div>
@@ -59,18 +67,68 @@
 
 
 <script type="text/x-handlebars" data-template-name="components/form-field">
-    <div {{bind-attr class="error:error :field"}}>
+    <div {{bind-attr class="displayError:error :field"}}>
         <label>{{label}}</label>
 
         <div class="ui left labeled icon input">
-            {{form-input type="text" placeholder=placeholder value=value error=error regex=regex}}
+            {{form-input type="text" placeholder=placeholder value=value displayError=displayError regex=regex error=error}}
             <i {{bind-attr class="icon :icon"}}></i>
 
         </div>
-        {{#if error}}
+        {{#if displayError}}
             <div class="ui red pointing above label">{{errorMessage}}</div>
         {{/if}}
     </div>
 </script>
 
 
+<script type="text/x-handlebars" data-template-name="components/tags-add">
+    <div class="field">
+        <label>标签</label>
+        <div class="ui segment tag-input">
+            {{#each tags}}
+                <div class="ui label">
+                    {{name}}
+                    <i class="delete icon"  {{action 'removeTag' this}}></i>
+                </div>
+            {{/each}}
+            {{input type="text" action="addTag" value=tagValue placeholder="请填写标签"}}
+        </div>
+    </div>
+</script>
+
+
+
+<script type="text/x-handlebars" data-template-name="components/product-add-modal">
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            添加产品
+        </div>
+        <div class="content">
+            <div class="ui form">
+                <div class="three fields">
+                    {{form-field label="品牌名称" placeholder="品牌名称" value=brand errorMessage="品牌不能为空"
+                    icon="reorder" error=brandError}}
+                    {{form-field label="型号" placeholder="型号" value=pattern errorMessage="型号不能为空"
+                    icon="reorder" error=patternError}}
+                    {{form-field label="价格" placeholder="价格" value=price regex="^[1-9]\d*$"
+                    errorMessage="价格不能为空，数字，单位是分" icon="yen" error=priceError}}
+                </div>
+                <div class="three fields">
+                    {{form-field label="货期" placeholder="货期天数" value=deadline regex="^[1-9]\d*$"
+                    errorMessage="货期不能为空，数字，单位是天" icon="reorder" error=deadlineError}}
+                    {{form-field label="库存数量" placeholder="库存数量" value=sku regex="^[0-9]\d*$"
+                    errorMessage="库存数量不能为空，数字" icon="reorder" error=deadlineError}}
+                    {{form-field label="库存单位" placeholder="库存单位" value=unit
+                    errorMessage="库存单位不能为空" icon="reorder" error=unitError}}
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui button negative">取消</div>
+            <div {{bind-attr class="error:disabled :ui :positive :left :labeled :icon :button"}} {{action 'addProduct'}}>
+                <i class="icon checkmark"></i>确认添加</div>
+        </div>
+    </div>
+</script>

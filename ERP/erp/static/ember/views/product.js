@@ -4,21 +4,24 @@ Erp.FormInputView = Ember.TextField.extend({
                       'accept', 'autocomplete', 'autosave', 'formaction',
                       'formenctype', 'formmethod', 'formnovalidate', 'formtarget',
                       'height', 'inputmode', 'list', 'multiple', 'pattern', 'step',
-                      'width', 'error', 'regex'],
+                      'width', 'displayError', 'error'],
     name: 'default',
 
     error: '',
 
     regex: '^.+$',
 
-    hasError: false,
+    hasError: function () {
+        var re = new RegExp(this.get('regex'), 'g');
+        return !re.test(this.get('value'));
+    }.property('value'),
 
     getFocus: false,
 
     valueChanged: function () {
-        re = new RegExp(this.get('regex'), 'g');
-        this.set('error', !re.test(this.get('value')) && this.get('getFocus'));
-    }.observes('value', 'getFocus'),
+        this.set('error', this.get('hasError'));
+        this.set('displayError', this.get('hasError') && this.get('getFocus'));
+    }.observes('hasError', 'getFocus'),
 
     focusIn: function (event) {
         this._super(event);

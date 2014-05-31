@@ -1,87 +1,149 @@
-Erp.ProductsNewController = Ember.ArrayController.extend({
-
-    formError: false,
-    // server respond
-    productError: Ember.A(),
+Erp.ProductsNewController = Ember.ObjectController.extend({
 
     isLoading: false,
 
     files: Ember.A(),
 
+    reset: false,
+
     brand: "",
+
+    brandError: true,
 
     category: "",
 
-    spec: "",
+    categoryError: true,
 
     desc: "",
 
+    descError: function () {
+        return !this.get('desc');
+    }.property('desc.length'),
+
     cover: "",
 
-    rows: Ember.A([{price: "", spec: "", image: "", amount: "", dtime: ""}]),
+    coverError: function () {
+        return !this.get('cover');
+    }.property('cover'),
 
-    reset: false,
+    tags: Ember.A(),
+
+    tagsError: function () {
+        return !this.get('tags.length');
+    }.property('tags.length'),
+
+    images: Ember.A(),
+
+    imagesError: function () {
+        return !this.get('images.length');
+    }.property('images.length'),
+
+    products: Ember.A(),
+
+    productsError: function () {
+        return !this.get('products.length');
+    }.property('products.length'),
+
+    error: function () {
+        return this.get('brandError') || this.get('categoryError') || this.get('descError') || this.get('coverError')
+            || this.get('productsError') || this.get('tagsError') || this.get('imagesError');
+    }.property('brandError', 'categoryError', 'descError', 'coverError', 'productsError', 'tagsError', 'imagesError'),
+
 
     actions: {
         publishProduct: function () {
+
             var context = this;
 
-            context.set('formError', false);
-            context.set('productError', Ember.A());
-
-            var newProduct = this.store.createRecord('product', {
+            var productMaster = this.store.createRecord('productMaster', {
                 brand: context.get('brand'),
                 category: context.get('category'),
-                spec: context.get('spec'),
                 cover: context.get('cover'),
-                desc: context.get('desc'),
-                rows: context.get('rows')
+                desc: context.get('desc')
             });
-            
-            context.set('isLoading', true);
 
-            newProduct.save().then(
-                function (respond) {
-                    context.set('isLoading', false);
-                    var success = Ember.$('.ui.dimmer.page');
-                    success.dimmer('show');
-                    window.setTimeout(function () {
-                        success.dimmer('hide');
-                    }, 2000);
-                    context.set('brand', '');
-                    context.set('category', '');
-                    context.set('spec', '');
-                    context.set('desc', '');
-                    context.set('cover', '');
-                    var rows = Ember.A([{price: "", spec: "", image: "", amount: "", dtime: ""}]);
-                    context.set('rows', rows);
-                    context.set('reset', true);
-                }, function (response) {
-                    newProduct.deleteRecord();
-                    context.set('isLoading', false);
-                    context.set('formError', true);
-                   response.responseJSON.errors.forEach(function (error) {
-                       var productError = context.get('productError');
-                       productError.pushObject(error.description);
-                   });
-                });
+            productMaster.get('tags').pushObjects(context.get('tags'));
+            productMaster.save().then(function () {
+                productMaster.get('products').pushObjects(context.get('products'));
+                productMaster.get('products').save();
+                productMaster.get('images').pushObjects(context.get('images'));
+                productMaster.get('images').save();
+            });
+
+
         },
 
         uploadImage: function () {
-            $('#upload').trigger("click");
+            Ember.$('#upload').trigger("click");
         },
 
         addProduct: function () {
-            var rows = this.get('rows');
-            rows.pushObject({price: "", spec: "", image: "", amount: "", dtime: ""});
+            Ember.$('.ui.modal').modal('show');
         },
 
-        removeProduct: function (row) {
-            var rows = this.get('rows');
-            if (rows.length > 1) {
-                rows.removeObject(row);
+        removeProduct: function (product) {
+            this.get('products').removeObject(product);
+            product.deleteRecord();
+        },
+
+        addTag: function (tag) {
+            var exist_tag = this.store.all('productTag').find(function (item) {
+                return item.get('name') === tag.name;
+            });
+            var new_tag;
+            if (exist_tag) {
+                new_tag = exist_tag
+            } else {
+                new_tag = this.store.createRecord('productTag', tag);
+                new_tag.save();
             }
+            this.get('tags').pushObject(new_tag);
+        },
+
+        removeTag: function (tag) {
+            this.get('tags').removeObject(tag);
+        },
+
+
+        confirmAddProduct: function (product) {
+            var new_product = this.store.createRecord('product', product);
+            this.get('products').pushObject(new_product);
+        },
+
+        addProductImage: function (new_image) {
+            this.get('images').pushObject(new_image);
+        },
+
+        removeProductImage: function (image) {
+            this.get('images').removeObject(image);
         }
+
+    }
+});
+
+
+Erp.ProductListActionController = Ember.ObjectController.extend({
+
+    needs: ['productsNew'],
+
+    isEditing: false,
+
+    actions: {
+        edit: function () {
+            this.set('isEditing', true);
+        },
+
+
+        done: function () {
+            this.set('isEditing', false);
+        },
+
+
+        deleteProduct: function () {
+            var product = this.get('model');
+            this.get('controllers.productsNew').send('removeProduct', product);
+        }
+
 
     }
 });

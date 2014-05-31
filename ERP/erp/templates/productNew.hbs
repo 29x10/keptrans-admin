@@ -10,6 +10,8 @@
         </div>
     </div>
 
+    {{product-add-modal addProduct="confirmAddProduct"}}
+
     <h2 class="ui header">
         <i class="settings icon"></i>
 
@@ -18,64 +20,108 @@
             <div class="sub header">添加产品</div>
         </div>
     </h2>
-    <div {{bind-attr class="formError:warning isLoading:loading :ui :form :segment"}}>
-        {{#if formError}}
-            <div class="ui warning message">
-                <div class="ui header">出错啦</div>
-                <ul class="list">
-                    {{#each error in productError}}
-                        <li>{{error}}</li>
-                    {{/each}}
-                </ul>
+    <div class="ui segment">
+        <div {{bind-attr class="isLoading:loading :ui :form"}}>
+            <div class="two fields">
+                {{form-field label="品牌" placeholder="品牌名称" value=brand errorMessage="品牌不能为空" icon="bookmark"
+                error=brandError}}
+                {{form-field label="类目" placeholder="产品所属类目" value=category errorMessage="类目不能为空"
+                icon="reorder" error=categoryError}}
             </div>
-        {{/if}}
-        <div class="three fields">
-            {{form-field label="品牌" placeholder="品牌名称" value=brand regex="^.+$" errorMessage="品牌不能为空" icon="bookmark"}}
-            {{form-field label="类目" placeholder="所属类目" value=category regex="^.+$" errorMessage="所属类目不能为空" icon="reorder"}}
-            {{form-field label="基本型号" placeholder="基本型号" value=spec regex="^.+$" errorMessage="基本型号不能为空" icon="tag"}}
-        </div>
 
-        <div class="field">
-            {{image-upload imageUrl=cover}}
-        </div>
-        {{#each rows}}
-            <div class="ui divider horizontal">产品#{{_view.contentIndex}}</div>
-            <div class="two fields">
-                {{form-field label="型号" placeholder="型号" value=spec regex="^.+$" errorMessage="型号不能为空" icon="reorder"}}
-                {{form-field label="价格" placeholder="价格" value=price regex="^[1-9]\d*$" errorMessage="价格不能为空且必须是数字，单位是分" icon="yen"}}
-            </div>
-            <div class="two fields">
-                {{form-field label="库存数量" placeholder="数量" value=amount regex="^[1-9]\d*$" errorMessage="库存数量不能为空" icon="archive"}}
-                {{form-field label="货期" placeholder="天数" value=dtime regex="^[1-9]\d*$" errorMessage="货期不能为空且必须为数字，单位是天" icon="calendar"}}
-            </div>
+            {{tags-add tags=tags addTag="addTag" removeTag="removeTag"}}
+
+
+
             <div class="field">
-                {{image-upload imageUrl=image}}
+                <label>封面</label>
+                {{image-upload imageUrl=cover}}
             </div>
-            <div class="ui button red small floated right" {{action 'removeProduct' this}}>
-                删除
-            </div>
-        {{/each}}
 
-        <div class="field">
-            <label>产品手册</label>
-            {{textarea value=desc}}
-        </div>
-        <div class="ui teal button"
-            {{action 'addProduct'}}>
-            <i class="icon add"></i>添加产品
-        </div>
-        <div class="ui blue button"
-            {{action 'publishProduct'}}>
-            <i class="icon location"></i>发布产品
-        </div>
-        {{multi-img-upload id="upload" files=files}}
-        <div class="ui green button" {{action 'uploadImage'}}>
-            <i class="icon photo"></i>上传图片
-        </div>
-        <div class="ui list large">
-            {{#each image in files}}
-                {{images-list image=image}}
+
+            <div class="field">
+                <label>产品手册</label>
+                {{textarea value=desc}}
+            </div>
+
+             <table class="ui table nine column product">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>品牌</th>
+                <th>型号</th>
+                <th>价格(分)</th>
+                <th>货期(天)</th>
+                <th>库存</th>
+                <th>单位</th>
+                <th>操作</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each products itemController='productListAction'}}
+                <tr>
+                    <td>{{id}}</td>
+                    {{#if isEditing}}
+                        <td>
+                            <div class="ui product input">{{input type="text" value=brand}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=pattern}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=price}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=deadline}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=sku}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=unit}}</div>
+                        </td>
+                        <td class="positive mouse">取消</td>
+                        <td class="negative mouse" {{action 'done'}}>完成</td>
+                    {{else}}
+                        <td>{{brand}}</td>
+                        <td>{{pattern}}</td>
+                        <td>{{price price}}</td>
+                        <td>{{deadline}}</td>
+                        <td>{{sku}}</td>
+                        <td>{{unit}}</td>
+                        <td class="positive mouse" {{action 'deleteProduct'}}>删除</td>
+                        <td class="negative mouse" {{action 'edit'}}>编辑</td>
+                    {{/if}}
+
+                </tr>
             {{/each}}
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+
+            <br />
+
+
+            <div class="ui teal button"
+                {{action 'addProduct'}}>
+                <i class="icon add"></i>添加产品
+            </div>
+            <div {{bind-attr class="error:disabled :ui :blue :button"}}
+                {{action 'publishProduct'}}>
+                <i class="icon location"></i>发布产品
+            </div>
+            {{multi-img-upload id="upload" files=files}}
+            <div class="ui green button" {{action 'uploadImage'}}>
+                <i class="icon photo"></i>上传图片
+            </div>
+            <div class="ui list large">
+                {{#each image in files}}
+                    {{images-list image=image addProductImage="addProductImage" removeProductImage="removeProductImage"}}
+                {{/each}}
+            </div>
         </div>
+
     </div>
+
 </script>

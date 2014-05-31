@@ -1,4 +1,6 @@
 Erp.FormFieldComponent = Ember.Component.extend({
+    tagName: '',
+
     error: false,
 
     label: "默认标签",

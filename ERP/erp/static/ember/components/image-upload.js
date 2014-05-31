@@ -11,7 +11,7 @@ Erp.ImageUploadComponent = Ember.Component.extend({
     imageObject: false,
 
     actions: {
-        uploadImage: function (file) {
+        upload: function (file) {
             var formData = new FormData();
             var context = this;
             if (context.get('startUpload')) {
@@ -38,9 +38,9 @@ Erp.ImageUploadComponent = Ember.Component.extend({
 
             context.set('startUpload', true);
             context.set('uploadStatus', '上传中');
-            Erp.FormDataPromise.ajax("http://api.keptrans.com/image", "POST", formData, true, hash).then(function (response) {
+            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + '/image', "POST", formData, true, hash).then(function (response) {
                 context.set('uploadStatus', '上传完成');
-                context.set('imageUrl', 'http://keptrans.b0.upaiyun.com' + response.image);
+                context.set('imageUrl', response.image);
                 console.log(response);
             }, function (response) {
                 context.set('startUpload', false);

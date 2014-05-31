@@ -7,6 +7,10 @@ Erp.ImagesListComponent = Ember.Component.extend({
 
     imageUrl: "",
 
+    imageObject: "",
+
+    isSet: false,
+
     actions: {
         upload: function (file) {
             var formData = new FormData();
@@ -35,9 +39,9 @@ Erp.ImagesListComponent = Ember.Component.extend({
 
             context.set('startUpload', true);
             context.set('uploadStatus', '上传中');
-            Erp.FormDataPromise.ajax("http://api.keptrans/image", "POST", formData, true, hash).then(function (response) {
+            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + '/image', "POST", formData, true, hash).then(function (response) {
                 context.set('uploadStatus', '上传完成');
-                context.set('imageUrl', 'http://keptrans.b0.upaiyun.com' + response.image);
+                context.set('imageUrl', response.image);
                 console.log(response);
             }, function (response) {
                 context.set('startUpload', false);
@@ -45,6 +49,22 @@ Erp.ImagesListComponent = Ember.Component.extend({
                 context.set('barWidth', 'width: 0');
                 console.log(response);
             });
+        },
+
+        addToProduct: function () {
+            var image = this.get('targetObject.store').createRecord('productImage', {
+                url: this.get('imageUrl')
+            });
+            this.set('imageObject', image);
+            this.sendAction('addProductImage', image);
+            this.set('isSet', true);
+        },
+
+        removeFromProduct: function () {
+            var image = this.get('imageObject');
+            this.sendAction('removeProductImage', image);
+            image.deleteRecord();
+            this.set('isSet', false);
         }
     }
 });
