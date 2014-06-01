@@ -109,9 +109,9 @@ Erp.ImagePreviewView = Ember.View.extend({
     },
 
     fileChanged: function () {
-        this.get('controller').set('barWidth', 'width: 0');
-        this.get('controller').set('uploadStatus', "上传");
-        this.get('controller').set('startUpload', false);
+        if (!this.get('file')) {
+            return;
+        }
         var reader = new FileReader();
         reader.onload = function (event) {
             this.set('src', event.target.result);

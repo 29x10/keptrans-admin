@@ -1,10 +1,8 @@
-Erp.ProductsNewController = Ember.ObjectController.extend({
+Erp.ProductsNewController = Ember.ArrayController.extend({
 
     isLoading: false,
 
     files: Ember.A(),
-
-    reset: false,
 
     brand: "",
 
@@ -68,6 +66,20 @@ Erp.ProductsNewController = Ember.ObjectController.extend({
                 productMaster.get('products').save();
                 productMaster.get('images').pushObjects(context.get('images'));
                 productMaster.get('images').save();
+            }).then(function () {
+                var success = Ember.$('.ui.dimmer.page');
+                success.dimmer('show');
+                window.setTimeout(function () {
+                    success.dimmer('hide');
+                }, 2000);
+                context.set('brand', '');
+                context.set('category', '');
+                context.set('desc', '');
+                context.set('cover', '');
+                context.set('products', Ember.A());
+                context.set('tags', Ember.A());
+                context.set('images', Ember.A());
+                context.set('files', Ember.A());
             });
 
 
@@ -108,6 +120,7 @@ Erp.ProductsNewController = Ember.ObjectController.extend({
         confirmAddProduct: function (product) {
             var new_product = this.store.createRecord('product', product);
             this.get('products').pushObject(new_product);
+            Ember.$('.ui.modal').modal('hide');
         },
 
         addProductImage: function (new_image) {
@@ -146,4 +159,19 @@ Erp.ProductListActionController = Ember.ObjectController.extend({
 
 
     }
+});
+
+
+Erp.ProductsViewController = Ember.ArrayController.extend({
+
+    search: '',
+
+    filteredProducts: function () {
+        var context = this;
+        return this.get('model').filter(function (item) {
+            return item.get('tags').some(function (tag) {
+                return tag.get('name').indexOf(context.get('search')) > -1
+            });
+        })
+    }.property('search')
 });

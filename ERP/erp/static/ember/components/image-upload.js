@@ -10,6 +10,18 @@ Erp.ImageUploadComponent = Ember.Component.extend({
 
     imageObject: false,
 
+    urlChanged: function () {
+        if (!(this.get('imageUrl'))) {
+            this.set('imageObject', false);
+        }
+    }.observes('imageUrl'),
+
+    imageObjectChanged: function () {
+        this.set('barWidth', 'width: 0');
+        this.set('uploadStatus', "上传");
+        this.set('startUpload', false);
+    }.observes('imageObject'),
+
     actions: {
         upload: function (file) {
             var formData = new FormData();
@@ -38,7 +50,7 @@ Erp.ImageUploadComponent = Ember.Component.extend({
 
             context.set('startUpload', true);
             context.set('uploadStatus', '上传中');
-            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + '/image', "POST", formData, true, hash).then(function (response) {
+            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + 'image', "POST", formData, true, hash).then(function (response) {
                 context.set('uploadStatus', '上传完成');
                 context.set('imageUrl', response.image);
                 console.log(response);

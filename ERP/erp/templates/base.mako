@@ -8,14 +8,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="${request.static_url('erp:static/keptrans.ico')}">
 
     <title>KepTrans 凯思电气</title>
-    <link href="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/css/semantic.min.css" rel="stylesheet">
 
-    <link href="//cdnjscn.b0.upaiyun.com/libs/alertify.js/0.3.11/alertify.core.css" rel="stylesheet">
-    <link href="//cdnjscn.b0.upaiyun.com/libs/alertify.js/0.3.11/alertify.default.css" rel="stylesheet">
-
-
-
-    % for url in webassets(request, 'base.css', output='out.css', filters='yui_css'):
+    % for url in webassets(request,\
+                                  'lib/semantic-ui/css/semantic.css',\
+                                  'lib/alertify/alertify.core.css',\
+                                  'lib/alertify/alertify.default.css',\
+                                  'base.css', output='out.css', filters='yui_css'):
         <link href="${url}" rel="stylesheet">
     % endfor
 
@@ -27,21 +25,21 @@
 <%include file="components.hbs"/>
 <%include file="sidebar.hbs"/>
 <%include file="productNew.hbs"/>
-##<%include file="productView.hbs"/>
+<%include file="productMasterList.hbs"/>
 ##<%include file="productDetail.hbs"/>
 ##<%include file="productEdit.hbs"/>
 ##<%include file="orderNew.hbs"/>
 
 
-<script src="//cdnjscn.b0.upaiyun.com/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/javascript/semantic.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/handlebars.js/1.3.0/handlebars.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/zeroclipboard/2.0.0-beta.5/ZeroClipboard.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/alertify.js/0.3.11/alertify.min.js" type="text/javascript"></script>
-
-    % for url in webassets(request, 'ember/app.js',\
+    % for url in webassets(request,\
+                                  'lib/jquery.js',\
+                                  'lib/semantic-ui/javascript/semantic.js',\
+                                  'lib/ember/handlebars.js',\
+                                  'lib/ember/ember.js',\
+                                  'lib/ember/ember-data.js',\
+                                  'lib/zeroclipboard/ZeroClipboard.js',\
+                                  'lib/alertify/alertify.js',\
+                                  'ember/app.js',\
                                   'ember/form-data-promise.js',\
                                   'ember/models/product.js',\
                                   'ember/views/product.js',\

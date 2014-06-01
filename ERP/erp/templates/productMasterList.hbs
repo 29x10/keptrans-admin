@@ -1,0 +1,29 @@
+<script type="text/x-handlebars" data-template-name="products/view">
+    <div class="ui form segment">
+        <div class="field">
+            <div class="ui input">
+                {{input type="text" value=search}}
+            </div>
+        </div>
+    </div>
+    <div class="ui three items stackable">
+        {{#each product in filteredProducts}}
+            {{#link-to 'product' product tagName="div" class="item"}}
+                <div class="image">
+                    <img {{bind-attr src=product.cover}}>
+                    <a class="star ui corner label">
+                        <i class="star icon"></i>
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="description">
+                        {{#each product.tags}}
+                            <div class="ui label" style="margin-top: 10px">{{name}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/link-to}}
+        {{/each}}
+    </div>
+</script>
+

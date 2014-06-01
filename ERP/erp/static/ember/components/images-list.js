@@ -39,7 +39,7 @@ Erp.ImagesListComponent = Ember.Component.extend({
 
             context.set('startUpload', true);
             context.set('uploadStatus', '上传中');
-            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + '/image', "POST", formData, true, hash).then(function (response) {
+            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + 'image', "POST", formData, true, hash).then(function (response) {
                 context.set('uploadStatus', '上传完成');
                 context.set('imageUrl', response.image);
                 console.log(response);

@@ -26,7 +26,7 @@ Erp.ProductAddModalComponent = Ember.Component.extend({
     unitError: true,
 
 
-    error: function () {
+    formError: function () {
         return this.get('brandError') || this.get('patternError') || this.get('priceError')
             || this.get('deadlineError') || this.get('skuError') || this.get('unitError');
     }.property('brandError', 'patternError', 'priceError', 'deadlineError', 'skuError', 'unitError'),
