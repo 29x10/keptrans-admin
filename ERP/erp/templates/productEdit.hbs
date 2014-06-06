@@ -1,4 +1,4 @@
-<script type="text/x-handlebars" data-template-name="product/edit">
+<script type="text/x-handlebars" data-template-name="product/kjkjkj">
     <div class="ui dimmer page">
         <div class="content">
             <div class="center">
@@ -78,5 +78,142 @@
                 {{images-list image=image}}
             {{/each}}
         </div>
+    </div>
+</script>
+
+
+
+<script type="text/x-handlebars" data-template-name="product/edit">
+    <h2 class="ui header">
+        <i class="edit icon"></i>
+        <div class="content">
+            产品管理
+            <div class="sub header">编辑产品</div>
+        </div>
+    </h2>
+    <div class="ui steps nav small">
+        {{#link-to 'products.view' class="ui step" tagName="div" activeClass="noActive"}}
+            产品列表
+        {{/link-to}}
+        {{#link-to 'product' model class="ui step" tagName="div" activeClass="noActive"}}
+            产品详情
+        {{/link-to}}
+        <div class="ui active step">
+            编辑产品
+        </div>
+    </div>
+
+    {{product-add-modal addProduct="confirmAddProduct"}}
+
+    <div class="ui segment">
+        <div {{bind-attr class="isLoading:loading :ui :form"}}>
+            <div class="two fields">
+                {{form-field label="品牌" placeholder="品牌名称" value=brand errorMessage="品牌不能为空" icon="bookmark"
+                error=brandError}}
+                {{form-field label="类目" placeholder="产品所属类目" value=category errorMessage="类目不能为空"
+                icon="reorder" error=categoryError}}
+            </div>
+
+            {{tags-add tags=tags addTag="addTag" removeTag="removeTag"}}
+
+
+
+            <div class="field">
+                <label>封面</label>
+                {{image-upload imageUrl=cover}}
+            </div>
+
+
+            <div class="field">
+                <label>产品手册</label>
+                {{textarea value=desc}}
+            </div>
+
+            <table class="ui table nine column product">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>品牌</th>
+                    <th>型号</th>
+                    <th>价格(分)</th>
+                    <th>货期(天)</th>
+                    <th>库存</th>
+                    <th>单位</th>
+                    <th>操作</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each products itemController='productEditListAction'}}
+                    <tr>
+                        <td>{{id}}</td>
+                        {{#if isEditing}}
+                            <td>
+                                <div class="ui product input">{{input type="text" value=brand}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=pattern}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=price}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=deadline}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=sku}}</div>
+                            </td>
+                            <td>
+                                {{product-unit-dropdown unit=unit}}
+                            </td>
+                            <td class="positive mouse" {{action 'cancel'}}>取消</td>
+                            <td class="negative mouse" {{action 'done'}}>完成</td>
+                        {{else}}
+                            <td>{{brand}}</td>
+                            <td>{{pattern}}</td>
+                            <td>{{price}}</td>
+                            <td>{{deadline}}</td>
+                            <td>{{sku}}</td>
+                            <td>{{unit}}</td>
+                            <td class="positive mouse" {{action 'deleteProduct'}}>删除</td>
+                            <td class="negative mouse" {{action 'edit'}}>编辑</td>
+                        {{/if}}
+
+                    </tr>
+                {{/each}}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+
+            <br/>
+
+
+            <div class="ui teal button"
+                {{action 'addProduct'}}>
+                <i class="icon add"></i>添加产品
+            </div>
+            <div {{bind-attr class="error:disabled :ui :blue :button"}}
+                {{action 'publishProduct'}}>
+                <i class="icon location"></i>发布产品
+            </div>
+            {{multi-img-upload id="upload" files=files}}
+            <div class="ui green button" {{action 'uploadImage'}}>
+                <i class="icon photo"></i>上传图片
+            </div>
+            <div class="ui list large">
+                {{#each images}}
+                    <div class="item ui">
+                        <img class="ui image medium" {{bind-attr src=url}}>
+                        <div {{bind-attr class=":ui :button :tiny :blue :floated :right"}} {{action 'removeProductImage' this}}><i
+                                class="copy icon"></i>删除
+                        </div>
+                    </div>
+                {{/each}}
+                {{#each image in files}}
+                    {{images-list image=image addProductImage="addProductImage" removeProductImage="removeProductImage"}}
+                {{/each}}
+            </div>
+        </div>
+
     </div>
 </script>

@@ -7,7 +7,8 @@
         <div class="item">
             <div class="right floated tiny teal ui button" {{action 'chooseImage'}}><i class="file icon"></i>选择</div>
             {{#if imageObject}}
-                <div class="right floated tiny red ui button" {{action 'upload' imageObject}}><i class="cloud upload icon"></i>{{uploadStatus}}</div>
+                <div class="right floated tiny red ui button" {{action 'upload' imageObject}}><i
+                        class="cloud upload icon"></i>{{uploadStatus}}</div>
                 {{img-preview file=imageObject class="avatar"}}
             {{else}}
                 {{#if imageUrl}}
@@ -50,16 +51,15 @@
 
         {{#if imageUrl}}
             {{#if isSet}}
-                <div {{bind-attr class=":ui :button :tiny :blue :floated: right"}} {{action 'removeFromProduct'}}><i class="copy icon"></i>删除</div>
+                <div {{bind-attr class=":ui :button :tiny :blue"}} {{action 'removeFromProduct'}}><i
+                        class="copy icon"></i>删除
+                </div>
             {{else}}
-                <div {{bind-attr class=":ui :button :tiny :blue :floated: right"}} {{action 'addToProduct'}}><i class="copy icon"></i>添加</div>
+                <div {{bind-attr class=":ui :button :tiny :blue"}} {{action 'addToProduct'}}><i
+                        class="copy icon"></i>添加
+                </div>
             {{/if}}
         {{/if}}
-        </div>
-        <div class="content">
-            <div class="header">{{name}}</div>
-            <div class="description"></div>
-        </div>
     </div>
 </script>
 
@@ -83,6 +83,7 @@
 <script type="text/x-handlebars" data-template-name="components/tags-add">
     <div class="field">
         <label>标签</label>
+
         <div class="ui segment tag-input">
             {{#each tags}}
                 <div class="ui label">
@@ -96,10 +97,10 @@
 </script>
 
 
-
 <script type="text/x-handlebars" data-template-name="components/product-add-modal">
     <div class="ui modal">
         <i class="close icon"></i>
+
         <div class="header">
             添加产品
         </div>
@@ -118,8 +119,19 @@
                     errorMessage="货期不能为空，数字，单位是天" icon="reorder" error=deadlineError}}
                     {{form-field label="库存数量" placeholder="库存数量" value=sku regex="^[0-9]\d*$"
                     errorMessage="库存数量不能为空，数字" icon="reorder" error=skuError}}
-                    {{form-field label="库存单位" placeholder="库存单位" value=unit
-                    errorMessage="库存单位不能为空" icon="reorder" error=unitError}}
+                    <div class="field">
+                        <label>库存单位</label>
+
+                        <div class="ui fluid selection dropdown">
+                            <div class="text">选择</div>
+                            <i class="dropdown icon"></i>
+                            {{input type="hidden" value=unit}}
+                            <div class="menu">
+                                <div class="item" data-value="只">只</div>
+                                <div class="item" data-value="米">米</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,12 +139,71 @@
             <div class="ui button negative">取消</div>
             {{#if formError}}
                 <div class="ui left labeled icon button disabled">
-                    <i class="icon checkmark"></i>确认添加</div>
+                    <i class="icon checkmark"></i>确认添加
+                </div>
             {{else}}
                 <div class="ui positive left labeled icon button" {{action 'addProduct'}}>
-                    <i class="icon checkmark"></i>确认添加</div>
+                    <i class="icon checkmark"></i>确认添加
+                </div>
             {{/if}}
 
         </div>
     </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="components/product-unit-dropdown">
+    <div class="ui fluid selection dropdown" style="padding: 0">
+        <div class="text">选择</div>
+        <i class="dropdown icon"></i>
+        {{input type="hidden" value=unit classNames="ui product input"}}
+        <div class="menu">
+            <div class="item" data-value="只">只</div>
+            <div class="item" data-value="米">米</div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="components/product-search">
+    <div class="ui form segment">
+        <div class="field">
+            <label>产品</label>
+            <div class="field">
+                <div class="ui left labeled icon input">
+                    {{input type="text" placeholder="搜索..." value=search action="pushToList"}}
+                    <i class="icon search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#if filtered.length}}
+    <table class="ui table seven column">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>品牌</th>
+            <th>型号</th>
+            <th>价格(分)</th>
+            <th>货期(天)</th>
+            <th>库存</th>
+            <th>单位</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each filtered}}
+            <tr {{bind-attr class="active"}}>
+                <td>{{id}}</td>
+                <td>{{brand}}</td>
+                <td>{{pattern}}</td>
+                <td>{{price}}</td>
+                <td>{{deadline}}</td>
+                <td>{{sku}}</td>
+                <td>{{unit}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+    {{/if}}
 </script>

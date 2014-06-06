@@ -63,7 +63,6 @@ Erp.ImagesListComponent = Ember.Component.extend({
         removeFromProduct: function () {
             var image = this.get('imageObject');
             this.sendAction('removeProductImage', image);
-            image.deleteRecord();
             this.set('isSet', false);
         }
     }

@@ -4,12 +4,12 @@ Erp.Router.map(function () {
             this.route('new');
             this.route('view');
             this.resource('product', {path: ':product_id'}, function () {
-//                this.route('edit');
+                this.route('edit');
             });
         });
-//        this.resource('orders', function () {
-//            this.route('new');
-//        })
+        this.resource('orders', function () {
+            this.route('new');
+        })
     });
 
 });
@@ -26,22 +26,23 @@ Erp.ErpRoute = Ember.Route.extend({
     }
 });
 
-//Erp.ProductsNewRoute = Ember.Route.extend({
-//    model: function () {
-//        return {};
-//    }
-//});
-
 
 Erp.ProductsRoute = Ember.Route.extend({
     model: function () {
         return this.store.findAll('productMaster');
     }
 });
-//
-//
-//Erp.ProductRoute = Ember.Route.extend({
-//    model: function (params) {
-//        return this.store.find('product', params.product_id);
-//    }
-//});
+
+
+Erp.ProductRoute = Ember.Route.extend({
+    model: function (params) {
+        return this.store.find('productMaster', params.product_id);
+    }
+});
+
+
+Erp.OrdersRoute = Ember.Route.extend({
+    model: function () {
+        return this.store.findAll('product');
+    }
+});

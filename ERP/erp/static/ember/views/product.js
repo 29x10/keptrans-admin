@@ -129,8 +129,3 @@ Erp.ItemView = Ember.View.extend({
         this.get('controller').set('index',this.get('contentIndex'));
     }
 });
-
-Ember.Handlebars.helper('price', function(value, options) {
-    value = "" + value;
-    return value.slice(0, -2) + '.' + value.slice(-2);
-});

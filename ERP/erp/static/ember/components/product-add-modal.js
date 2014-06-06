@@ -28,8 +28,8 @@ Erp.ProductAddModalComponent = Ember.Component.extend({
 
     formError: function () {
         return this.get('brandError') || this.get('patternError') || this.get('priceError')
-            || this.get('deadlineError') || this.get('skuError') || this.get('unitError');
-    }.property('brandError', 'patternError', 'priceError', 'deadlineError', 'skuError', 'unitError'),
+            || this.get('deadlineError') || this.get('skuError');
+    }.property('brandError', 'patternError', 'priceError', 'deadlineError', 'skuError'),
 
 
     actions: {
@@ -45,6 +45,10 @@ Erp.ProductAddModalComponent = Ember.Component.extend({
 
             this.sendAction('addProduct', product);
         }
+    },
+
+    didInsertElement: function () {
+        this.$('.ui.dropdown').dropdown();
     }
 
 });

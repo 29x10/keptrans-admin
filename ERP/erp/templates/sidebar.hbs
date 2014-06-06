@@ -24,13 +24,22 @@
         <div class="item">
             <i class="list icon"></i> 订单管理
             <div class="menu">
-                <a class="item">查看订单</a>
+                {{#link-to 'orders.new' class="item" closeSideBar="true"}}
+                    下单
+                {{/link-to}}
             </div>
         </div>
         <div class="item">
             <i class="list icon"></i> 库存管理
             <div class="menu">
                 <a class="item">产品入库</a>
+                <a class="item">查看库存</a>
+            </div>
+        </div>
+        <div class="item">
+            <i class="list icon"></i> 客户管理
+            <div class="menu">
+                <a class="item">添加客户</a>
                 <a class="item">查看库存</a>
             </div>
         </div>
@@ -44,5 +53,20 @@
 
     <div class="blank-sidebar">
         {{outlet}}
+    </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="error">
+    <div class="ui dimmer page active">
+        <div class="content">
+            <div class="center">
+                <h2 class="ui inverted icon header">
+                    <i class="icon circular inverted emphasized globe teal"></i>
+                    出错啦
+                    {{#link-to 'erp'}}返回主页{{/link-to}}
+                </h2>
+            </div>
+        </div>
     </div>
 </script>

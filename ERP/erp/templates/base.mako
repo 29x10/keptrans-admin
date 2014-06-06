@@ -26,9 +26,9 @@
 <%include file="sidebar.hbs"/>
 <%include file="productNew.hbs"/>
 <%include file="productMasterList.hbs"/>
-##<%include file="productDetail.hbs"/>
-##<%include file="productEdit.hbs"/>
-##<%include file="orderNew.hbs"/>
+<%include file="productDetail.hbs"/>
+<%include file="productEdit.hbs"/>
+<%include file="orderNew.hbs"/>
 
 
     % for url in webassets(request,\
@@ -49,9 +49,14 @@
                                   'ember/components/image-upload.js',\
                                   'ember/components/images-list.js',\
                                   'ember/components/product-add-modal.js',\
+                                  'ember/components/product-unit-dropdown.js',\
+                                  'ember/components/product-search.js',\
                                   'ember/router.js',\
-                                  'ember/controllers/products_controller.js',\
-                                  'ember/controllers/product_controller.js',\
+                                  'ember/controllers/products_new.js',\
+                                  'ember/controllers/products_list.js',\
+                                  'ember/controllers/product_detail.js',\
+                                  'ember/controllers/product_edit.js',\
+                                  'ember/controllers/orders_new.js',\
                                   output='out.js', filters='yui_js'):
         <script src="${url}" type="text/javascript"></script>
     % endfor

@@ -1,5 +1,5 @@
 <script type="text/x-handlebars" data-template-name="products/new">
-    <div class="ui dimmer page">
+    <div class="ui dimmer page new">
         <div class="content">
             <div class="center">
                 <h2 class="ui inverted icon header">
@@ -44,63 +44,63 @@
                 {{textarea value=desc}}
             </div>
 
-             <table class="ui table nine column product">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>品牌</th>
-                <th>型号</th>
-                <th>价格(分)</th>
-                <th>货期(天)</th>
-                <th>库存</th>
-                <th>单位</th>
-                <th>操作</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each products itemController='productListAction'}}
+            <table class="ui table nine column product">
+                <thead>
                 <tr>
-                    <td>{{id}}</td>
-                    {{#if isEditing}}
-                        <td>
-                            <div class="ui product input">{{input type="text" value=brand}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=pattern}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=price}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=deadline}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=sku}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=unit}}</div>
-                        </td>
-                        <td class="positive mouse">取消</td>
-                        <td class="negative mouse" {{action 'done'}}>完成</td>
-                    {{else}}
-                        <td>{{brand}}</td>
-                        <td>{{pattern}}</td>
-                        <td>{{price price}}</td>
-                        <td>{{deadline}}</td>
-                        <td>{{sku}}</td>
-                        <td>{{unit}}</td>
-                        <td class="positive mouse" {{action 'deleteProduct'}}>删除</td>
-                        <td class="negative mouse" {{action 'edit'}}>编辑</td>
-                    {{/if}}
-
+                    <th>ID</th>
+                    <th>品牌</th>
+                    <th>型号</th>
+                    <th>价格(分)</th>
+                    <th>货期(天)</th>
+                    <th>库存</th>
+                    <th>单位</th>
+                    <th>操作</th>
+                    <th>操作</th>
                 </tr>
-            {{/each}}
-            </tbody>
-            <tfoot></tfoot>
-        </table>
+                </thead>
+                <tbody>
+                {{#each products itemController='productListAction'}}
+                    <tr>
+                        <td>{{id}}</td>
+                        {{#if isEditing}}
+                            <td>
+                                <div class="ui product input">{{input type="text" value=brand}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=pattern}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=price}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=deadline}}</div>
+                            </td>
+                            <td>
+                                <div class="ui product input">{{input type="text" value=sku}}</div>
+                            </td>
+                            <td>
+                                {{product-unit-dropdown unit=unit}}
+                            </td>
+                            <td class="positive mouse" {{action 'cancel'}}>取消</td>
+                            <td class="negative mouse" {{action 'done'}}>完成</td>
+                        {{else}}
+                            <td>{{brand}}</td>
+                            <td>{{pattern}}</td>
+                            <td>{{price}}</td>
+                            <td>{{deadline}}</td>
+                            <td>{{sku}}</td>
+                            <td>{{unit}}</td>
+                            <td class="positive mouse" {{action 'deleteProduct'}}>删除</td>
+                            <td class="negative mouse" {{action 'edit'}}>编辑</td>
+                        {{/if}}
 
-            <br />
+                    </tr>
+                {{/each}}
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+
+            <br/>
 
 
             <div class="ui teal button"

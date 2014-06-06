@@ -1,6 +1,7 @@
-<script type="text/x-handlebars" data-template-name="product/index">
+<script type="text/x-handlebars" data-template-name="product/ddd">
     <div class="ui modal small remove">
         <i class="close icon"></i>
+
         <div class="header">
             删除产品
         </div>
@@ -10,7 +11,8 @@
         <div class="actions">
             <div class="ui button negative">取消</div>
             <div class="ui positive left labeled icon button" {{action 'confirmDelete'}}>
-                <i class="icon checkmark"></i>确定</div>
+                <i class="icon checkmark"></i>确定
+            </div>
         </div>
     </div>
     <div class="ui dimmer page">
@@ -25,6 +27,7 @@
     </div>
     <h2 class="ui header">
         <i class="info icon"></i>
+
         <div class="content">
             产品管理
             <div class="sub header">产品详情</div>
@@ -79,6 +82,105 @@
         {{/link-to}}
         <div class="ui button floated right basic orange" {{action 'deleteProduct'}}>删除</div>
     </div>
+    <div class="ui segment">
+        {{{desc}}}
+    </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="product/index">
+    <div class="ui modal small remove">
+        <i class="close icon"></i>
+
+        <div class="header">
+            删除产品
+        </div>
+        <div class="content text-center">
+            <p>你确定永久删除这个产品吗？</p>
+        </div>
+        <div class="actions">
+            <div class="ui button negative">取消</div>
+            <div class="ui positive left labeled icon button" {{action 'confirmDelete'}}>
+                <i class="icon checkmark"></i>确定
+            </div>
+        </div>
+    </div>
+    <h2 class="ui header">
+        <i class="info icon"></i>
+
+        <div class="content">
+            产品管理
+            <div class="sub header">产品详情</div>
+        </div>
+    </h2>
+    <div class="ui steps nav small">
+        {{#link-to 'products.view' class="ui step" tagName="div" activeClass="noActive"}}
+            产品详情
+        {{/link-to}}
+        {{#link-to 'product' model class="ui step" tagName="div"}}
+            产品详情
+        {{/link-to}}
+    </div>
+    <div class="ui segment">
+        <div class="ui grid stackable">
+            <div class="five column wide">
+                <div class="ui segment raised">
+                    {{#if selectedImg}}
+                        <img class="ui medium image" {{bind-attr src=selectedImg}}>
+                    {{else}}
+                        <img class="ui medium image" {{bind-attr src=cover}}>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="eleven column wide">
+                <div class="ui header huge blue">
+                    {{brand}}
+                    <div class="ui label black">{{category}}</div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui small images">
+                    <img class="ui image mouse" {{bind-attr src=cover}} {{action 'select' cover}}>
+                    {{#each images}}
+                        <img class="ui image mouse" {{bind-attr src=url}} {{action 'select' url}}>
+                    {{/each}}
+                </div>
+                {{#each tags}}
+                    <div class="ui label" style="margin-top: 7px">{{name}}</div>
+                {{/each}}
+            </div>
+        </div>
+        {{#link-to 'product.edit' class="ui button floated right basic green" tagName="div"}}
+            编辑
+        {{/link-to}}
+        <div class="ui button floated right basic orange" {{action 'deleteProduct'}}>删除</div>
+    </div>
+    <table class="ui table seven column product">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>品牌</th>
+            <th>型号</th>
+            <th>价格(分)</th>
+            <th>货期(天)</th>
+            <th>库存</th>
+            <th>单位</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each products}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{brand}}</td>
+                <td>{{pattern}}</td>
+                <td>{{price}}</td>
+                <td>{{deadline}}</td>
+                <td>{{sku}}</td>
+                <td>{{unit}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+        <tfoot></tfoot>
+    </table>
     <div class="ui segment">
         {{{desc}}}
     </div>
