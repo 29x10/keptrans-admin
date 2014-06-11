@@ -1,4 +1,4 @@
-Erp.ProductAddModalComponent = Ember.Component.extend({
+App.ProductAddModalComponent = Ember.Component.extend({
 
     brand: "",
 

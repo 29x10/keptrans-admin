@@ -1,4 +1,4 @@
-Erp.ProductEditController = Ember.ObjectController.extend({
+App.ProductEditController = Ember.ObjectController.extend({
 
     isLoading: false,
 
@@ -127,7 +127,7 @@ Erp.ProductEditController = Ember.ObjectController.extend({
 });
 
 
-Erp.ProductEditListActionController = Ember.ObjectController.extend({
+App.ProductEditListActionController = Ember.ObjectController.extend({
 
     needs: ['productEdit'],
 

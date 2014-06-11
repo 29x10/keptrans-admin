@@ -1,4 +1,4 @@
-Erp.ProductUnitDropdownComponent = Ember.Component.extend({
+App.ProductUnitDropdownComponent = Ember.Component.extend({
     didInsertElement: function () {
         this.$('.dropdown').dropdown();
     }

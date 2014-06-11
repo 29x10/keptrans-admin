@@ -1,4 +1,4 @@
-Erp.ProductSearchComponent = Ember.Component.extend({
+App.ProductSearchComponent = Ember.Component.extend({
     search: "",
 
     products: Ember.A(),
@@ -17,7 +17,7 @@ Erp.ProductSearchComponent = Ember.Component.extend({
         }
         var result =  this.get('products').filter(function (item) {
             return item.get('pattern').toLowerCase().indexOf(search) > -1;
-        }).slice(0, 20);
+        }).slice(0, 10);
         result.forEach(function (item) {
             item.set('active', false);
         });

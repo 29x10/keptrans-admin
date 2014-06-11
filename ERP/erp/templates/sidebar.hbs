@@ -10,6 +10,14 @@
         <div class="item">
             <div class="ui input"><input placeholder="Search..." type="text"></div>
         </div>
+        {{#if session.isAuthenticated}}
+            <div class="item">
+                <i class="user icon"></i> 你好，{{session.username}}
+                <div class="menu">
+                    <a class="item">退出</a>
+                </div>
+            </div>
+        {{/if}}
         <div class="item">
             <i class="list icon"></i> 产品管理
             <div class="menu">
@@ -58,15 +66,7 @@
 
 
 <script type="text/x-handlebars" data-template-name="error">
-    <div class="ui dimmer page active">
-        <div class="content">
-            <div class="center">
-                <h2 class="ui inverted icon header">
-                    <i class="icon circular inverted emphasized globe teal"></i>
-                    出错啦
-                    {{#link-to 'erp'}}返回主页{{/link-to}}
-                </h2>
-            </div>
-        </div>
+    <div class="ui header">出错啦
+        <div class="sub header">{{#link-to 'erp'}}返回主页{{/link-to}}</div>
     </div>
 </script>

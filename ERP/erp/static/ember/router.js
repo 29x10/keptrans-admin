@@ -1,4 +1,4 @@
-Erp.Router.map(function () {
+App.Router.map(function () {
     this.resource('erp', {path: '/'}, function () {
         this.resource('products', function () {
             this.route('new');
@@ -9,12 +9,70 @@ Erp.Router.map(function () {
         });
         this.resource('orders', function () {
             this.route('new');
-        })
+        });
     });
+    this.route('login');
+    this.route('signup');
+    this.route('logout');
 
 });
 
-Erp.ErpRoute = Ember.Route.extend({
+App.ApplicationRoute = Ember.Route.extend({
+    activate: function() {
+        var _this = this;
+        Ember.A([
+            'sessionAuthenticationSucceeded',
+            'sessionAuthenticationFailed',
+            'sessionInvalidationSucceeded',
+            'sessionInvalidationFailed',
+            'authorizationFailed'
+        ]).forEach(function(event) {
+            _this.get('session').on(event, function(error) {
+                Array.prototype.unshift.call(arguments, event);
+                _this.send.apply(_this, arguments);
+            });
+        });
+    },
+
+    actions: {
+
+        authenticateSession: function() {
+            this.transitionTo('login');
+        },
+
+        sessionAuthenticationSucceeded: function() {
+            var attemptedTransition = this.get('session').get('attemptedTransition');
+            if (attemptedTransition) {
+                attemptedTransition.retry();
+                this.get('session').set('attemptedTransition', null);
+            } else {
+                this.transitionTo('erp');
+            }
+        },
+
+        sessionAuthenticationFailed: function(error) {
+        },
+
+        invalidateSession: function() {
+            this.get('session').invalidate();
+        },
+
+        sessionInvalidationSucceeded: function() {
+            window.location.replace('/');
+        },
+
+        sessionInvalidationFailed: function(error) {
+        },
+
+        authorizationFailed: function() {
+            if (this.get('session').get('isAuthenticated')) {
+                this.get('session').invalidate();
+            }
+        }
+    }
+});
+
+App.ErpRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
     actions: {
         showSideBar: function () {
             Ember.$('.ui.sidebar').sidebar({overlay: true}).sidebar('show');
@@ -27,21 +85,21 @@ Erp.ErpRoute = Ember.Route.extend({
 });
 
 
-Erp.ProductsRoute = Ember.Route.extend({
+App.ProductsRoute = Ember.Route.extend({
     model: function () {
         return this.store.findAll('productMaster');
     }
 });
 
 
-Erp.ProductRoute = Ember.Route.extend({
+App.ProductRoute = Ember.Route.extend({
     model: function (params) {
         return this.store.find('productMaster', params.product_id);
     }
 });
 
 
-Erp.OrdersRoute = Ember.Route.extend({
+App.OrdersRoute = Ember.Route.extend({
     model: function () {
         return this.store.findAll('product');
     }

@@ -1,4 +1,4 @@
-Erp.ProductsNewController = Ember.ArrayController.extend({
+App.ProductsNewController = Ember.ArrayController.extend({
 
     isLoading: false,
 
@@ -137,7 +137,7 @@ Erp.ProductsNewController = Ember.ArrayController.extend({
 });
 
 
-Erp.ProductListActionController = Ember.ObjectController.extend({
+App.ProductListActionController = Ember.ObjectController.extend({
 
     needs: ['productsNew'],
 

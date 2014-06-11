@@ -1,4 +1,4 @@
-Erp.ImagesListComponent = Ember.Component.extend({
+App.ImagesListComponent = Ember.Component.extend({
     barWidth: "width: 0;",
 
     uploadStatus: "上传",
@@ -19,7 +19,15 @@ Erp.ImagesListComponent = Ember.Component.extend({
                 return;
             }
             formData.append('file', file);
-            var hash = {
+
+            context.set('startUpload', true);
+            context.set('uploadStatus', '上传中');
+
+            Ember.$.ajax({
+                url: App.API_HOST + '/' + App.API_NAME_SPACE + 'image',
+                type: 'POST',
+                crossDomain: true,
+                data: formData,
                 xhr: function () {
                     var xhr = Ember.$.ajaxSettings.xhr();
 
@@ -35,20 +43,14 @@ Erp.ImagesListComponent = Ember.Component.extend({
                 },
                 contentType: false,
                 processData: false
-            };
-
-            context.set('startUpload', true);
-            context.set('uploadStatus', '上传中');
-            Erp.FormDataPromise.ajax(Erp.API_HOST + '/' + Erp.API_NAME_SPACE + 'image', "POST", formData, true, hash).then(function (response) {
+            }).then(function (response) {
                 context.set('uploadStatus', '上传完成');
                 context.set('imageUrl', response.image);
-                console.log(response);
             }, function (response) {
                 context.set('startUpload', false);
                 context.set('uploadStatus', '上传');
                 context.set('barWidth', 'width: 0');
-                console.log(response);
-            });
+            }, "upload image");
         },
 
         addToProduct: function () {

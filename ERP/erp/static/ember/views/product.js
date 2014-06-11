@@ -1,4 +1,4 @@
-Erp.FormInputView = Ember.TextField.extend({
+App.FormInputView = Ember.TextField.extend({
 
     attributeBindings: ['type', 'value', 'size', 'pattern', 'name', 'min', 'max',
                       'accept', 'autocomplete', 'autosave', 'formaction',
@@ -34,9 +34,9 @@ Erp.FormInputView = Ember.TextField.extend({
     }
 });
 
-Ember.Handlebars.helper('form-input', Erp.FormInputView);
+Ember.Handlebars.helper('form-input', App.FormInputView);
 
-Erp.ImageUploadView = Ember.TextField.extend({
+App.ImageUploadView = Ember.TextField.extend({
 
     type: "file",
 
@@ -57,10 +57,10 @@ Erp.ImageUploadView = Ember.TextField.extend({
     file: ""
 });
 
-Ember.Handlebars.helper('img-upload', Erp.ImageUploadView);
+Ember.Handlebars.helper('img-upload', App.ImageUploadView);
 
 
-Erp.MultiImageUploadView = Ember.TextField.extend({
+App.MultiImageUploadView = Ember.TextField.extend({
 
     type: "file",
 
@@ -87,9 +87,9 @@ Erp.MultiImageUploadView = Ember.TextField.extend({
     files: Ember.A()
 });
 
-Ember.Handlebars.helper('multi-img-upload', Erp.MultiImageUploadView);
+Ember.Handlebars.helper('multi-img-upload', App.MultiImageUploadView);
 
-Erp.ImagePreviewView = Ember.View.extend({
+App.ImagePreviewView = Ember.View.extend({
     tagName: 'img',
     attributeBindings: ['src', 'file'],
     
@@ -121,10 +121,10 @@ Erp.ImagePreviewView = Ember.View.extend({
     }.observes('file')
 });
 
-Ember.Handlebars.helper('img-preview', Erp.ImagePreviewView);
+Ember.Handlebars.helper('img-preview', App.ImagePreviewView);
 
 
-Erp.ItemView = Ember.View.extend({
+App.ItemView = Ember.View.extend({
     didInsertElement: function() {
         this.get('controller').set('index',this.get('contentIndex'));
     }

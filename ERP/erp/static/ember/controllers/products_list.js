@@ -1,4 +1,4 @@
-Erp.ProductsViewController = Ember.ArrayController.extend({
+App.ProductsViewController = Ember.ArrayController.extend({
 
     search: '',
 

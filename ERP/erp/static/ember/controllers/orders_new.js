@@ -1,4 +1,4 @@
-Erp.OrdersNewController = Ember.ArrayController.extend({
+App.OrdersNewController = Ember.ArrayController.extend({
 
     phone: "",
 

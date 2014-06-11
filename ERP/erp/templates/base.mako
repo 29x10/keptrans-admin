@@ -23,6 +23,8 @@
 <body>
 
 <%include file="components.hbs"/>
+<%include file="login.hbs" />
+<%include file="signup.hbs" />
 <%include file="sidebar.hbs"/>
 <%include file="productNew.hbs"/>
 <%include file="productMasterList.hbs"/>
@@ -37,11 +39,13 @@
                                   'lib/ember/handlebars.js',\
                                   'lib/ember/ember.js',\
                                   'lib/ember/ember-data.js',\
+                                  'lib/ember/ember-simple-auth.js',\
+                                  'lib/ember/ember-simple-auth-cookie-store.js',\
                                   'lib/zeroclipboard/ZeroClipboard.js',\
                                   'lib/alertify/alertify.js',\
                                   'ember/app.js',\
-                                  'ember/form-data-promise.js',\
                                   'ember/models/product.js',\
+                                  'ember/models/order.js',\
                                   'ember/views/product.js',\
                                   'ember/components/tags-add.js',\
                                   'ember/components/clipboard.js',\
@@ -52,6 +56,7 @@
                                   'ember/components/product-unit-dropdown.js',\
                                   'ember/components/product-search.js',\
                                   'ember/router.js',\
+                                  'ember/controllers/account.js',\
                                   'ember/controllers/products_new.js',\
                                   'ember/controllers/products_list.js',\
                                   'ember/controllers/product_detail.js',\

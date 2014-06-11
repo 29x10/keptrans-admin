@@ -1,4 +1,4 @@
-Erp.FormFieldComponent = Ember.Component.extend({
+App.FormFieldComponent = Ember.Component.extend({
     tagName: '',
 
     error: false,

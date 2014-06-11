@@ -1,4 +1,4 @@
-Erp.ProductIndexController = Ember.ObjectController.extend({
+App.ProductIndexController = Ember.ObjectController.extend({
 
     selectedImg: false,
 

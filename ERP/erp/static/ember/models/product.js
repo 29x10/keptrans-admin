@@ -1,4 +1,4 @@
-Erp.ProductMaster = DS.Model.extend({
+App.ProductMaster = DS.Model.extend({
     brand: DS.attr('string'),
     category: DS.attr('string'),
     cover: DS.attr('string'),
@@ -10,21 +10,21 @@ Erp.ProductMaster = DS.Model.extend({
     products: DS.hasMany('product')
 });
 
-Erp.ProductTag = DS.Model.extend({
+App.ProductTag = DS.Model.extend({
     name: DS.attr('string'),
 
 
     productMasters: DS.hasMany('productMaster')
 });
 
-Erp.ProductImage = DS.Model.extend({
+App.ProductImage = DS.Model.extend({
     url: DS.attr('string'),
 
 
     productMaster: DS.belongsTo('productMaster')
 });
 
-Erp.Product = DS.Model.extend({
+App.Product = DS.Model.extend({
     brand: DS.attr('string'),
     pattern: DS.attr('string'),
     price: DS.attr('string'),

@@ -1,4 +1,4 @@
-Erp.TagsAddComponent = Ember.Component.extend({
+App.TagsAddComponent = Ember.Component.extend({
     tagName: '',
 
     tags: Ember.A(),
