@@ -33,7 +33,7 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="components/zero-clipboard">
-    <div {{bind-attr data-clipboard-text=text class=":ui :button btn-class"}}><i class="copy icon"></i>复制</div>
+    <div {{bind-attr data-clipboard-text=text class=":ui :button btn-class"}}><i class="url icon"></i>复制</div>
 </script>
 
 
@@ -98,7 +98,7 @@
 
 
 <script type="text/x-handlebars" data-template-name="components/product-add-modal">
-    <div class="ui modal">
+    <div class="ui modal product">
         <i class="close icon"></i>
 
         <div class="header">
@@ -111,8 +111,8 @@
                     icon="reorder" error=brandError}}
                     {{form-field label="型号" placeholder="型号" value=pattern errorMessage="型号不能为空"
                     icon="reorder" error=patternError}}
-                    {{form-field label="价格" placeholder="价格" value=price regex="^[1-9]\d*$"
-                    errorMessage="价格不能为空，数字，单位是分" icon="yen" error=priceError}}
+                    {{form-field label="价格" placeholder="价格" value=price regex="^[1-9]\d*\.\d{2}$"
+                    errorMessage="价格不能为空, 两位小数" icon="yen" error=priceError}}
                 </div>
                 <div class="three fields">
                     {{form-field label="货期" placeholder="货期天数" value=deadline regex="^[1-9]\d*$"
@@ -138,11 +138,11 @@
         <div class="actions">
             <div class="ui button negative">取消</div>
             {{#if formError}}
-                <div class="ui left labeled icon button disabled">
+                <div class="ui left icon button disabled">
                     <i class="icon checkmark"></i>确认添加
                 </div>
             {{else}}
-                <div class="ui positive left labeled icon button" {{action 'addProduct'}}>
+                <div class="ui positive left icon button" {{action 'addProduct'}}>
                     <i class="icon checkmark"></i>确认添加
                 </div>
             {{/if}}
@@ -170,7 +170,7 @@
         <div class="field">
             <label>产品</label>
             <div class="field">
-                <div class="ui left labeled icon input">
+                <div class="ui left icon input">
                     {{input type="text" placeholder="搜索..." value=search action="pushToList"}}
                     <i class="icon search"></i>
                 </div>
@@ -184,7 +184,7 @@
             <th>ID</th>
             <th>品牌</th>
             <th>型号</th>
-            <th>价格(分)</th>
+            <th>价格</th>
             <th>货期(天)</th>
             <th>库存</th>
             <th>单位</th>
@@ -192,7 +192,7 @@
         </thead>
         <tbody>
         {{#each filtered}}
-            <tr {{bind-attr class="active"}}>
+            <tr {{bind-attr class="active :mouse"}} {{action 'pushSelected' this}}>
                 <td>{{id}}</td>
                 <td>{{brand}}</td>
                 <td>{{pattern}}</td>
@@ -200,6 +200,119 @@
                 <td>{{deadline}}</td>
                 <td>{{sku}}</td>
                 <td>{{unit}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+    {{/if}}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="components/contract-info-add-modal">
+    <div class="ui modal contractInfo">
+        <i class="close icon"></i>
+
+        <div class="header">
+            添加信息
+        </div>
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>公司</label>
+                    <div class="ui left icon input">
+                        {{input type="text" placeholder="公司名称" value=company}}
+                        <i class="icon building"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>地址</label>
+                    <div class="ui left icon input">
+                        {{input type="text" placeholder="地址" value=address}}
+                        <i class="icon map marker"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>开户行</label>
+                    <div class="ui left icon input">
+                        {{input type="text" placeholder="开户行" value=bank}}
+                        <i class="icon money"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>帐号</label>
+                    <div class="ui left icon input">
+                        {{input type="text" placeholder="帐号" value=bankAccount}}
+                        <i class="icon payment"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>税号</label>
+                    <div class="ui left icon input">
+                        {{input type="text" placeholder="税号" value=tax}}
+                        <i class="icon payment"></i>
+                    </div>
+                </div>
+                <div class="three fields">
+                    <div class="field">
+                        <label>法人</label>
+                        <div class="ui left icon input">
+                            {{input type="text" placeholder="法人" value=legalPerson}}
+                            <i class="icon user"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>电话</label>
+                        <div class="ui left icon input">
+                            {{input type="text" placeholder="电话" value=phone}}
+                            <i class="icon phone"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>法人</label>
+                        <div class="ui left icon input">
+                            {{input type="text" placeholder="传真" value=fax}}
+                            <i class="icon phone"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui button negative">取消</div>
+            <div class="ui button positive" {{action 'addContractInfo'}}>确认</div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="components/client-search">
+    <div class="ui form segment">
+        <div class="field">
+            <label>客户</label>
+            <div class="field">
+                <div class="ui left icon input">
+                    {{input type="text" placeholder="搜索..." value=search action="pushToList"}}
+                    <i class="icon search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#if filtered.length}}
+    <table class="ui table three column">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>客户</th>
+            <th>手机</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each filtered}}
+            <tr {{bind-attr class="active :mouse"}} {{action 'pushSelected' this}}>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{mobile}}</td>
             </tr>
         {{/each}}
         </tbody>

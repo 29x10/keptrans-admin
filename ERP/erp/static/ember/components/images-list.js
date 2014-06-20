@@ -24,7 +24,7 @@ App.ImagesListComponent = Ember.Component.extend({
             context.set('uploadStatus', '上传中');
 
             Ember.$.ajax({
-                url: App.API_HOST + '/' + App.API_NAME_SPACE + 'image',
+                url: App.API_HOST + '/' + App.API_NAME_SPACE + '/' + 'image',
                 type: 'POST',
                 crossDomain: true,
                 data: formData,

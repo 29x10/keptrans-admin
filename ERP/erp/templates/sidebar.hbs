@@ -12,9 +12,9 @@
         </div>
         {{#if session.isAuthenticated}}
             <div class="item">
-                <i class="user icon"></i> 你好，{{session.username}}
+                你好，{{session.username}}
                 <div class="menu">
-                    <a class="item">退出</a>
+                    <a class="item" {{action 'invalidateSession'}}>退出<i class="icon off"></i> </a>
                 </div>
             </div>
         {{/if}}
@@ -47,8 +47,12 @@
         <div class="item">
             <i class="list icon"></i> 客户管理
             <div class="menu">
-                <a class="item">添加客户</a>
-                <a class="item">查看库存</a>
+                {{#link-to 'clients.new' class="item" closeSideBar="true"}}
+                    添加客户
+                {{/link-to}}
+                {{#link-to 'clients.view' class="item" closeSideBar="true"}}
+                    查看客户
+                {{/link-to}}
             </div>
         </div>
     </div>

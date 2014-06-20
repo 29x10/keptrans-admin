@@ -10,6 +10,10 @@ App.Router.map(function () {
         this.resource('orders', function () {
             this.route('new');
         });
+        this.resource('clients', function () {
+            this.route('new');
+            this.route('view');
+        })
     });
     this.route('login');
     this.route('signup');
@@ -101,6 +105,16 @@ App.ProductRoute = Ember.Route.extend({
 
 App.OrdersRoute = Ember.Route.extend({
     model: function () {
-        return this.store.findAll('product');
+        return Ember.RSVP.hash({
+            products: this.store.findAll('product'),
+            clients: this.store.findAll('client')
+        });
+    }
+});
+
+
+App.ClientsRoute = Ember.Route.extend({
+    model: function () {
+        return this.store.findAll('client');
     }
 });

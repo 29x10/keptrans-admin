@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="凯思电气">
     <meta name="author" content="BINLEI XUE">
-    <link rel="shortcut icon" type="image/x-icon" href="${request.static_url('erp:static/keptrans.ico')}">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/keptrans.ico">
 
     <title>KepTrans 凯思电气</title>
 
@@ -31,6 +31,8 @@
 <%include file="productDetail.hbs"/>
 <%include file="productEdit.hbs"/>
 <%include file="orderNew.hbs"/>
+<%include file="clientNew.hbs"/>
+<%include file="clientList.hbs"/>
 
 
     % for url in webassets(request,\
@@ -40,12 +42,13 @@
                                   'lib/ember/ember.js',\
                                   'lib/ember/ember-data.js',\
                                   'lib/ember/ember-simple-auth.js',\
-                                  'lib/ember/ember-simple-auth-cookie-store.js',\
                                   'lib/zeroclipboard/ZeroClipboard.js',\
                                   'lib/alertify/alertify.js',\
+                                  'lib/moment.js',\
                                   'ember/app.js',\
                                   'ember/models/product.js',\
                                   'ember/models/order.js',\
+                                  'ember/models/client.js',\
                                   'ember/views/product.js',\
                                   'ember/components/tags-add.js',\
                                   'ember/components/clipboard.js',\
@@ -55,7 +58,10 @@
                                   'ember/components/product-add-modal.js',\
                                   'ember/components/product-unit-dropdown.js',\
                                   'ember/components/product-search.js',\
+                                  'ember/components/contract-info-add-modal.js',\
+                                  'ember/components/client-search.js',\
                                   'ember/router.js',\
+                                  'ember/controllers/clients_new.js',\
                                   'ember/controllers/account.js',\
                                   'ember/controllers/products_new.js',\
                                   'ember/controllers/products_list.js',\

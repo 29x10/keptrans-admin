@@ -3,6 +3,8 @@ App.ProductMaster = DS.Model.extend({
     category: DS.attr('string'),
     cover: DS.attr('string'),
     desc: DS.attr('string'),
+    pubDate: DS.attr('string'),
+    modifiedDate: DS.attr('string'),
 
 
     tags: DS.hasMany('productTag'),
@@ -31,7 +33,8 @@ App.Product = DS.Model.extend({
     deadline: DS.attr('string'),
     unit: DS.attr('string'),
     sku: DS.attr('string'),
-
+    pubDate: DS.attr('string'),
+    modifiedDate: DS.attr('string'),
 
     productMaster: DS.belongsTo('productMaster')
 });

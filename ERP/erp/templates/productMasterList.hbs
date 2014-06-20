@@ -12,10 +12,11 @@
                 <div class="image">
                     <img {{bind-attr src=product.cover}}>
                     <a class="star ui corner label">
-                        <i class="star icon"></i>
+                        <div class="text">新品</div>
                     </a>
                 </div>
                 <div class="content">
+                    <div class="meta">{{format-date product.modifiedDate}}</div>
                     <div class="description">
                         {{#each product.tags}}
                             <div class="ui label" style="margin-top: 7px">{{name}}</div>

@@ -129,3 +129,8 @@ App.ItemView = Ember.View.extend({
         this.get('controller').set('index',this.get('contentIndex'));
     }
 });
+
+
+Ember.Handlebars.helper('format-date', function(date) {
+    return moment(date).fromNow();
+});

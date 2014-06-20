@@ -4,25 +4,27 @@ Ember.Application.initializer({
         container.register('authenticator:custom', App.CustomAuthenticator);
         container.register('authorizer:custom', App.CustomAuthorizer);
         Ember.SimpleAuth.setup(container, application, {
-            crossOriginWhitelist: ['http://api.keptrans.com'],
-            authorizerFactory: 'authorizer:custom',
-            storeFactory: 'ember-simple-auth-session-store:cookie'
+            crossOriginWhitelist: [App.API_HOST],
+            authorizerFactory: 'authorizer:custom'
         });
     }
 });
 
+moment.lang('zh-cn')
+
 App = Ember.Application.create();
 
 
-App.API_HOST = 'http://api.keptrans.com';
+App.API_HOST = 'https://api.keptrans.com';
 //App.API_HOST = 'http://127.0.0.1:5002';
 
-App.API_NAME_SPACE = "";
+App.API_NAME_SPACE = "v0.1.0";
 
 
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-    host: App.API_HOST
+    host: App.API_HOST,
+    namespace: App.API_NAME_SPACE
 });
 
 
@@ -48,7 +50,7 @@ App.CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
         var _this = this;
         return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
-                url: App.API_HOST + '/' + App.API_NAME_SPACE + 'account',
+                url: App.API_HOST + '/' + App.API_NAME_SPACE + '/' + 'account',
                 type:        'PUT',
                 data:        JSON.stringify({ session: { username: credentials.username, password: credentials.password } }),
                 contentType: 'application/json; charset=utf-8',
@@ -69,9 +71,7 @@ App.CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
     invalidate: function() {
         var _this = this;
         return new Ember.RSVP.Promise(function(resolve) {
-            Ember.$.ajax({ url: _this.tokenEndpoint, type: 'DELETE' }).always(function() {
-                resolve();
-            })
+            resolve();
         });
     }
 
@@ -80,7 +80,7 @@ App.CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
 App.CustomAuthorizer = Ember.SimpleAuth.Authorizers.Base.extend({
     authorize: function(jqXHR, requestOptions) {
         if (this.get('session.isAuthenticated') && !Ember.isEmpty(this.get('session.token'))) {
-            jqXHR.setRequestHeader('AUTH_TOKEN', this.get('session.token'));
+            jqXHR.setRequestHeader('API-KEY', this.get('session.token'));
         }
     }
 });

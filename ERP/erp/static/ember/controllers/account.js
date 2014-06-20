@@ -24,7 +24,7 @@ App.SignupController = Ember.ObjectController.extend({
             var add_user = new Ember.RSVP.Promise(function (resolve, reject) {
 
                 var hash = {
-                    url: App.API_HOST + '/' + App.API_NAME_SPACE + 'account',
+                    url: App.API_HOST + '/' + App.API_NAME_SPACE + '/' + 'account',
                     type: "POST",
                     dataType: "json",
                     contentType: 'application/json; charset=utf-8',

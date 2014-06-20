@@ -67,11 +67,6 @@ App.ProductsNewController = Ember.ArrayController.extend({
                 productMaster.get('images').pushObjects(context.get('images'));
                 productMaster.get('images').save();
             }).then(function () {
-                var success = Ember.$('.ui.dimmer.page.new');
-                success.dimmer('show');
-                window.setTimeout(function () {
-                    success.dimmer('hide');
-                }, 2000);
                 context.set('brand', '');
                 context.set('category', '');
                 context.set('desc', '');
@@ -80,6 +75,7 @@ App.ProductsNewController = Ember.ArrayController.extend({
                 context.set('tags', Ember.A());
                 context.set('images', Ember.A());
                 context.set('files', Ember.A());
+                alertify.success("成功添加产品");
             });
 
 
@@ -90,8 +86,7 @@ App.ProductsNewController = Ember.ArrayController.extend({
         },
 
         addProduct: function () {
-//            Ember.$('.ui.dropdown').dropdown();
-            Ember.$('.ui.modal').modal('show');
+            Ember.$('.ui.modal.product').modal('show');
         },
 
         removeProduct: function (product) {
@@ -121,7 +116,7 @@ App.ProductsNewController = Ember.ArrayController.extend({
         confirmAddProduct: function (product) {
             var new_product = this.store.createRecord('product', product);
             this.get('products').pushObject(new_product);
-            Ember.$('.ui.modal').modal('hide');
+            Ember.$('.ui.modal.product').modal('hide');
         },
 
         addProductImage: function (new_image) {
@@ -132,40 +127,6 @@ App.ProductsNewController = Ember.ArrayController.extend({
             image.deleteRecord();
             this.get('images').removeObject(image);
         }
-
-    }
-});
-
-
-App.ProductListActionController = Ember.ObjectController.extend({
-
-    needs: ['productsNew'],
-
-    isEditing: false,
-
-    actions: {
-        edit: function () {
-            this.set('isEditing', true);
-        },
-
-
-        done: function () {
-            this.set('isEditing', false);
-        },
-
-        cancel: function () {
-            if (this.get('model.isDirty')) {
-                this.get('model').rollback();
-            }
-            this.set('isEditing', false);
-        },
-
-
-        deleteProduct: function () {
-            var product = this.get('model');
-            this.get('controllers.productsNew').send('removeProduct', product);
-        }
-
 
     }
 });

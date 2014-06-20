@@ -1,91 +1,7 @@
-<script type="text/x-handlebars" data-template-name="product/kjkjkj">
-    <div class="ui dimmer page">
-        <div class="content">
-            <div class="center">
-                <h2 class="ui inverted icon header">
-                    <i class="icon circular inverted emphasized blue checkmark"></i>
-                    更新成功
-                </h2>
-            </div>
-        </div>
-    </div>
-    <h2 class="ui header">
-        <i class="edit icon"></i>
-        <div class="content">
-            产品管理
-            <div class="sub header">编辑产品</div>
-        </div>
-    </h2>
-    <div class="ui steps nav small">
-        {{#link-to 'products.view' class="ui step" tagName="div" activeClass="noActive"}}
-            产品列表
-        {{/link-to}}
-        {{#link-to 'product' model class="ui step" tagName="div" activeClass="noActive"}}
-            产品详情
-        {{/link-to}}
-        <div class="ui active step">
-            编辑产品
-        </div>
-    </div>
-    <div class="ui segment form">
-        <div class="three fields">
-            {{form-field label="品牌" placeholder="品牌名称" value=brand regex="^.+$" errorMessage="品牌不能为空" icon="bookmark"}}
-            {{form-field label="类目" placeholder="所属类目" value=category regex="^.+$" errorMessage="所属类目不能为空" icon="reorder"}}
-            {{form-field label="基本型号" placeholder="基本型号" value=spec regex="^.+$" errorMessage="基本型号不能为空" icon="tag"}}
-        </div>
-        <div class="field">
-            {{image-upload imageUrl=cover}}
-        </div>
-        {{#each rows}}
-            <div class="ui divider horizontal">产品#{{_view.contentIndex}}</div>
-            <div class="two fields">
-                {{form-field label="型号" placeholder="型号" value=spec regex="^.+$" errorMessage="型号不能为空" icon="reorder"}}
-                {{form-field label="价格" placeholder="价格" value=price regex="^[1-9]\d*$" errorMessage="价格不能为空且必须是数字，单位是分" icon="yen"}}
-            </div>
-            <div class="two fields">
-                {{form-field label="库存数量" placeholder="数量" value=amount regex="^[1-9]\d*$" errorMessage="库存数量不能为空" icon="archive"}}
-                {{form-field label="货期" placeholder="天数" value=dtime regex="^[1-9]\d*$" errorMessage="货期不能为空且必须为数字，单位是天" icon="calendar"}}
-            </div>
-            <div class="field">
-                {{image-upload imageUrl=image}}
-            </div>
-            <div class="ui button red small floated right" {{action 'removeProduct' this}}>
-                删除
-            </div>
-        {{/each}}
-        <div class="field">
-            <label>产品手册</label>
-            {{textarea value=desc}}
-        </div>
-
-        <div class="ui teal button"
-            {{action 'addProduct'}}>
-            <i class="icon add"></i>添加产品
-        </div>
-        <div class="ui blue button"
-            {{action 'updateProduct'}}>
-            <i class="icon save"></i>保存
-        </div>
-        {{multi-img-upload id="upload" files=files}}
-        <div class="ui green button" {{action 'uploadImage'}}>
-            <i class="icon photo"></i>上传图片
-        </div>
-        <div class="ui purple button" {{action 'rollback'}}>
-            <i class="undo icon"></i>撤销
-        </div>
-        <div class="ui list large">
-            {{#each image in files}}
-                {{images-list image=image}}
-            {{/each}}
-        </div>
-    </div>
-</script>
-
-
-
 <script type="text/x-handlebars" data-template-name="product/edit">
     <h2 class="ui header">
         <i class="edit icon"></i>
+
         <div class="content">
             产品管理
             <div class="sub header">编辑产品</div>
@@ -135,7 +51,7 @@
                     <th>ID</th>
                     <th>品牌</th>
                     <th>型号</th>
-                    <th>价格(分)</th>
+                    <th>价格</th>
                     <th>货期(天)</th>
                     <th>库存</th>
                     <th>单位</th>
@@ -147,38 +63,30 @@
                 {{#each products itemController='productEditListAction'}}
                     <tr>
                         <td>{{id}}</td>
-                        {{#if isEditing}}
-                            <td>
-                                <div class="ui product input">{{input type="text" value=brand}}</div>
-                            </td>
-                            <td>
-                                <div class="ui product input">{{input type="text" value=pattern}}</div>
-                            </td>
-                            <td>
-                                <div class="ui product input">{{input type="text" value=price}}</div>
-                            </td>
-                            <td>
-                                <div class="ui product input">{{input type="text" value=deadline}}</div>
-                            </td>
-                            <td>
-                                <div class="ui product input">{{input type="text" value=sku}}</div>
-                            </td>
-                            <td>
-                                {{product-unit-dropdown unit=unit}}
-                            </td>
-                            <td class="positive mouse" {{action 'cancel'}}>取消</td>
-                            <td class="negative mouse" {{action 'done'}}>完成</td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=brand}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=pattern}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=price}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=deadline}}</div>
+                        </td>
+                        <td>
+                            <div class="ui product input">{{input type="text" value=sku}}</div>
+                        </td>
+                        <td>
+                            {{product-unit-dropdown unit=unit}}
+                        </td>
+                        {{#if this.isDirty}}
+                            <td class="positive mouse" {{action 'cancel'}}>撤销</td>
                         {{else}}
-                            <td>{{brand}}</td>
-                            <td>{{pattern}}</td>
-                            <td>{{price}}</td>
-                            <td>{{deadline}}</td>
-                            <td>{{sku}}</td>
-                            <td>{{unit}}</td>
-                            <td class="positive mouse" {{action 'deleteProduct'}}>删除</td>
-                            <td class="negative mouse" {{action 'edit'}}>编辑</td>
+                            <td>未修改</td>
                         {{/if}}
-
+                        <td class="negative mouse" {{action 'deleteProduct'}}>删除</td>
                     </tr>
                 {{/each}}
                 </tbody>
@@ -204,8 +112,10 @@
                 {{#each images}}
                     <div class="item ui">
                         <img class="ui image medium" {{bind-attr src=url}}>
-                        <div {{bind-attr class=":ui :button :tiny :blue :floated :right"}} {{action 'removeProductImage' this}}><i
-                                class="copy icon"></i>删除
+
+                        <div {{bind-attr class=":ui :button :tiny :blue :floated :right"}} {{action 'removeProductImage' this}}>
+                            <i
+                                    class="copy icon"></i>删除
                         </div>
                     </div>
                 {{/each}}

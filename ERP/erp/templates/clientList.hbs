@@ -1,0 +1,42 @@
+<script type="text/x-handlebars" data-template-name="clients/view">
+    <div class="ui grid four column">
+        {{#each model}}
+        <div class="column">
+            <div class="ui small feed segment">
+
+                <h4 class="ui header">客户</h4>
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            ID
+                        </div>
+                        <div class="extra text">
+                            {{id}}
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            称呼
+                        </div>
+                        <div class="extra text">
+                            {{name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            手机
+                        </div>
+                        <div class="extra text">
+                            {{mobile}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>

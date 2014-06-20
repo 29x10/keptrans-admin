@@ -39,7 +39,7 @@ App.ProductEditController = Ember.ObjectController.extend({
 
     actions: {
         addProduct: function () {
-            Ember.$('.ui.modal').modal('show');
+            Ember.$('.ui.modal.product').modal('show');
         },
 
         removeProduct: function (product) {
@@ -73,7 +73,7 @@ App.ProductEditController = Ember.ObjectController.extend({
         confirmAddProduct: function (product) {
             var new_product = this.store.createRecord('product', product);
             this.get('products').pushObject(new_product);
-            Ember.$('.ui.modal').modal('hide');
+            Ember.$('.ui.modal.product').modal('hide');
         },
 
         addProductImage: function (new_image) {
@@ -131,24 +131,12 @@ App.ProductEditListActionController = Ember.ObjectController.extend({
 
     needs: ['productEdit'],
 
-    isEditing: false,
-
     actions: {
-        edit: function () {
-            Ember.$('.ui.dropdown').dropdown();
-            this.set('isEditing', true);
-        },
-
-
-        done: function () {
-            this.set('isEditing', false);
-        },
 
         cancel: function () {
             if (this.get('model.isDirty')) {
                 this.get('model').rollback();
             }
-            this.set('isEditing', false);
         },
 
 

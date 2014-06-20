@@ -75,7 +75,7 @@ body {
 }
 
 .ui.basic.button {
-    margin: 10px 10px 0 0;
+    /*margin: 10px 10px 0 0;*/
 }
 
 .ui.basic.button.black {
@@ -128,7 +128,17 @@ body {
 
 .ui.product.input input {
     padding: 0;
-    height: 100%;
+    border: none;
+    text-decoration: underline;
+}
+
+.ui.contract-info.input input {
+    padding: 0;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-color: #000000;
+    border-radius: 0;
 }
 
 

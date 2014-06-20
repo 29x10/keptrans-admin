@@ -1,7 +1,7 @@
-App.ProductSearchComponent = Ember.Component.extend({
+App.ClientSearchComponent = Ember.Component.extend({
     search: "",
 
-    products: Ember.A(),
+    clients: Ember.A(),
 
     selected: 0,
 
@@ -13,8 +13,9 @@ App.ProductSearchComponent = Ember.Component.extend({
             this.set('filtered', Ember.A());
             return;
         }
-        var result =  this.get('products').filter(function (item) {
-            return item.get('pattern').toLowerCase().indexOf(search) > -1;
+        var result =  this.get('clients').filter(function (item) {
+
+            return item.get('mobile').toLowerCase().indexOf(search) > -1;
         }).slice(0, 10);
         result.forEach(function (item) {
             item.set('active', false);
@@ -24,7 +25,7 @@ App.ProductSearchComponent = Ember.Component.extend({
         }
         this.set('selected', 0);
         this.set('filtered', result);
-    }.observes('products.@each.pattern', 'search'),
+    }.observes('clients.@each.mobile', 'search'),
 
     keyUp: function (event) {
         var source = this.get('filtered');
@@ -65,12 +66,12 @@ App.ProductSearchComponent = Ember.Component.extend({
             var selected = this.get('selected');
             var source = this.get('filtered');
             var target = source.objectAt(selected);
-            this.sendAction('addOrder', target);
+            this.sendAction('setClient', target);
             this.set('search', '');
         },
 
         pushSelected: function (target) {
-            this.sendAction('addOrder', target);
+            this.sendAction('setClient', target);
             this.set('search', '');
         }
     }
