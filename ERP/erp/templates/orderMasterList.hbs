@@ -1,0 +1,46 @@
+<script type="text/x-handlebars" data-template-name="orders/view">
+    <div class="ui secondary  menu">
+        <a class="active item">
+            <i class="home icon"></i> 未付款
+        </a>
+        <a class="item">
+            <i class="mail icon"></i> 交易成功
+        </a>
+
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input placeholder="搜索..." type="text">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+            <a class="ui item">
+                Logout
+            </a>
+        </div>
+    </div>
+    <table class="ui table segment five column">
+        <thead>
+        <tr>
+            <th>订单ID</th>
+            <th>总金额</th>
+            <th>订单状态</th>
+            <th>客户手机号</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each orders}}
+            <tr>
+                <td>{{id}}</td>
+                <td>￥{{total}}</td>
+                <td>{{status}}</td>
+                <td>{{client.mobile}}</td>
+                {{#link-to 'order' this tagName="td" class="positive mouse"}}查看详情{{/link-to}}
+            </tr>
+        {{/each}}
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</script>

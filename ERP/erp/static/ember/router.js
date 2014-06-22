@@ -9,6 +9,10 @@ App.Router.map(function () {
         });
         this.resource('orders', function () {
             this.route('new');
+            this.route('view');
+            this.resource('order', {path: ':order_id'}, function () {
+                this.route('pay');
+            });
         });
         this.resource('clients', function () {
             this.route('new');
@@ -103,7 +107,7 @@ App.ProductRoute = Ember.Route.extend({
 });
 
 
-App.OrdersRoute = Ember.Route.extend({
+App.OrdersNewRoute = Ember.Route.extend({
     model: function () {
         return Ember.RSVP.hash({
             products: this.store.findAll('product'),
@@ -112,6 +116,22 @@ App.OrdersRoute = Ember.Route.extend({
     }
 });
 
+App.OrdersRoute = Ember.Route.extend({
+    model: function () {
+        return Ember.RSVP.hash({
+            orders: this.store.findAll('orderMaster')
+        });
+    }
+});
+
+
+App.OrderRoute = Ember.Route.extend({
+    model: function (params) {
+        return Ember.RSVP.hash({
+            order: this.store.find('orderMaster', params.order_id)
+        });
+    }
+});
 
 App.ClientsRoute = Ember.Route.extend({
     model: function () {

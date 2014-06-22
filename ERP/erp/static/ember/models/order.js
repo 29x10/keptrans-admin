@@ -2,7 +2,9 @@ App.OrderMaster = DS.Model.extend({
 
     pubDate: DS.attr('string'),
     modifiedDate: DS.attr('string'),
-    orderStatus: DS.attr('string'),
+    status: DS.attr('string'),
+    total: DS.attr('string'),
+    memo: DS.attr('string'),
 
     company: DS.attr('string'),
     address: DS.attr('string'),
@@ -22,14 +24,27 @@ App.OrderMaster = DS.Model.extend({
 
 
 App.Order = DS.Model.extend({
-    unitPrice: DS.attr('string'),
-    amount: DS.attr('string'),
+    origin: DS.attr('string'),
+    discount: DS.attr('string'),
     tax: DS.attr('string'),
 
-    price: function () {
-        return (parseInt(this.get('unitPrice'))/(100 - parseInt(this.get('tax')))*parseInt(this.get('amount'))*100).toFixed(2);
-    }.property('unitPrice', 'amount', 'tax'),
+    amount: DS.attr('string'),
 
-    product: DS.belongsTo('product')
+    localPrice: function () {
+        return ((100 - parseInt(this.get('discount')))*parseFloat(this.get('origin'))
+            /(100 - parseInt(this.get('tax')))).toFixed(2);
+    }.property('origin', 'discount', 'tax'),
+
+    serverPrice: DS.attr('string'),
+
+    localTotalPrice: function () {
+        return (this.get('localPrice')*parseInt(this.get('amount'))).toFixed(2);
+    }.property('localPrice', 'amount'),
+
+    serverTotalPrice: DS.attr('string'),
+
+    product: DS.belongsTo('product'),
+
+    orderMaster: DS.belongsTo('orderMaster')
 
 });

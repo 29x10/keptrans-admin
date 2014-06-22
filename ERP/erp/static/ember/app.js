@@ -4,13 +4,13 @@ Ember.Application.initializer({
         container.register('authenticator:custom', App.CustomAuthenticator);
         container.register('authorizer:custom', App.CustomAuthorizer);
         Ember.SimpleAuth.setup(container, application, {
-            crossOriginWhitelist: [App.API_HOST],
+            crossOriginWhitelist: [App.API_HOST, 'https://admin.keptrans.com'],
             authorizerFactory: 'authorizer:custom'
         });
     }
 });
 
-moment.lang('zh-cn')
+moment.lang('zh-cn');
 
 App = Ember.Application.create();
 

@@ -35,6 +35,9 @@
                 {{#link-to 'orders.new' class="item" closeSideBar="true"}}
                     下单
                 {{/link-to}}
+                {{#link-to 'orders.view' class="item" closeSideBar="true"}}
+                    查看订单
+                {{/link-to}}
             </div>
         </div>
         <div class="item">
@@ -57,7 +60,7 @@
         </div>
     </div>
 
-    <div class="ui menu mobile-nav">
+    <div class="ui menu mobile-nav large">
         <a class="item" {{action 'showSideBar'}}>
             <i class="icon list"></i>
         </a>

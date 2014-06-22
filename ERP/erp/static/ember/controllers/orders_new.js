@@ -8,11 +8,20 @@ App.OrdersNewController = Ember.ObjectController.extend({
 
     contractInfo: undefined,
 
+    totalPrice: function () {
+        var orders = this.get('orderList');
+        var total = orders.reduce(function (previousValue, order) {
+            return previousValue + parseFloat(order.get('localTotalPrice'));
+        }, 0);
+        return total.toFixed(2);
+    }.property('orderList.@each.localTotalPrice'),
+
     actions: {
         addOrder: function (product) {
             var new_order = this.store.createRecord('order', {
-                unitPrice: product.get('price'),
+                origin: product.get('price'),
                 amount: '1',
+                discount: '0',
                 tax: '0',
                 product: product
             });
@@ -45,7 +54,9 @@ App.OrdersNewController = Ember.ObjectController.extend({
                 fax: _this.get('contractInfo.fax'),
 
                 deliveryAddress: _this.get('deliveryAddress.address'),
-                orderStatus: "1",
+                status: "1",
+                total: _this.get('totalPrice'),
+                memo: _this.get('memo'),
 
                 client: _this.get('client')
             });

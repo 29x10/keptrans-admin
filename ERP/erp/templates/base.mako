@@ -33,6 +33,8 @@
 <%include file="orderNew.hbs"/>
 <%include file="clientNew.hbs"/>
 <%include file="clientList.hbs"/>
+<%include file="orderMasterList.hbs"/>
+<%include file="orderDetail.hbs"/>
 
 
     % for url in webassets(request,\
@@ -68,6 +70,8 @@
                                   'ember/controllers/product_detail.js',\
                                   'ember/controllers/product_edit.js',\
                                   'ember/controllers/orders_new.js',\
+                                  'ember/controllers/orders_list.js',\
+                                  'ember/controllers/order_detail.js',\
                                   output='out.js', filters='yui_js'):
         <script src="${url}" type="text/javascript"></script>
     % endfor

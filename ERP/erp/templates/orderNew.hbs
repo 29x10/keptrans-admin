@@ -10,17 +10,19 @@
     {{product-search products=products addOrder="addOrder"}}
 
 
-    <table class="ui table eight column">
+    <table class="ui table ten column">
         <thead>
         <tr>
             <th>ID</th>
             <th>品牌</th>
             <th>型号</th>
+            <th>面价</th>
             <th>单价</th>
             <th>单位</th>
-            <th>数量</th>
+            <th>下浮%</th>
             <th>税率%</th>
-            <th>价格</th>
+            <th>数量</th>
+            <th>总价</th>
         </tr>
         </thead>
         <tbody>
@@ -30,22 +32,40 @@
                 <td>{{product.brand}}</td>
                 <td>{{product.pattern}}</td>
                 <td>
-                    <div class="ui product input">{{input type="text" value=unitPrice}}</div>
+                    {{origin}}
+                </td>
+                <td>
+                    {{localPrice}}
                 </td>
                 <td>{{product.unit}}</td>
                 <td>
-                    <div class="ui product input">{{input type="text" value=amount}}</div>
+                    <div class="ui product input">{{input type="text" value=discount}}</div>
                 </td>
                 <td>
                     <div class="ui product input">{{input type="text" value=tax}}</div>
                 </td>
                 <td>
-                    <div class="ui product input">{{input type="text" value=price}}</div>
+                    <div class="ui product input">{{input type="text" value=amount}}</div>
+                </td>
+                <td>
+                    {{localTotalPrice}}
                 </td>
             </tr>
         {{/each}}
         </tbody>
-        <tfoot></tfoot>
+        <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th colspan="2">合计:￥{{totalPrice}}</th>
+        </tr>
+        </tfoot>
     </table>
     <br/>
 
@@ -229,7 +249,7 @@
             {{textarea value=memo}}
         </div>
         <div {{bind-attr class="error:disabled :ui :blue :button"}}
-            {{action 'previewOrder'}}>
+            {{action 'createOrder'}}>
             <i class="icon right"></i>预览订单
         </div>
     </div>

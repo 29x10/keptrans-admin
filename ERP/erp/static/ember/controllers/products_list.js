@@ -6,7 +6,7 @@ App.ProductsViewController = Ember.ArrayController.extend({
         var context = this;
         return this.get('model').filter(function (item) {
             return item.get('tags').some(function (tag) {
-                return tag.get('name').indexOf(context.get('search')) > -1
+                return tag.get('name').toLowerCase().indexOf(context.get('search').toLowerCase()) > -1
             });
         })
     }.property('search', 'model.@each.brand')
