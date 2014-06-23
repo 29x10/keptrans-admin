@@ -16,7 +16,9 @@ requires = [
     'waitress',
     'pyramid_webassets',
     'yuicompressor',
-    'webassets==0.9'
+    'webassets==0.9',
+    'gunicorn',
+    'gevent'
     ]
 
 setup(name='ERP',
