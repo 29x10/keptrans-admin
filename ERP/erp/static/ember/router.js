@@ -126,9 +126,7 @@ App.OrdersRoute = Ember.Route.extend({
 
 App.OrderRoute = Ember.Route.extend({
     model: function (params) {
-        return Ember.RSVP.hash({
-            order: this.store.find('orderMaster', params.order_id)
-        });
+        return this.store.find('orderMaster', params.order_id);
     }
 });
 

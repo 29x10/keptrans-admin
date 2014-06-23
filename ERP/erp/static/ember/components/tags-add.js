@@ -7,7 +7,7 @@ App.TagsAddComponent = Ember.Component.extend({
         return this.get('tags').map(function (item) {
             return item.get('name');
         });
-    }.property('tags'),
+    }.property('tags.@each.name'),
 
     actions: {
         addTag: function () {
@@ -18,7 +18,6 @@ App.TagsAddComponent = Ember.Component.extend({
                 alertify.log("请不要重复输入", "", 2000);
             } else {
                 alertify.success("成功添加标签" + tagValue, "", 2000);
-                this.get('tagNames').push(tagValue);
                 this.sendAction('addTag', {name: tagValue});
                 this.set('tagValue', '');
             }
