@@ -13,7 +13,7 @@
     % for url in webassets(request,\
                                   'lib/alertify/alertify.core.css',\
                                   'lib/alertify/alertify.default.css',\
-                                  'base.css', output='out.css', filters='yui_css', debug=False):
+                                  'base.css', output='out.css', filters='yui_css'):
         <link href="${url}" rel="stylesheet">
     % endfor
 
@@ -71,7 +71,7 @@
                                   'ember/controllers/orders_new.js',\
                                   'ember/controllers/orders_list.js',\
                                   'ember/controllers/order_detail.js',\
-                                  output='out.js', filters='yui_js', debug=False):
+                                  output='out.js', filters='yui_js'):
         <script src="${url}" type="text/javascript"></script>
     % endfor
 </body>
