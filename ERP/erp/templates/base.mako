@@ -24,7 +24,6 @@
 
 <%include file="components.hbs"/>
 <%include file="login.hbs" />
-<%include file="signup.hbs" />
 <%include file="sidebar.hbs"/>
 <%include file="productNew.hbs"/>
 <%include file="productMasterList.hbs"/>
