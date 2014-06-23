@@ -8,12 +8,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="/static/keptrans.ico">
 
     <title>KepTrans 凯思电气</title>
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/css/semantic.min.css" type="text/css"/>
 
     % for url in webassets(request,\
-                                  'lib/semantic-ui/css/semantic.css',\
                                   'lib/alertify/alertify.core.css',\
                                   'lib/alertify/alertify.default.css',\
-                                  'base.css', output='out.css', filters='yui_css'):
+                                  'base.css', output='out.css', filters='yui_css', debug=False):
         <link href="${url}" rel="stylesheet">
     % endfor
 
@@ -35,15 +35,15 @@
 <%include file="orderMasterList.hbs"/>
 <%include file="orderDetail.hbs"/>
 
+<script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/javascript/semantic.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/handlebars.js/1.3.0/handlebars.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/zeroclipboard/2.1.1/ZeroClipboard.min.js" type="text/javascript"></script>
 
     % for url in webassets(request,\
-                                  'lib/jquery.js',\
-                                  'lib/semantic-ui/javascript/semantic.js',\
-                                  'lib/ember/handlebars.js',\
-                                  'lib/ember/ember.js',\
-                                  'lib/ember/ember-data.js',\
                                   'lib/ember/ember-simple-auth.js',\
-                                  'lib/zeroclipboard/ZeroClipboard.js',\
                                   'lib/alertify/alertify.js',\
                                   'lib/moment.js',\
                                   'ember/app.js',\
@@ -71,7 +71,7 @@
                                   'ember/controllers/orders_new.js',\
                                   'ember/controllers/orders_list.js',\
                                   'ember/controllers/order_detail.js',\
-                                  output='out.js', filters='yui_js'):
+                                  output='out.js', filters='yui_js', debug=False):
         <script src="${url}" type="text/javascript"></script>
     % endfor
 </body>
