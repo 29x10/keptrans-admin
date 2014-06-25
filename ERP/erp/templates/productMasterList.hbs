@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <div class="ui items stackable">
+    <div class="ui three items">
         {{#each product in filteredProducts}}
             {{#link-to 'product' product tagName="div" class="item"}}
                 <div class="image">
@@ -20,11 +20,6 @@
                 </div>
                 <div class="content">
                     <div class="meta">{{format-date product.modifiedDate}}</div>
-                    <div class="description">
-                        {{#each product.tags}}
-                            <div class="ui label" style="margin-top: 7px">{{name}}</div>
-                        {{/each}}
-                    </div>
                 </div>
             {{/link-to}}
         {{/each}}
