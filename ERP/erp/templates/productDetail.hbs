@@ -33,25 +33,24 @@
     </div>
     <div class="ui segment">
         <div class="ui grid stackable">
-            <div class="five column wide">
+            <div class="six column wide">
                 <div class="ui segment raised">
-                    {{#if selectedImg}}
-                        <img class="ui medium image" {{bind-attr src=selectedImg}}>
-                    {{else}}
-                        <img class="ui medium image" {{bind-attr src=cover}}>
-                    {{/if}}
+                    <a class="fancybox" rel="gallery" {{bind-attr href=cover}}>
+                        <img class="ui image" {{bind-attr src=cover}} style="width: 100%"/>
+                    </a>
                 </div>
             </div>
-            <div class="eleven column wide">
+            <div class="ten column wide">
                 <div class="ui header huge blue">
                     {{brand}}
                     <div class="ui label black">{{category}}</div>
                 </div>
                 <div class="ui divider"></div>
                 <div class="ui small images">
-                    <img class="ui image mouse" {{bind-attr src=cover}} {{action 'select' cover}}>
                     {{#each images}}
-                        <img class="ui image mouse" {{bind-attr src=url}} {{action 'select' url}}>
+                        <a class="fancybox" rel="gallery" {{bind-attr href=url}}>
+                            <img class="ui image" {{bind-attr src=url}}/>
+                        </a>
                     {{/each}}
                 </div>
                 {{#each tags}}

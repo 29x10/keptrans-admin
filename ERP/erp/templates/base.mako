@@ -9,6 +9,7 @@
 
     <title>KepTrans 凯思电气</title>
     <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/css/semantic.min.css" type="text/css"/>
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/fancybox/2.1.5/jquery.fancybox.css" type="text/css"/>
 
     % for url in webassets(request,\
                                   'lib/alertify/alertify.core.css',\
@@ -41,6 +42,7 @@
 <script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js" type="text/javascript"></script>
 <script src="//cdnjscn.b0.upaiyun.com/libs/zeroclipboard/2.1.1/ZeroClipboard.min.js" type="text/javascript"></script>
+<script src="//cdnjscn.b0.upaiyun.com/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript"></script>
 
     % for url in webassets(request,\
                                   'lib/ember/ember-simple-auth.js',\

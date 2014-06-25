@@ -29,3 +29,11 @@ App.ProductIndexController = Ember.ObjectController.extend({
         }
     }
 });
+
+
+App.ProductIndexView = Ember.View.extend({
+
+    didInsertElement: function () {
+        this.$(".fancybox").fancybox();
+    }
+});
