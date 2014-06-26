@@ -73,7 +73,19 @@
 
 
 <script type="text/x-handlebars" data-template-name="error">
-    <div class="ui header">出错啦
-        <div class="sub header">{{#link-to 'erp'}}返回主页{{/link-to}}</div>
+    <div class="ui page grid">
+        <div class="column">
+            <h1 class="ui huge center aligned icon header">
+                <i class="emphasized teal attention outline icon"></i>
+            </h1>
+            <div class="ui inverted horizontal section divider">
+                <i class="circular heart red icon"></i>
+            </div>
+            <h2 class="ui huge header aligned center green">404
+            </h2>
+            <h2 class="ui huge header aligned center">{{#link-to 'erp' tagName="div" class="ui button"}}返回首页{{/link-to}}
+            </h2>
+
+        </div>
     </div>
 </script>

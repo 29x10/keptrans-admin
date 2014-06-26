@@ -8,6 +8,6 @@ App.ProductsViewController = Ember.ArrayController.extend({
             return item.get('tags').some(function (tag) {
                 return tag.get('name').toLowerCase().indexOf(context.get('search').toLowerCase()) > -1
             });
-        })
+        });
     }.property('search', 'model.@each.brand')
 });
