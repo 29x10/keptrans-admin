@@ -10,7 +10,7 @@
     <title>KepTrans 凯思电气</title>
 
     % for url in webassets(request,\
-                                  'browser.css', output='out.css', filters='yui_css'):
+                                  'browser.css', output='browser.min.css', filters='yui_css'):
         <link href="${url}" rel="stylesheet">
     % endfor
 
