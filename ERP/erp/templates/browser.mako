@@ -22,7 +22,7 @@
 <p>Keptrans并不支持IE9以下的浏览器</p>
 
 请您升级到最新的<a href="https://mozilla.org/firefox/">火狐浏览器</a>或者
-<a href="https://www.google.com/chrome/browser/index.html?system=true&standalone=1">谷歌浏览器</a>
+<a href="https://www.google.com/intl/zh-CN/chrome/browser/?standalone=1">谷歌浏览器</a>
 
 </body>
 </html>
