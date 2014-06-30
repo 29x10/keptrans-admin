@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #FCFCFC url(bgr.jpg) repeat;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
