@@ -1,4 +1,4 @@
-App.ProductsViewController = Ember.ArrayController.extend({
+App.ProductsIndexController = Ember.ArrayController.extend({
 
     search: '',
 
