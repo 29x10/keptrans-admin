@@ -23,7 +23,7 @@ App.ProductIndexController = Ember.ObjectController.extend({
                 image.deleteRecord();
             });
             product.destroyRecord().then(function () {
-                context.transitionToRoute('products.view');
+                context.transitionToRoute('products.index');
             });
 
         }
