@@ -40,66 +40,103 @@
             </div>
 
 
+
+
+
+            <div class="ui grid three column stackable">
+                {{#each products}}
+                    <div class="column">
+                        <div class="ui small feed segment">
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        ID
+                                    </div>
+                                    <div class="extra text">
+                                        {{id}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        品牌
+                                    </div>
+                                    <div class="extra text">
+                                        <div class="ui contract-info input fluid">{{input type="text" value=brand}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        型号
+                                    </div>
+                                    <div class="extra text">
+                                        <div class="ui contract-info input fluid">{{input type="text" value=pattern}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        价格
+                                    </div>
+                                    <div class="extra text">
+                                        <div class="ui contract-info input fluid">{{input type="text" value=price}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        货期
+                                    </div>
+                                    <div class="extra text">
+                                        <div class="ui contract-info input fluid">{{input type="text" value=deadline}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        库存数量
+                                    </div>
+                                    <div class="extra text">
+                                        <div class="ui contract-info input fluid">{{input type="text" value=sku}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="content">
+                                    <div class="summary">
+                                        库存单位
+                                    </div>
+                                    <div class="extra text">
+                                        {{product-unit-dropdown unit=unit}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui red button floated right"
+                                {{action 'removeProduct' this}}>删除
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+
+            <div class="ui basic button"
+                {{action 'addProduct'}}>
+                <i class="icon add"></i>添加产品
+            </div>
+            <br /><br />
+
+
             <div class="field">
                 <label>产品手册</label>
                 {{textarea value=desc}}
             </div>
 
-            <table class="ui table nine column product">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>品牌</th>
-                    <th>型号</th>
-                    <th>价格</th>
-                    <th>货期(天)</th>
-                    <th>库存</th>
-                    <th>单位</th>
-                    <th>操作</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each products itemController='productEditListAction'}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=brand}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=pattern}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=price}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=deadline}}</div>
-                        </td>
-                        <td>
-                            <div class="ui product input">{{input type="text" value=sku}}</div>
-                        </td>
-                        <td>
-                            {{product-unit-dropdown unit=unit}}
-                        </td>
-                        {{#if this.isDirty}}
-                            <td class="positive mouse" {{action 'cancel'}}>撤销</td>
-                        {{else}}
-                            <td>未修改</td>
-                        {{/if}}
-                        <td class="negative mouse" {{action 'deleteProduct'}}>删除</td>
-                    </tr>
-                {{/each}}
-                </tbody>
-                <tfoot></tfoot>
-            </table>
-
-            <br/>
-
-
-            <div class="ui teal button"
-                {{action 'addProduct'}}>
-                <i class="icon add"></i>添加产品
-            </div>
             <div {{bind-attr class="error:disabled :ui :blue :button"}}
                 {{action 'publishProduct'}}>
                 <i class="icon location"></i>发布产品

@@ -34,7 +34,7 @@ App.ClientsNewController = Ember.ArrayController.extend({
         },
 
         addInfo: function () {
-            Ember.$('.ui.modal.contractInfo').modal('show');
+            Ember.$('#contractInfo').modal('show');
         },
 
         confirmAddContractInfo: function (contractInfo) {

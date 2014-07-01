@@ -2,7 +2,6 @@ App.Router.map(function () {
     this.resource('erp', {path: '/'}, function () {
         this.resource('products', function () {
             this.route('new');
-            this.route('view');
             this.resource('product', {path: ':product_id'}, function () {
                 this.route('edit');
             });

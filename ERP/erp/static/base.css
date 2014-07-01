@@ -128,8 +128,11 @@ body {
 
 .ui.product.input input {
     padding: 0;
-    border: none;
-    text-decoration: underline;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-color: #000000;
+    border-radius: 0;
 }
 
 .ui.contract-info.input input {
@@ -147,18 +150,3 @@ body {
 .ui.disabled.button.active {
     pointer-events: none;
 }
-
-
-/*.ui.form.segment.test {*/
-    /*width: 800px;*/
-	/*max-height: 300px;*/
-	/*background-color: red;*/
-/**/
-	/*position: absolute;*/
-	/*top:0;*/
-	/*bottom: 0;*/
-	/*left: 0;*/
-	/*right: 0;*/
-/**/
-	/*margin: auto;*/
-/*}*/

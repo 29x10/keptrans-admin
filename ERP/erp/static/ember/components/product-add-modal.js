@@ -23,13 +23,15 @@ App.ProductAddModalComponent = Ember.Component.extend({
 
     unit: "",
 
-    unitError: true,
+    unitError: function () {
+        return ['只', '米'].indexOf(this.get('unit')) === -1;
+    }.property('unit'),
 
 
     formError: function () {
         return this.get('brandError') || this.get('patternError') || this.get('priceError')
-            || this.get('deadlineError') || this.get('skuError');
-    }.property('brandError', 'patternError', 'priceError', 'deadlineError', 'skuError'),
+            || this.get('deadlineError') || this.get('skuError') || this.get('unitError');
+    }.property('brandError', 'patternError', 'priceError', 'deadlineError', 'skuError', 'unitError'),
 
 
     actions: {

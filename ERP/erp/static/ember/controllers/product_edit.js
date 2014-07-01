@@ -39,7 +39,7 @@ App.ProductEditController = Ember.ObjectController.extend({
 
     actions: {
         addProduct: function () {
-            Ember.$('.ui.modal.product').modal('show');
+            Ember.$('#product').modal('show');
         },
 
         removeProduct: function (product) {
@@ -73,7 +73,7 @@ App.ProductEditController = Ember.ObjectController.extend({
         confirmAddProduct: function (product) {
             var new_product = this.store.createRecord('product', product);
             this.get('products').pushObject(new_product);
-            Ember.$('.ui.modal.product').modal('hide');
+            Ember.$('#product').modal('show');
         },
 
         addProductImage: function (new_image) {

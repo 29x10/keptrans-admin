@@ -86,7 +86,7 @@ App.ProductsNewController = Ember.ArrayController.extend({
         },
 
         addProduct: function () {
-            Ember.$('.ui.modal.product').modal('show');
+            Ember.$('#product').modal('show');
         },
 
         removeProduct: function (product) {
@@ -116,7 +116,7 @@ App.ProductsNewController = Ember.ArrayController.extend({
         confirmAddProduct: function (product) {
             var new_product = this.store.createRecord('product', product);
             this.get('products').pushObject(new_product);
-            Ember.$('.ui.modal.product').modal('hide');
+            Ember.$('#product').modal('hide');
         },
 
         addProductImage: function (new_image) {
@@ -127,6 +127,5 @@ App.ProductsNewController = Ember.ArrayController.extend({
             image.deleteRecord();
             this.get('images').removeObject(image);
         }
-
     }
 });
