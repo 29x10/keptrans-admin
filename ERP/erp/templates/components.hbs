@@ -36,30 +36,32 @@
     <div {{bind-attr data-clipboard-text=text class=":ui :button btn-class"}}><i class="url icon"></i>复制</div>
 </script>
 
-
 <script type="text/x-handlebars" data-template-name="components/images-list">
-    <div class="ui top attached successful progress">
-        <div class="bar" {{bind-attr style=barWidth}}></div>
-    </div>
-    <div class="item ui attached">
-        {{img-preview file=image class="medium"}}
-        <div {{bind-attr class=":ui :tiny :button :red :floated :right isUploading:disabled"}}
-            {{action 'upload' image}}><i class="icon cloud upload"></i>{{uploadStatus}}</div>
-        {{#if imageUrl}}
-            {{zero-clipboard text=imageUrl btn-class="tiny green floated right"}}
-        {{/if}}
-
-        {{#if imageUrl}}
-            {{#if isSet}}
-                <div {{bind-attr class=":ui :button :tiny :blue"}} {{action 'removeFromProduct'}}><i
-                        class="copy icon"></i>删除
-                </div>
-            {{else}}
-                <div {{bind-attr class=":ui :button :tiny :blue"}} {{action 'addToProduct'}}><i
-                        class="copy icon"></i>添加
-                </div>
+    <div class="ui segment">
+        <div class="ui top attached successful progress">
+            <div class="bar" {{bind-attr style=barWidth}}></div>
+        </div>
+        <div class="ui attached">
+            {{img-preview file=image class="medium"}}
+            <br />
+            <div {{bind-attr class=":ui :tiny :button :red isUploading:disabled :floated :right"}}
+                {{action 'upload' image}}><i class="icon cloud upload"></i>{{uploadStatus}}</div>
+            {{#if imageUrl}}
+                {{zero-clipboard text=imageUrl btn-class="tiny green floated left"}}
             {{/if}}
-        {{/if}}
+
+            {{#if imageUrl}}
+                {{#if isSet}}
+                    <div {{bind-attr class=":ui :button :tiny :blue :floated :left"}} {{action 'removeFromProduct'}}><i
+                            class="copy icon"></i>删除
+                    </div>
+                {{else}}
+                    <div {{bind-attr class=":ui :button :tiny :blue :floated :left"}} {{action 'addToProduct'}}><i
+                            class="copy icon"></i>添加
+                    </div>
+                {{/if}}
+            {{/if}}
+        </div>
     </div>
 </script>
 
@@ -169,6 +171,7 @@
     <div class="ui form">
         <div class="field">
             <label>产品</label>
+
             <div class="field">
                 <div class="ui left icon input">
                     {{input type="text" placeholder="搜索..." value=search action="pushToList"}}
@@ -178,33 +181,33 @@
         </div>
     </div>
     {{#if filtered.length}}
-    <table class="ui table seven column">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>品牌</th>
-            <th>型号</th>
-            <th>价格</th>
-            <th>货期(天)</th>
-            <th>库存</th>
-            <th>单位</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each filtered}}
-            <tr {{bind-attr class="active :mouse"}} {{action 'pushSelected' this}}>
-                <td>{{id}}</td>
-                <td>{{brand}}</td>
-                <td>{{pattern}}</td>
-                <td>{{price}}</td>
-                <td>{{deadline}}</td>
-                <td>{{sku}}</td>
-                <td>{{unit}}</td>
+        <table class="ui table seven column">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>品牌</th>
+                <th>型号</th>
+                <th>价格</th>
+                <th>货期(天)</th>
+                <th>库存</th>
+                <th>单位</th>
             </tr>
-        {{/each}}
-        </tbody>
-        <tfoot></tfoot>
-    </table>
+            </thead>
+            <tbody>
+            {{#each filtered}}
+                <tr {{bind-attr class="active :mouse"}} {{action 'pushSelected' this}}>
+                    <td>{{id}}</td>
+                    <td>{{brand}}</td>
+                    <td>{{pattern}}</td>
+                    <td>{{price}}</td>
+                    <td>{{deadline}}</td>
+                    <td>{{sku}}</td>
+                    <td>{{unit}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+            <tfoot></tfoot>
+        </table>
     {{/if}}
 </script>
 
@@ -220,6 +223,7 @@
             <div class="ui form">
                 <div class="field">
                     <label>公司</label>
+
                     <div class="ui left icon input">
                         {{input type="text" placeholder="公司名称" value=company}}
                         <i class="icon building"></i>
@@ -227,6 +231,7 @@
                 </div>
                 <div class="field">
                     <label>地址</label>
+
                     <div class="ui left icon input">
                         {{input type="text" placeholder="地址" value=address}}
                         <i class="icon map marker"></i>
@@ -234,6 +239,7 @@
                 </div>
                 <div class="field">
                     <label>开户行</label>
+
                     <div class="ui left icon input">
                         {{input type="text" placeholder="开户行" value=bank}}
                         <i class="icon money"></i>
@@ -241,6 +247,7 @@
                 </div>
                 <div class="field">
                     <label>帐号</label>
+
                     <div class="ui left icon input">
                         {{input type="text" placeholder="帐号" value=bankAccount}}
                         <i class="icon payment"></i>
@@ -248,6 +255,7 @@
                 </div>
                 <div class="field">
                     <label>税号</label>
+
                     <div class="ui left icon input">
                         {{input type="text" placeholder="税号" value=tax}}
                         <i class="icon payment"></i>
@@ -256,6 +264,7 @@
                 <div class="three fields">
                     <div class="field">
                         <label>法人</label>
+
                         <div class="ui left icon input">
                             {{input type="text" placeholder="法人" value=legalPerson}}
                             <i class="icon user"></i>
@@ -263,6 +272,7 @@
                     </div>
                     <div class="field">
                         <label>电话</label>
+
                         <div class="ui left icon input">
                             {{input type="text" placeholder="电话" value=phone}}
                             <i class="icon phone"></i>
@@ -270,6 +280,7 @@
                     </div>
                     <div class="field">
                         <label>法人</label>
+
                         <div class="ui left icon input">
                             {{input type="text" placeholder="传真" value=fax}}
                             <i class="icon phone"></i>
@@ -290,6 +301,7 @@
     <div class="ui form">
         <div class="field">
             <label>客户</label>
+
             <div class="field">
                 <div class="ui left icon input">
                     {{input type="text" placeholder="搜索..." value=search action="pushToList"}}
@@ -299,24 +311,24 @@
         </div>
     </div>
     {{#if filtered.length}}
-    <table class="ui table three column">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>客户</th>
-            <th>手机</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each filtered}}
-            <tr {{bind-attr class="active :mouse"}} {{action 'pushSelected' this}}>
-                <td>{{id}}</td>
-                <td>{{name}}</td>
-                <td>{{mobile}}</td>
+        <table class="ui table three column">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>客户</th>
+                <th>手机</th>
             </tr>
-        {{/each}}
-        </tbody>
-        <tfoot></tfoot>
-    </table>
+            </thead>
+            <tbody>
+            {{#each filtered}}
+                <tr {{bind-attr class="active :mouse"}} {{action 'pushSelected' this}}>
+                    <td>{{id}}</td>
+                    <td>{{name}}</td>
+                    <td>{{mobile}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+            <tfoot></tfoot>
+        </table>
     {{/if}}
 </script>

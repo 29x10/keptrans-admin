@@ -133,9 +133,11 @@
             <div class="ui green button" {{action 'uploadImage'}}>
                 <i class="icon photo"></i>上传图片
             </div>
-            <div class="ui list large">
+            <div class="ui grid three column stackable">
                 {{#each image in files}}
-                    {{images-list image=image addProductImage="addProductImage" removeProductImage="removeProductImage"}}
+                    <div class="column">
+                        {{images-list image=image addProductImage="addProductImage" removeProductImage="removeProductImage"}}
+                    </div>
                 {{/each}}
             </div>
         </div>

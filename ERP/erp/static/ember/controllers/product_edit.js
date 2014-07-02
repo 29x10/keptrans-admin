@@ -73,7 +73,7 @@ App.ProductEditController = Ember.ObjectController.extend({
         confirmAddProduct: function (product) {
             var new_product = this.store.createRecord('product', product);
             this.get('products').pushObject(new_product);
-            Ember.$('#product').modal('show');
+            Ember.$('#product').modal('hide');
         },
 
         addProductImage: function (new_image) {
@@ -121,6 +121,12 @@ App.ProductEditController = Ember.ObjectController.extend({
             productMaster.save().then(function () {
                 context.set('files', Ember.A());
             });
+        },
+
+        rollbackProduct: function (product) {
+            if (product.get('isDirty')) {
+                product.rollback();
+            }
         }
 
     }

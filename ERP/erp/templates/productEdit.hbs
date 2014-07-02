@@ -117,6 +117,11 @@
                                     </div>
                                 </div>
                             </div>
+                            {{#if this.isDirty}}
+                                <div class="ui purple button floated left"
+                                    {{action 'rollbackProduct' this}}>撤销
+                                </div>
+                            {{/if}}
                             <div class="ui red button floated right"
                                 {{action 'removeProduct' this}}>删除
                             </div>
@@ -145,19 +150,23 @@
             <div class="ui green button" {{action 'uploadImage'}}>
                 <i class="icon photo"></i>上传图片
             </div>
-            <div class="ui list large">
-                {{#each images}}
-                    <div class="item ui">
-                        <img class="ui image medium" {{bind-attr src=url}}>
 
-                        <div {{bind-attr class=":ui :button :tiny :blue :floated :right"}} {{action 'removeProductImage' this}}>
-                            <i
-                                    class="copy icon"></i>删除
+            <div class="ui grid three column stackable">
+                {{#each images}}
+                    <div class="column">
+                        <div class="ui segment">
+                            <img class="ui image medium" {{bind-attr src=url}}>
+                            <br />
+                            <div {{bind-attr class=":ui :button :tiny :blue :floated :right"}} {{action 'removeProductImage' this}}>
+                                <i class="copy icon"></i>删除
+                            </div>
                         </div>
                     </div>
                 {{/each}}
                 {{#each image in files}}
-                    {{images-list image=image addProductImage="addProductImage" removeProductImage="removeProductImage"}}
+                    <div class="column">
+                        {{images-list image=image addProductImage="addProductImage" removeProductImage="removeProductImage"}}
+                    </div>
                 {{/each}}
             </div>
         </div>
