@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="凯思电气">
     <meta name="author" content="BINLEI XUE">
-    <link rel="shortcut icon" type="image/x-icon" href="/static/keptrans.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="${request.static_path('erp:static/keptrans.ico')}">
 
     <title>KepTrans 凯思电气</title>
 
