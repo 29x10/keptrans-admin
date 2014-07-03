@@ -41,12 +41,6 @@ body {
     float:none;
 }
 
-.ui.segment.dropArea {
-    line-height: 180px;
-    vertical-align: middle;
-    text-align: center;
-    min-height: 200px;
-}
 
 .ui.menu .item.mobile-only {
     display: none;
