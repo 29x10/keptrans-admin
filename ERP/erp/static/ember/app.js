@@ -1,14 +1,19 @@
+window.ENV = window.ENV || {};
+
+window.ENV['simple-auth'] = {
+    authorizer: 'authorizer:custom'
+};
+
 Ember.Application.initializer({
     name: 'authentication',
+    before: 'simple-auth',
     initialize: function(container, application) {
+        // register the custom authenticator and authorizer so Ember Simple Auth can find them
         container.register('authenticator:custom', App.CustomAuthenticator);
         container.register('authorizer:custom', App.CustomAuthorizer);
-        Ember.SimpleAuth.setup(container, application, {
-            crossOriginWhitelist: [App.API_HOST, 'https://admin.keptrans.com'],
-            authorizerFactory: 'authorizer:custom'
-        });
     }
 });
+
 
 moment.lang('zh-cn');
 
@@ -33,7 +38,7 @@ App.Router.reopen({
 });
 
 
-App.CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
+App.CustomAuthenticator = SimpleAuth.Authenticators.Base.extend({
 
     restore: function(data) {
         return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -44,7 +49,6 @@ App.CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
             }
         });
     },
-
 
     authenticate: function(credentials) {
         var _this = this;
@@ -74,10 +78,10 @@ App.CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
             resolve();
         });
     }
-
 });
 
-App.CustomAuthorizer = Ember.SimpleAuth.Authorizers.Base.extend({
+// the custom authorizer that authorizes requests against the custom server
+App.CustomAuthorizer = SimpleAuth.Authorizers.Base.extend({
     authorize: function(jqXHR, requestOptions) {
         if (this.get('session.isAuthenticated') && !Ember.isEmpty(this.get('session.token'))) {
             jqXHR.setRequestHeader('API-KEY', this.get('session.token'));

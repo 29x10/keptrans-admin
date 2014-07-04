@@ -13,7 +13,6 @@
     <table class="ui table ten column">
         <thead>
         <tr>
-            <th>ID</th>
             <th>品牌</th>
             <th>型号</th>
             <th>面价</th>
@@ -23,12 +22,12 @@
             <th>税率%</th>
             <th>数量</th>
             <th>总价</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
         {{#each orderList}}
             <tr>
-                <td>{{product.id}}</td>
                 <td>{{product.brand}}</td>
                 <td>{{product.pattern}}</td>
                 <td>
@@ -49,6 +48,9 @@
                 </td>
                 <td>
                     {{localTotalPrice}}
+                </td>
+                <td class="mouse negative" {{action 'deleteOrder' this}}>
+                    删除
                 </td>
             </tr>
         {{/each}}

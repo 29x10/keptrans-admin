@@ -35,7 +35,7 @@
                 {{#link-to 'orders.new' class="item" closeSideBar="true"}}
                     下单
                 {{/link-to}}
-                {{#link-to 'orders.view' class="item" closeSideBar="true"}}
+                {{#link-to 'orders.index' class="item" closeSideBar="true"}}
                     查看订单
                 {{/link-to}}
             </div>
@@ -71,6 +71,21 @@
     </div>
 </script>
 
+<script type="text/x-handlebars" data-template-name="products">
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="product">
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="orders">
+    {{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="order">
+    {{outlet}}
+</script>
 
 <script type="text/x-handlebars" data-template-name="error">
     <div class="ui page grid">

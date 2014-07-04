@@ -1,4 +1,4 @@
-<script type="text/x-handlebars" data-template-name="orders/view">
+<script type="text/x-handlebars" data-template-name="orders/index">
     <div class="ui secondary  menu">
         <a class="active item">
             <i class="home icon"></i> 未付款
@@ -30,7 +30,7 @@
         </tr>
         </thead>
         <tbody>
-        {{#each orders}}
+        {{#each model}}
             <tr>
                 <td>{{id}}</td>
                 <td>￥{{total}}</td>

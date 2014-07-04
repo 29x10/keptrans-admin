@@ -8,12 +8,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="${request.static_path('erp:static/keptrans.ico')}">
 
     <title>KepTrans 凯思电气</title>
-    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/css/semantic.min.css" type="text/css"/>
-    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/fancybox/2.1.5/jquery.fancybox.css" type="text/css"/>
+
+    <link rel="stylesheet" href="${request.static_path('erp:static/bower/bower_components/semantic-ui/build/packaged/css/semantic.min.css')}" type="text/css"/>
 
     % for url in webassets(request,\
-                                  'lib/alertify/alertify.core.css',\
-                                  'lib/alertify/alertify.default.css',\
+                                  'bower/bower_components/fancybox/source/jquery.fancybox.css',\
+                                  'bower/bower_components/alertify/themes/alertify.core.css',\
+                                  'bower/bower_components/alertify/themes/alertify.default.css',\
                                   'base.css', output='base.min.css', filters='yui_css'):
         <link href="${url}" rel="stylesheet">
     % endfor
@@ -36,18 +37,25 @@
 <%include file="orderMasterList.hbs"/>
 <%include file="orderDetail.hbs"/>
 
-<script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/semantic-ui/0.16.1/javascript/semantic.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/handlebars.js/1.3.0/handlebars.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/ember.js/1.5.1/ember.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/ember-data.js/1.0.0-beta.7/ember-data.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/zeroclipboard/2.1.1/ZeroClipboard.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/fancybox/2.1.5/jquery.fancybox.min.js" type="text/javascript"></script>
-<script src="//cdnjscn.b0.upaiyun.com/libs/moment.js/2.6.0/moment-with-langs.min.js" type="text/javascript"></script>
 
     % for url in webassets(request,\
-                                  'lib/ember/ember-simple-auth.js',\
-                                  'lib/alertify/alertify.js',\
+                                  'bower/bower_components/jquery/dist/jquery.js',\
+                                  'bower/bower_components/semantic-ui/build/packaged/javascript/semantic.js',\
+                                  'bower/bower_components/handlebars/handlebars.js',\
+                                  'bower/bower_components/zeroclipboard/dist/ZeroClipboard.js',\
+                                  'bower/bower_components/fancybox/source/jquery.fancybox.js',\
+                                  'bower/bower_components/moment/moment.js',\
+                                  'bower/bower_components/moment/lang/zh-cn.js',\
+                                  'bower/bower_components/alertify/alertify.js',\
+                                  output='test.min.js', filters='yui_js'):
+        <script src="${url}" type="text/javascript" charset="UTF-8"></script>
+    % endfor
+
+<script src="${request.static_path('erp:static/bower/bower_components/ember/ember.min.js')}" type="text/javascript"></script>
+<script src="${request.static_path('erp:static/bower/bower_components/ember-data/ember-data.min.js')}" type="text/javascript"></script>
+<script src="${request.static_path('erp:static/bower/bower_components/ember-simple-auth/simple-auth.js')}" type="text/javascript"></script>
+
+    % for url in webassets(request,\
                                   'ember/app.js',\
                                   'ember/models/product.js',\
                                   'ember/models/order.js',\
@@ -74,7 +82,7 @@
                                   'ember/controllers/orders_list.js',\
                                   'ember/controllers/order_detail.js',\
                                   output='base.min.js', filters='yui_js'):
-        <script src="${url}" type="text/javascript"></script>
+        <script src="${url}" type="text/javascript" charset="UTF-8"></script>
     % endfor
 </body>
 </html>

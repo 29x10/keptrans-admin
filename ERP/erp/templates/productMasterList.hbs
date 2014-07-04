@@ -9,19 +9,15 @@
             </div>
         </div>
     </div>
-    <div class="ui items stackable">
+    <div class="ui grid four column stackable">
         {{#each product in filteredProducts}}
-            {{#link-to 'product' product tagName="div" class="item"}}
-                <div class="image">
-                    <img {{bind-attr src=product.cover}}>
-                    <a class="star ui corner label">
-                        <div class="text">凯思</div>
-                    </a>
-                </div>
-                <div class="content">
-                    <div class="meta">{{format-date product.modifiedDate}}</div>
-                </div>
-            {{/link-to}}
+            <div class="column">
+                {{#link-to 'product' product tagName="div" class="ui segment mouse raised"}}
+                    <img {{bind-attr src=product.cover}} class="ui medium image">
+                    <div style="float: left;">最后修改时间:</div>
+                    <div style="float: right;">{{format-date product.modifiedDate}}</div>`
+                {{/link-to}}
+            </div>
         {{/each}}
     </div>
 </script>

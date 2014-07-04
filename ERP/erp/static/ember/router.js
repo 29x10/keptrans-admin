@@ -8,7 +8,6 @@ App.Router.map(function () {
         });
         this.resource('orders', function () {
             this.route('new');
-            this.route('view');
             this.resource('order', {path: '/:order_id'}, function () {
                 this.route('pay');
             });
@@ -78,7 +77,7 @@ App.ApplicationRoute = Ember.Route.extend({
     }
 });
 
-App.ErpRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+App.ErpRoute = Ember.Route.extend(SimpleAuth.AuthenticatedRouteMixin, {
     actions: {
         showSideBar: function () {
             Ember.$('.ui.sidebar').sidebar({overlay: true}).sidebar('show');
@@ -104,20 +103,18 @@ App.ProductRoute = Ember.Route.extend({
     }
 });
 
+App.OrdersRoute = Ember.Route.extend({
+    model: function () {
+        return this.store.findAll('orderMaster');
+    }
+});
+
 
 App.OrdersNewRoute = Ember.Route.extend({
     model: function () {
         return Ember.RSVP.hash({
             products: this.store.findAll('product'),
             clients: this.store.findAll('client')
-        });
-    }
-});
-
-App.OrdersRoute = Ember.Route.extend({
-    model: function () {
-        return Ember.RSVP.hash({
-            orders: this.store.findAll('orderMaster')
         });
     }
 });

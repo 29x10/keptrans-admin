@@ -63,7 +63,18 @@ App.OrdersNewController = Ember.ObjectController.extend({
             new_order_master.save().then(function () {
                 new_order_master.get('orders').pushObjects(_this.get('orderList'));
                 new_order_master.get('orders').save();
+            }).then(function () {
+                alertify.success("下单成功");
+                _this.set('orderList', Ember.A());
+                _this.set('client', "");
+                _this.set('deliveryAddress', undefined);
+                _this.set('contractInfo', undefined);
             });
+        },
+
+        deleteOrder: function (order) {
+            order.deleteRecord();
+            this.get('orderList').removeObject(order);
         }
     }
 });

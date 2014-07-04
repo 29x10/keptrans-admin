@@ -13,4 +13,6 @@ ERP/erp/static/.webassets-cache
 ERP/erp/static/base.min.css
 ERP/erp/static/base.min.js
 
+ERP/erp/static/test.min.js
+
 ERP/erp/static/browser.min.css

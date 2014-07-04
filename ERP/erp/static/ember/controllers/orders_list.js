@@ -1,4 +1,4 @@
-App.OrdersViewController = Ember.ObjectController.extend({
+App.OrdersIndexController = Ember.ArrayController.extend({
 
 
 });
