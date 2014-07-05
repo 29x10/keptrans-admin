@@ -47,6 +47,9 @@
                                   'bower/bower_components/moment/moment.js',\
                                   'bower/bower_components/moment/lang/zh-cn.js',\
                                   'bower/bower_components/alertify/alertify.js',\
+                                  'bower/bower_components/Snap.svg/dist/snap.svg.js',\
+                                  'bower/bower_components/classie/classie.js',\
+                                  'loader/svgLoader.js',\
                                   output='test.min.js', filters='yui_js'):
         <script src="${url}" type="text/javascript" charset="UTF-8"></script>
     % endfor
@@ -72,6 +75,7 @@
                                   'ember/components/contract-info-add-modal.js',\
                                   'ember/components/client-search.js',\
                                   'ember/router.js',\
+                                  'ember/controllers/loading.js',\
                                   'ember/controllers/clients_new.js',\
                                   'ember/controllers/account.js',\
                                   'ember/controllers/products_new.js',\

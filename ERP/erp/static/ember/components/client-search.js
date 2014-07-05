@@ -15,7 +15,7 @@ App.ClientSearchComponent = Ember.Component.extend({
         }
         var result =  this.get('clients').filter(function (item) {
 
-            return item.get('mobile').toLowerCase().indexOf(search) > -1;
+            return item.get('mobile').toLowerCase().indexOf(search.toLowerCase()) > -1;
         }).slice(0, 10);
         result.forEach(function (item) {
             item.set('active', false);

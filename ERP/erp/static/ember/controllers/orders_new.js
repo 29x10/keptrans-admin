@@ -78,3 +78,5 @@ App.OrdersNewController = Ember.ObjectController.extend({
         }
     }
 });
+
+

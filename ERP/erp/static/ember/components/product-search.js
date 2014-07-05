@@ -14,7 +14,7 @@ App.ProductSearchComponent = Ember.Component.extend({
             return;
         }
         var result =  this.get('products').filter(function (item) {
-            return item.get('pattern').toLowerCase().indexOf(search) > -1;
+            return item.get('pattern').toLowerCase().indexOf(search.toLowerCase()) > -1;
         }).slice(0, 10);
         result.forEach(function (item) {
             item.set('active', false);
