@@ -1,3 +1,6 @@
+ZeroClipboard.config({ swfPath: "/static/bower/bower_components/zeroclipboard/dist/ZeroClipboard.swf" });
+
+
 window.ENV = window.ENV || {};
 
 window.ENV['simple-auth'] = {
