@@ -164,17 +164,6 @@ loader
 	visibility: visible;
 }
 
-.pageload-overlay svg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	pointer-events: none;
-}
-
-.pageload-overlay svg path {
-	fill: #fff;
-}
-
 .pageload-overlay::after,
 .pageload-overlay::before {
 	content: '';
