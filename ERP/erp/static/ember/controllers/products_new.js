@@ -51,30 +51,40 @@ App.ProductsNewController = Ember.ArrayController.extend({
     actions: {
         publishProduct: function () {
 
-            var context = this;
+            var _this = this;
 
             var productMaster = this.store.createRecord('productMaster', {
-                brand: context.get('brand'),
-                category: context.get('category'),
-                cover: context.get('cover'),
-                desc: context.get('desc')
+                brand: _this.get('brand'),
+                category: _this.get('category'),
+                cover: _this.get('cover'),
+                desc: _this.get('desc')
             });
 
-            productMaster.get('tags').pushObjects(context.get('tags'));
-            productMaster.save().then(function () {
-                productMaster.get('products').pushObjects(context.get('products'));
-                productMaster.get('products').save();
-                productMaster.get('images').pushObjects(context.get('images'));
-                productMaster.get('images').save();
+            productMaster.get('tags').then(function (tags) {
+                tags.pushObjects(_this.get('tags'));
             }).then(function () {
-                context.set('brand', '');
-                context.set('category', '');
-                context.set('desc', '');
-                context.set('cover', '');
-                context.set('products', Ember.A());
-                context.set('tags', Ember.A());
-                context.set('images', Ember.A());
-                context.set('files', Ember.A());
+                return productMaster.save();
+            }).then(function () {
+                return productMaster.get('products');
+            }).then(function (products) {
+                return products.pushObjects(_this.get('products'));
+            }).then(function (products) {
+                return products.save();
+            }).then(function () {
+                return productMaster.get('images');
+            }).then(function (images) {
+                return images.pushObjects(_this.get('images'));
+            }).then(function (images) {
+                return images.save();
+            }).then(function () {
+                _this.set('brand', '');
+                _this.set('category', '');
+                _this.set('desc', '');
+                _this.set('cover', '');
+                _this.set('products', Ember.A());
+                _this.set('tags', Ember.A());
+                _this.set('images', Ember.A());
+                _this.set('files', Ember.A());
                 alertify.success("成功添加产品");
             });
 

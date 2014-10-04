@@ -7,23 +7,20 @@ App.ProductMaster = DS.Model.extend({
     modifiedDate: DS.attr('string'),
 
 
-    tags: DS.hasMany('productTag'),
-    images: DS.hasMany('productImage'),
-    products: DS.hasMany('product')
+    tags: DS.hasMany('productTag', {async: true}),
+    images: DS.hasMany('productImage', {async: true}),
+    products: DS.hasMany('product', {async: true})
 });
 
 App.ProductTag = DS.Model.extend({
-    name: DS.attr('string'),
-
-
-    productMasters: DS.hasMany('productMaster')
+    name: DS.attr('string')
 });
 
 App.ProductImage = DS.Model.extend({
     url: DS.attr('string'),
 
 
-    productMaster: DS.belongsTo('productMaster')
+    productMaster: DS.belongsTo('productMaster', {async: true})
 });
 
 App.Product = DS.Model.extend({
@@ -36,5 +33,5 @@ App.Product = DS.Model.extend({
     pubDate: DS.attr('string'),
     modifiedDate: DS.attr('string'),
 
-    productMaster: DS.belongsTo('productMaster')
+    productMaster: DS.belongsTo('productMaster', {async: true})
 });

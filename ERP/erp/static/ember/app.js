@@ -71,7 +71,7 @@ App.CustomAuthenticator = SimpleAuth.Authenticators.Base.extend({
                 Ember.run(function() {
                     reject(response.error);
                 });
-            }, 'auth');
+            });
         });
     },
 

@@ -10489,8 +10489,7 @@ define("rsvp/promise/all",
       ```
 
       @method all
-      @for Ember.RSVP.Promise
-      @param {Array} entries array of promises
+      @for Ember.RSVP.Promise      @param {Array} entries array of promises
       @param {String} label optional string for labeling the promise.
       Useful for tooling.
       @return {Promise} promise that is fulfilled when all `promises` have been
